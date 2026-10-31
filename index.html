@@ -276,7 +276,25 @@ nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-4p
 .howto{display:grid;gap:4px;margin:10px 0 4px;font-size:12.5px;color:var(--muted)}
 .howto b{display:inline-block;width:18px;color:var(--accent);text-align:center}
 .prog{display:inline-block;margin-left:8px;font-size:11.5px;font-weight:700;color:var(--ok);font-variant-numeric:tabular-nums}
-.act-row{display:grid;grid-template-columns:auto auto 1fr;gap:6px;align-items:center}
+.act-row{display:grid;grid-template-columns:auto auto 1fr auto;gap:6px;align-items:center}
+.grip-off{width:6px}
+.fav{width:38px;height:38px;border:0;background:transparent;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);padding:0;margin-right:-6px}
+.fav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.fav[aria-pressed="true"]{color:var(--accent)}
+.fav[aria-pressed="true"] svg{fill:currentColor}
+.fav:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.fav.pop svg{animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
+.favbar{margin:8px 0 2px}
+#favOnly svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
+#favOnly[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);border-color:transparent;font-weight:700}
+#favOnly[aria-pressed="true"] svg{fill:currentColor}
+.tag-mine{font-size:11px;font-weight:700;color:var(--c-kyoto);background:color-mix(in srgb,var(--c-kyoto) 14%,var(--surface));border-radius:999px;padding:1px 7px;margin-left:6px;white-space:nowrap}
+.act-note{font-size:13px;color:var(--muted);margin:4px 0 0 42px;overflow-wrap:anywhere}
+.act.flash{animation:flash 1.4s ease-out;border-radius:10px}
+.add-li{list-style:none;margin-top:4px}
+.cform{margin-top:4px}
+ul.acts:not(:has(> li.act)) > .drop-hint{display:block}
 .grip{width:30px;height:34px;border:0;background:transparent;color:var(--muted);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;padding:0;margin-left:-6px}
 .grip svg{width:18px;height:18px;fill:currentColor}
 .grip:active{cursor:grabbing;background:var(--bg)}
@@ -371,7 +389,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
 .flt-n{width:24px;height:24px;border-radius:50%;background:var(--cc);color:var(--surface);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:none}
 .flt .kt{margin-left:auto}
 
-@media (prefers-reduced-motion:reduce){.note.flash,.day.flash{animation:none}}
+@media (prefers-reduced-motion:reduce){.note.flash,.day.flash,.act.flash,.fav.pop svg{animation:none}}
 </style>
 
 <header class="top">
@@ -420,7 +438,9 @@ body.dragging{-webkit-user-select:none;user-select:none}
     <span><b>⠿</b> Mantén y arrastra para cambiar el orden o pasar a otro día</span>
     <span><b>✓</b> Marca lo que ya hiciste</span>
     <span><b>＋</b> Guarda hasta 5 fotos por actividad</span>
+    <span><b>♥</b> Marca tus favoritas y agrega actividades propias en cada día</span>
   </div>
+  <div class="favbar"><button type="button" class="chip" id="favOnly" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>Solo favoritas <span id="favCount"></span></button></div>
   <input type="file" id="photoInput" accept="image/*" multiple hidden>
   <div id="dayList"></div>
 </section>
@@ -1036,12 +1056,32 @@ body.dragging{-webkit-user-select:none;user-select:none}
   state.layout=null;   // {"1":[ids], ...} when the viewer reorders
   state.acts={};       // {id:{done:bool, photos:[{id,url}]}}
   try{ var lay=JSON.parse(ls("japon2028-layout")||"null"); if(lay&&typeof lay==="object") state.layout=lay; }catch(e){}
-  try{ var dn=JSON.parse(ls("japon2028-done")||"{}"); if(dn&&typeof dn==="object") Object.keys(dn).forEach(function(k){ if(ACTS[k]) state.acts[k]={done:!!dn[k],photos:[]}; }); }catch(e){}
+  try{ var dn=JSON.parse(ls("japon2028-done")||"{}"); if(dn&&typeof dn==="object") Object.keys(dn).forEach(function(k){ if(ACTS[k]) state.acts[k]={done:!!dn[k],photos:[],fav:false}; }); }catch(e){}
+  try{ var fv=JSON.parse(ls("japon2028-fav")||"{}"); if(fv&&typeof fv==="object") Object.keys(fv).forEach(function(k){ var d=state.acts[k]||{done:false,photos:[]}; d.fav=!!fv[k]; state.acts[k]=d; }); }catch(e){}
   var assetsNS=null, uploading={}, photoIdx={}, confirmPhoto=null, moving=null, photoErr={};
+  // Viewer-added activities
+  var CUSTOM={}, favOnly=false, addingDay=null, editingCustom=null, confirmCustom=null, customErr="";
+  function cityOfDay(n){ var d=DAYS[n-1]; return d ? BASES[d.base].name.split(" ")[0] : ""; }
+  function registerCustom(map){
+    Object.keys(CUSTOM).forEach(function(id){ delete ACTS[id]; delete ORIG[id]; });
+    CUSTOM={};
+    Object.keys(map).forEach(function(id){
+      var v=map[id]; if(!v || !v.t) return;
+      var day=Math.min(20,Math.max(1,parseInt(v.day,10)||1));
+      CUSTOM[id]={day:day,t:String(v.t).slice(0,100),note:String(v.note||"").slice(0,300),created:+v.created||0};
+      ACTS[id]={id:id,t:CUSTOM[id].t,q:CUSTOM[id].t+" "+cityOfDay(day),alts:[],custom:true,note:CUSTOM[id].note};
+      ORIG[id]=day;
+    });
+  }
+  try{ var cl=JSON.parse(ls("japon2028-custom")||"{}"); if(cl&&typeof cl==="object") registerCustom(cl); }catch(e){}
+  function customStore(){ var o={}; Object.keys(CUSTOM).forEach(function(k){ o[k]=CUSTOM[k]; }); return o; }
+  function softRender(){ if(document.querySelector("#dayList .cform")){ pendingRender=true; return; } renderDays(); }
+  function isFav(id){ return !!actData(id).fav; }
   var drag=null, pendingRender=false;
   var MAXPH=5;
 
-  function actData(id){ return state.acts[id] || {done:false,photos:[]}; }
+  function actData(id){ return state.acts[id] || {done:false,photos:[],fav:false}; }
+  function patchAct(id,patch){ var d=actData(id), n={done:!!d.done,photos:d.photos||[],fav:!!d.fav}; for(var k in patch) n[k]=patch[k]; state.acts[id]=n; return n; }
   function layoutNow(){
     var out={}, placed={};
     DAYS.forEach(function(d){ out[d.n]=[]; });
@@ -1052,6 +1092,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
       });
     }
     DAYS.forEach(function(d){ d.acts.forEach(function(a){ if(!placed[a.id]){ out[d.n].push(a.id); placed[a.id]=1; } }); });
+    Object.keys(CUSTOM).sort(function(a,b){ return CUSTOM[a].created-CUSTOM[b].created; }).forEach(function(id){ if(!placed[id]){ out[CUSTOM[id].day].push(id); placed[id]=1; } });
     return out;
   }
   function actState(id){ return state.choices[id] || null; }
@@ -1067,7 +1108,11 @@ body.dragging{-webkit-user-select:none;user-select:none}
     var out="", lastBase=null, groupOpen=false;
     var ranges={};
     DAYS.forEach(function(d,i){ var key=d.base+(i>16&&d.base==="tokio"?"2":""); (ranges[key]=ranges[key]||[]).push(d.n); });
+    var favTotal=0; Object.keys(L).forEach(function(n){ L[n].forEach(function(id){ if(isFav(id)) favTotal++; }); });
+    var fc=document.getElementById("favCount"); if(fc) fc.textContent="("+favTotal+")";
+    var fb=document.getElementById("favOnly"); if(fb) fb.setAttribute("aria-pressed",favOnly?"true":"false");
     DAYS.forEach(function(day,i){
+      if(favOnly && !L[day.n].some(isFav)) return;
       var gkey = day.base+(i>16&&day.base==="tokio"?"2":"");
       if(gkey!==lastBase){
         if(groupOpen) out+='</ol>';
@@ -1080,12 +1125,26 @@ body.dragging{-webkit-user-select:none;user-select:none}
       out+='<div class="day-head"><span class="num">'+day.n+'</span><div><h3>'+esc(day.t)+(day.fn?'<button class="fn" data-note="'+day.fn+'" aria-label="Ver nota '+day.fn+'">'+day.fn+'</button>':'')+'</h3><span class="date">'+fmt(addDays(start,day.n-1))+'</span><span class="prog" id="prog-'+day.n+'">'+progText(ids)+'</span></div></div>';
       if(day.note) out+='<p class="day-note">'+esc(day.note)+'</p>';
       out+='<ul class="acts" data-day="'+day.n+'">';
-      ids.forEach(function(id){ out+=renderAct(ACTS[id]); });
-      out+='<li class="drop-hint" aria-hidden="true">Arrastra una actividad aquí</li></ul>';
+      (favOnly ? ids.filter(isFav) : ids).forEach(function(id){ out+=renderAct(ACTS[id]); });
+      out+='<li class="drop-hint" aria-hidden="true">Arrastra una actividad aquí</li>';
+      if(!favOnly) out+= addingDay===day.n ? '<li class="add-li">'+customForm(null,day.n)+'</li>' : '<li class="add-li"><button class="addbtn" type="button" data-addc="'+day.n+'">+ Agregar actividad al día '+day.n+'</button></li>';
+      out+='</ul>';
       out+='</li>';
     });
     if(groupOpen) out+='</ol>';
+    if(favOnly && !favTotal) out='<div class="empty" style="margin-top:14px">Aún no tienes favoritas. Toca el corazón de cualquier actividad para guardarla aquí.</div>';
     document.getElementById("dayList").innerHTML = out;
+    var f=document.querySelector("#dayList .cform input[name=t]"); if(f && !f.value) f.focus({preventScroll:false});
+  }
+  function customForm(id,day){
+    var c=id?CUSTOM[id]:{t:"",note:"",day:day};
+    var h='<form class="lform cform" data-cform="'+(id||"new")+'" data-day="'+(id?c.day:day)+'" novalidate style="--cc:var(--accent)">';
+    h+='<h3 class="form-h">'+(id?'Editar actividad':'Nueva actividad · Día '+day)+'</h3>';
+    h+='<label for="cf-t-'+(id||day)+'">Nombre<input id="cf-t-'+(id||day)+'" name="t" maxlength="100" value="'+esc(c.t)+'" placeholder="Ej. Museo Ghibli"></label>';
+    h+='<label for="cf-n-'+(id||day)+'">Nota (opcional)<textarea id="cf-n-'+(id||day)+'" name="note" maxlength="300" placeholder="Horario, reserva, precio…">'+esc(c.note)+'</textarea></label>';
+    if(customErr) h+='<p class="err">'+esc(customErr)+'</p>';
+    h+='<div class="actions"><button class="btn small" type="submit">'+(id?'Guardar':'Agregar')+'</button><button class="btn small ghost" type="button" data-ccancel="1">Cancelar</button></div></form>';
+    return h;
   }
   function photoSrc(p){ return p.url || ("/_blob/"+p.id); }
   function renderCarousel(id, photos){
@@ -1110,22 +1169,32 @@ body.dragging{-webkit-user-select:none;user-select:none}
     if(st && typeof st.alt==="number" && a.alts[st.alt]){ cls+=" swapped"; title=a.alts[st.alt].t; q=a.alts[st.alt].q; tag='<span class="tag-alt">Cambiado</span>'; }
     else if(st && st.dropped){ cls+=" dropped"; tag='<span class="tag-alt" style="color:var(--muted);background:var(--bg)">Descartado</span>'; }
     if(ad.done) cls+=" done";
+    if(a.custom) cls+=" mine";
+    if(a.custom && editingCustom===a.id) return '<li class="'+cls+'" data-act="'+a.id+'">'+customForm(a.id)+'</li>';
+    var fav=!!ad.fav;
     var h='<li class="'+cls+'" data-act="'+a.id+'">';
-    h+='<div class="act-row"><button class="grip" type="button" data-grip="'+a.id+'" aria-label="Arrastrar para mover: '+esc(title)+'"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg></button>';
+    h+= favOnly ? '<div class="act-row"><span class="grip-off" aria-hidden="true"></span>' : '<div class="act-row"><button class="grip" type="button" data-grip="'+a.id+'" aria-label="Arrastrar para mover: '+esc(title)+'"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg></button>';
+    if(a.custom) tag+='<span class="tag-mine">Mía</span>';
     h+='<label class="donebox"><input type="checkbox" id="done-'+a.id+'" data-done="'+a.id+'"'+(ad.done?' checked':'')+'><span class="sr">Marcar como hecha</span></label>';
-    h+='<div class="act-title"><span>'+esc(title)+tag+'</span></div></div>';
+    h+='<div class="act-title"><span>'+esc(title)+tag+'</span></div>';
+    h+='<button class="fav" type="button" data-fav="'+a.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de favoritas':'Marcar como favorita')+': '+esc(title)+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg></button></div>';
+    if(a.custom && a.note) h+='<p class="act-note">'+esc(a.note)+'</p>';
     if(photos.length) h+=renderCarousel(a.id, photos);
     if(uploading[a.id]) h+='<p class="small up">Subiendo '+uploading[a.id]+' foto'+(uploading[a.id]>1?'s':'')+'…</p>';
     if(photoErr[a.id]) h+='<p class="small up" style="color:var(--accent)">'+esc(photoErr[a.id])+'</p>';
     h+='<div class="act-tools">'+lookChips(q);
     if(assetsNS && photos.length<MAXPH) h+='<button class="chip" type="button" data-addph="'+a.id+'">'+ICON_IMG+'＋ Mis fotos ('+photos.length+'/'+MAXPH+')</button>';
+    if(a.custom) h+='<a class="chip" href="'+mapUrl(q)+'" target="_blank" rel="noopener">'+ICON_MAP+'Maps</a>';
     h+='<button class="chip" type="button" data-move="'+a.id+'">Mover</button>';
-    if(st && (typeof st.alt==="number" || st.dropped)){
+    if(a.custom){
+      h+='<button class="chip" type="button" data-cedit="'+a.id+'">Editar</button><button class="chip warn" type="button" data-cdel="'+a.id+'">Eliminar</button>';
+    } else if(st && (typeof st.alt==="number" || st.dropped)){
       h+='<button class="chip" type="button" data-restore="'+a.id+'">Volver al original</button>';
     } else {
       h+='<button class="chip warn" type="button" data-discard="'+a.id+'">Descartar</button>';
     }
     h+='</div>';
+    if(confirmCustom===a.id) h+='<div class="confirm">¿Eliminar esta actividad? También se borran sus fotos.<button class="btn small" type="button" data-cdelyes="'+a.id+'">Eliminar</button><button class="btn small ghost" type="button" data-cdelno="1">Cancelar</button></div>';
     if(moving===a.id){
       var L=layoutNow(), cur=findDay(a.id, L);
       h+='<div class="movebox"><label for="mv-'+a.id+'">Mover al día</label><select id="mv-'+a.id+'" data-mvsel="'+a.id+'">';
@@ -1176,15 +1245,17 @@ body.dragging{-webkit-user-select:none;user-select:none}
     var d=actData(id);
     var done={}; Object.keys(state.acts).forEach(function(k){ if(state.acts[k].done) done[k]=1; });
     ls("japon2028-done",JSON.stringify(done));
+    var favs={}; Object.keys(state.acts).forEach(function(k){ if(state.acts[k].fav) favs[k]=1; });
+    ls("japon2028-fav",JSON.stringify(favs));
     if(dbRef){
       var ref=dbRef.collection("acts").doc(id);
-      var body={done:!!d.done, photos:(d.photos||[]).map(function(p){ return {id:p.id,url:p.url||""}; })};
+      var body={done:!!d.done, fav:!!d.fav, photos:(d.photos||[]).map(function(p){ return {id:p.id,url:p.url||""}; })};
       return ref.set(body).catch(function(){});
     }
     return Promise.resolve();
   }
   function setDone(id,val){
-    var d=actData(id); state.acts[id]={done:!!val,photos:d.photos||[]};
+    patchAct(id,{done:!!val});
     var li=document.querySelector('[data-act="'+id+'"]'); if(li) li.classList.toggle("done",!!val);
     var n=findDay(id), p=document.getElementById("prog-"+n); if(p) p.textContent=progText(layoutNow()[n]);
     saveAct(id);
@@ -1238,7 +1309,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     files.forEach(function(f){
       chain=chain.then(function(){ return shrink(f); }).then(function(b){ return assetsNS.upload(b); }).then(function(r){
         var cur=actData(id); var ph=(cur.photos||[]).slice(); if(ph.length<MAXPH) ph.push({id:r.id,url:r.url});
-        state.acts[id]={done:!!cur.done,photos:ph}; photoIdx[id]=ph.length-1;
+        patchAct(id,{photos:ph}); photoIdx[id]=ph.length-1;
       }).catch(function(){ photoErr[id]="No se pudo subir una foto. Prueba con otra imagen o revisa tu conexión."; }).then(function(){ uploading[id]=Math.max(0,(uploading[id]||1)-1); });
     });
     chain.then(function(){ delete uploading[id]; rerenderAct(id); return saveAct(id); });
@@ -1246,7 +1317,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
   function deletePhoto(id){
     var d=actData(id), ph=(d.photos||[]).slice(), i=Math.min(photoIdx[id]||0,ph.length-1);
     var gone=ph.splice(i,1)[0];
-    state.acts[id]={done:!!d.done,photos:ph}; photoIdx[id]=Math.max(0,i-1); confirmPhoto=null;
+    patchAct(id,{photos:ph}); photoIdx[id]=Math.max(0,i-1); confirmPhoto=null;
     rerenderAct(id); saveAct(id);
     if(gone && assetsNS) assetsNS.delete(gone.id).catch(function(){});
   }
@@ -1269,6 +1340,16 @@ body.dragging{-webkit-user-select:none;user-select:none}
     else if(ds.drop){ setChoice(ds.drop,{dropped:true}); }
     else if(ds.restore){ setChoice(ds.restore,null); }
     else if(ds.addph){ photoTarget=ds.addph; photoInput.click(); }
+    else if(ds.fav){
+      var nv=!actData(ds.fav).fav; patchAct(ds.fav,{fav:nv}); saveAct(ds.fav);
+      if(favOnly && !nv) renderDays(); else { t.setAttribute("aria-pressed",nv?"true":"false"); t.setAttribute("aria-label",(nv?"Quitar de favoritas":"Marcar como favorita")); t.classList.remove("pop"); void t.offsetWidth; t.classList.add("pop"); var fc=document.getElementById("favCount"); if(fc){ var L0=layoutNow(), n0=0; Object.keys(L0).forEach(function(k){ L0[k].forEach(function(x){ if(isFav(x)) n0++; }); }); fc.textContent="("+n0+")"; } }
+    }
+    else if(ds.addc){ addingDay=+ds.addc; editingCustom=null; customErr=""; pendingRender=false; renderDays(); }
+    else if(ds.ccancel){ addingDay=null; editingCustom=null; customErr=""; pendingRender=false; renderDays(); }
+    else if(ds.cedit){ editingCustom=ds.cedit; addingDay=null; customErr=""; renderDays(); }
+    else if(ds.cdel){ confirmCustom=ds.cdel; rerenderAct(ds.cdel); }
+    else if(ds.cdelno){ var cc=confirmCustom; confirmCustom=null; if(cc) rerenderAct(cc); }
+    else if(ds.cdelyes){ deleteCustom(ds.cdelyes); }
     else if(ds.goph){ var car=document.querySelector('[data-car="'+ds.goph+'"]'); if(car) car.scrollTo({left:car.clientWidth*(+ds.k),behavior:"smooth"}); }
     else if(ds.delph){ confirmPhoto=ds.delph; rerenderAct(ds.delph); }
     else if(ds.delphno){ var c=confirmPhoto; confirmPhoto=null; if(c) rerenderAct(c); }
@@ -1287,6 +1368,37 @@ body.dragging{-webkit-user-select:none;user-select:none}
       var dEl=document.getElementById("day-"+to); if(dEl){ scrollToEl(dEl); flash(dEl); }
     }
   });
+  function saveCustom(id,data){
+    if(dbRef) return dbRef.collection("custom").doc(id).set(data);
+    var m=customStore(); m[id]=data; registerCustom(m); ls("japon2028-custom",JSON.stringify(customStore())); return Promise.resolve();
+  }
+  function deleteCustom(id){
+    confirmCustom=null;
+    var ph=(actData(id).photos||[]);
+    delete state.acts[id];
+    var m=customStore(); delete m[id]; registerCustom(m);
+    ls("japon2028-custom",JSON.stringify(customStore()));
+    if(state.layout){ Object.keys(state.layout).forEach(function(n){ state.layout[n]=(state.layout[n]||[]).filter(function(x){ return x!==id; }); }); }
+    renderDays();
+    if(dbRef){ dbRef.collection("custom").doc(id).delete().catch(function(){}); dbRef.collection("acts").doc(id).delete().catch(function(){}); }
+    if(assetsNS) ph.forEach(function(p){ assetsNS.delete(p.id).catch(function(){}); });
+  }
+  dayList.addEventListener("submit",function(e){
+    var f=e.target.closest("form.cform"); if(!f) return;
+    e.preventDefault();
+    var t=String(f.elements.t.value||"").trim(), note=String(f.elements.note.value||"").trim();
+    if(!t){ customErr="Escribe el nombre de la actividad."; renderDays(); return; }
+    var isNew=f.dataset.cform==="new", id=isNew ? "c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5) : f.dataset.cform;
+    var prev=CUSTOM[id];
+    var data={day:prev?prev.day:+f.dataset.day, t:t.slice(0,100), note:note.slice(0,300), created:prev?prev.created:Date.now()};
+    addingDay=null; editingCustom=null; customErr="";
+    var m=customStore(); m[id]=data; registerCustom(m);
+    ls("japon2028-custom",JSON.stringify(customStore()));
+    renderDays();
+    var el=document.querySelector('[data-act="'+id+'"]'); if(el){ el.scrollIntoView({block:"nearest"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); }
+    if(dbRef) dbRef.collection("custom").doc(id).set(data).catch(function(){});
+  });
+  document.getElementById("favOnly").addEventListener("click",function(){ favOnly=!favOnly; moving=null; addingDay=null; editingCustom=null; renderDays(); });
   dayList.addEventListener("change",function(e){
     var cb=e.target.closest("input[data-done]"); if(cb) setDone(cb.dataset.done, cb.checked);
   });
@@ -1483,25 +1595,32 @@ body.dragging{-webkit-user-select:none;user-select:none}
         Object.keys(state.choices).forEach(function(k){ if(state.choices[k].open && !next[k]) next[k]=state.choices[k]; });
         state.choices=next;
         ls("japon2028-choices",JSON.stringify(next));
-        renderDays();
+        softRender();
       },function(){ syncNote.textContent="Tus cambios se guardan en este dispositivo."; dbRef=null; });
+      db.collection("custom").onSnapshot(function(snap){
+        var m={};
+        snap.docs.forEach(function(d){ var v=d.data()||{}; if(v.t) m[d.id]={day:v.day,t:v.t,note:v.note||"",created:v.created||0}; });
+        registerCustom(m); ls("japon2028-custom",JSON.stringify(customStore()));
+        if(editingCustom && !CUSTOM[editingCustom]) editingCustom=null;
+        softRender();
+      },function(){});
       db.collection("acts").onSnapshot(function(snap){
         var next={};
-        snap.docs.forEach(function(d){ if(!ACTS[d.id]) return; var v=d.data()||{}; next[d.id]={done:!!v.done, photos:Array.isArray(v.photos)?v.photos.filter(function(p){return p&&p.id;}).slice(0,MAXPH):[]}; });
-        // keep local done marks for activities never written to the shared store
-        Object.keys(state.acts).forEach(function(k){ if(!next[k] && state.acts[k].done && !(state.acts[k].photos||[]).length) next[k]=state.acts[k]; });
-        state.acts=next; renderDays();
+        snap.docs.forEach(function(d){ var v=d.data()||{}; next[d.id]={done:!!v.done, fav:!!v.fav, photos:Array.isArray(v.photos)?v.photos.filter(function(p){return p&&p.id;}).slice(0,MAXPH):[]}; });
+        // keep local marks for activities never written to the shared store
+        Object.keys(state.acts).forEach(function(k){ var a=state.acts[k]; if(!next[k] && (a.done||a.fav) && !(a.photos||[]).length) next[k]=a; });
+        state.acts=next; softRender();
       },function(){});
       db.doc("plan/layout").onSnapshot(function(s){
         var v=s.exists && s.data() && s.data().order;
-        if(v && typeof v==="object"){ state.layout=v; ls("japon2028-layout",JSON.stringify(v)); renderDays(); }
+        if(v && typeof v==="object"){ state.layout=v; ls("japon2028-layout",JSON.stringify(v)); softRender(); }
       },function(){});
       db.doc("settings/fechas").onSnapshot(function(s){
         var v=s.exists && s.data() && s.data().arrival;
         if(v && parseDate(v) && v!==state.arrival){ state.arrival=v; arrInput.value=v; ls("japon2028-arrival-v2",v); renderCalendar(); renderDays(); }
       },function(){});
     }).catch(function(){});
-    window.claude.use("assets").then(function(a){ if(a){ assetsNS=a; renderDays(); } }).catch(function(){});
+    window.claude.use("assets").then(function(a){ if(a){ assetsNS=a; softRender(); } }).catch(function(){});
   }
 
   /* ---------- Editable lodging list (shared db, local fallback) ---------- */
