@@ -293,6 +293,18 @@ nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-4p
 .act-note{font-size:13px;color:var(--muted);margin:4px 0 0 42px;overflow-wrap:anywhere}
 .act.flash{animation:flash 1.4s ease-out;border-radius:10px}
 .add-li{list-style:none;margin-top:4px}
+.act-time{display:flex;align-items:center;gap:6px;margin:4px 0 0 42px;font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums}
+.act-time svg{width:14px;height:14px;fill:none;stroke:var(--cc);stroke-width:2;stroke-linecap:round}
+.act-time b{font-weight:700}
+.act-time span{color:var(--muted)}
+.act-open{margin:2px 0 0 42px;font-size:12.5px;color:var(--muted)}
+.leg{list-style:none;display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--muted);padding:2px 0 2px 12px;margin:-2px 0}
+.leg .leg-i{flex:none;width:18px;text-align:center;color:var(--cc);font-weight:700}
+.leg .leg-i svg{width:16px;height:16px;fill:none;stroke:var(--cc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+.leg.first{background:color-mix(in srgb,var(--cc) 8%,transparent);border-radius:8px;padding:8px 10px;margin:4px 0 2px}
+.leg.first b{color:var(--ink)}
+.leg.gap{opacity:.75;font-style:italic}
+.sugbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;background:var(--warn-soft);border-radius:8px;padding:8px 10px;font-size:12.5px}
 .cform{margin-top:4px}
 ul.acts:not(:has(> li.act)) > .drop-hint{display:block}
 .grip{width:30px;height:34px;border:0;background:transparent;color:var(--muted);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;padding:0;margin-left:-6px}
@@ -439,6 +451,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     <span><b>✓</b> Marca lo que ya hiciste</span>
     <span><b>＋</b> Guarda hasta 5 fotos por actividad</span>
     <span><b>♥</b> Marca tus favoritas y agrega actividades propias en cada día</span>
+    <span><b>◷</b> Horas y duración sugeridas, con el traslado entre una y otra. Los horarios de apertura son aproximados: confírmalos antes de ir</span>
   </div>
   <div class="favbar"><button type="button" class="chip" id="favOnly" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>Solo favoritas <span id="favCount"></span></button></div>
   <input type="file" id="photoInput" accept="image/*" multiple hidden>
@@ -834,9 +847,9 @@ body.dragging{-webkit-user-select:none;user-select:none}
       A("d2a","Templo Sensō-ji y calle Nakamise","Senso-ji Asakusa Nakamise",[O("Yanaka Ginza, barrio antiguo","Yanaka Ginza Tokyo")]),
       A("d2b","Parque Ueno","Ueno Park sakura",[O("Museo Nacional de Tokio","Tokyo National Museum")])]},
     {n:3,base:"tokio",t:"Tokio moderno",acts:[
-      A("d3a","Cruce de Shibuya y estatua de Hachikō","Shibuya crossing Hachiko",[O("Mirador Shibuya Sky","Shibuya Sky")]),
-      A("d3b","Harajuku, calle Takeshita","Takeshita street Harajuku",[O("Avenida Omotesando","Omotesando Tokyo")]),
       A("d3c","Santuario Meiji","Meiji Jingu shrine"),
+      A("d3b","Harajuku, calle Takeshita","Takeshita street Harajuku",[O("Avenida Omotesando","Omotesando Tokyo")]),
+      A("d3a","Cruce de Shibuya y estatua de Hachikō","Shibuya crossing Hachiko",[O("Mirador Shibuya Sky","Shibuya Sky")]),
       A("d3d","Shinjuku de noche","Shinjuku night walk",[O("Callejón Omoide Yokocho","Omoide Yokocho Shinjuku")])]},
     {n:4,base:"tokio",t:"Tecnología y vistas",acts:[
       A("d4a","Akihabara","Akihabara electric town",[O("Ginza","Ginza Tokyo walk"),O("Tokyo Station y Marunouchi","Tokyo Station Marunouchi")]),
@@ -848,11 +861,11 @@ body.dragging{-webkit-user-select:none;user-select:none}
       A("d6b","Templo Hase-dera","Hasedera Kamakura",[O("Isla Enoshima","Enoshima island")]),
       A("d6c","Calle Komachi-dori","Komachi dori Kamakura")]},
     {n:7,base:"fuji",t:"Monte Fuji / Kawaguchiko",note:"Excursión de día completo. La visibilidad depende del clima.",acts:[
-      A("d7a","Lago Kawaguchi y parque Oishi","Lake Kawaguchiko Oishi park Fuji",[O("Pagoda Chureito","Chureito Pagoda sakura Fuji")]),
-      A("d7b","Teleférico Kachi Kachi","Kachi Kachi ropeway Fuji")]},
+      A("d7b","Teleférico Kachi Kachi","Kachi Kachi ropeway Fuji"),
+      A("d7a","Lago Kawaguchi y parque Oishi","Lake Kawaguchiko Oishi park Fuji",[O("Pagoda Chureito","Chureito Pagoda sakura Fuji")])]},
     {n:8,base:"fuji",t:"Hakone",fn:2,note:"Noche en Tokio o Hakone, según presupuesto.",acts:[
-      A("d8a","Crucero por el lago Ashi","Lake Ashi pirate ship Hakone"),
       A("d8b","Teleférico y Owakudani","Owakudani ropeway Hakone",[O("Museo al aire libre de Hakone","Hakone Open Air Museum")]),
+      A("d8a","Crucero por el lago Ashi","Lake Ashi pirate ship Hakone"),
       A("d8c","Santuario de Hakone y torii del lago","Hakone shrine torii lake")]},
     {n:9,base:"kyoto",t:"Traslado a Kioto",note:"Tren a Kioto y check-in.",acts:[
       A("d9a","Gion y Pontocho al atardecer","Gion Pontocho evening Kyoto",[O("Paseo junto al río Kamo","Kamo river walk Kyoto")])]},
@@ -1049,6 +1062,72 @@ body.dragging{-webkit-user-select:none;user-select:none}
     }).join("");
   }
 
+
+  /* Suggested times. h = hour, d = duration, o = opening hours (approx.), go = transfer to the next stop in the suggested order */
+  var FROM = {
+    1:"Narita: Keisei Skyliner a Ueno, ~45 min. Haneda: tren o monorriel, 30–45 min",
+    2:"Desde Ueno: línea Ginza a Asakusa, 5 min",
+    3:"JR Yamanote a Harajuku, ~25 min desde Ueno. Lleguen temprano: el santuario está tranquilo antes de las 9",
+    4:"JR a Akihabara, 3 min desde Ueno",
+    5:"Según el operador o la actividad elegida",
+    6:"JR Yokosuka de Tokio a Kamakura, ~1 h; luego tren Enoden a Hase, 5 min",
+    7:"Bus de Busta Shinjuku a Kawaguchiko, ~2 h. Tomen el de 7:00–7:30: el Fuji suele verse mejor en la mañana",
+    8:"Romancecar a Hakone-Yumoto (1 h 25 min), tren de montaña a Gora (40 min), funicular y teleférico a Owakudani (25 min). Todo con el Freepass",
+    9:"Shinkansen Tokio → Kioto, 2 h 15 min",
+    10:"Bus 206 o taxi a Gojōzaka, 15–20 min desde la estación de Kioto",
+    11:"JR línea Nara de Kioto a Inari, 5 min",
+    12:"JR Sagano de Kioto a Saga-Arashiyama, 15 min",
+    13:"Kintetsu de Kioto a Kintetsu-Nara, 35–45 min",
+    14:"Metro de Namba a Tanimachi 4-chōme, 15 min",
+    15:"A pie o metro desde Namba, 5–10 min",
+    16:"Shinkansen Shin-Ōsaka → Hiroshima, 1 h 30 min; tranvía 2 o 6 al parque, 15 min",
+    17:"JR Hiroshima → Miyajimaguchi, 30 min; ferry, 10 min",
+    18:"Shinkansen Hiroshima → Tokio, ~4 h",
+    19:"Metro Marunouchi a Shinjuku-gyoemmae, 20–25 min desde Ueno"
+  };
+  var INFO = {
+    d1a:{h:"18:00",d:"1 h"},
+    d2a:{h:"8:00",d:"1.5 h",o:"Templo 6:30–17:00; patio y calle siempre",go:{to:"d2b",x:"Línea Ginza a Ueno, 5 min + 5 min a pie"}},
+    d2b:{h:"10:30",d:"2 h",o:"Parque todo el día"},
+    d3c:{h:"8:00",d:"1 h",o:"Del amanecer al atardecer",go:{to:"d3b",x:"5 min a pie, frente a la estación de Harajuku"}},
+    d3b:{h:"10:00",d:"1.5 h",o:"Tiendas ~10:00–20:00",go:{to:"d3a",x:"Omotesando y Cat Street a pie, 20 min (o JR, 1 parada)"}},
+    d3a:{h:"12:30",d:"2 h",o:"Shibuya Sky ~10:00–22:30; ideal al atardecer",go:{to:"d3d",x:"JR Yamanote a Shinjuku, 7 min"}},
+    d3d:{h:"18:00",d:"2–3 h",o:"Omoide Yokocho ~17:00–24:00"},
+    d4a:{h:"11:00",d:"3 h",o:"Tiendas ~10:00–21:00",go:{to:"d4b",x:"JR a Asakusabashi y metro Asakusa a Oshiage, ~25 min"}},
+    d4b:{h:"16:30",d:"1.5 h",o:"10:00–21:00; atardecer cerca de las 18:00"},
+    d5a:{h:"10:00",d:"2 h",o:"teamLab ~9:00–22:00; reservar en línea"},
+    d6a:{h:"9:30",d:"45 min",o:"8:00–17:30",go:{to:"d6b",x:"5–7 min a pie"}},
+    d6b:{h:"10:30",d:"1.5 h",o:"8:00–17:00",go:{to:"d6c",x:"Tren Enoden de Hase a Kamakura, 5 min"}},
+    d6c:{h:"12:30",d:"2 h",o:"Tiendas ~10:00–18:00"},
+    d7b:{h:"9:45",d:"1 h",o:"~9:30–17:00",go:{to:"d7a",x:"Bus turístico, línea roja, ~20 min"}},
+    d7a:{h:"11:30",d:"1.5 h",o:"Parque todo el día. Bus de regreso a Tokio ~15:00–16:00"},
+    d8b:{h:"10:30",d:"1 h",o:"Teleférico ~9:00–17:00; cierra con viento o gases",go:{to:"d8a",x:"Teleférico a Togendai, 25 min"}},
+    d8a:{h:"12:30",d:"40 min",o:"Barcos ~9:30–17:00",go:{to:"d8c",x:"Bajar en Moto-Hakone y caminar 10 min"}},
+    d8c:{h:"13:30",d:"1 h",o:"Todo el día. Bus a Hakone-Yumoto, ~40 min"},
+    d9a:{h:"17:30",d:"2 h"},
+    d10a:{h:"7:30",d:"1.5 h",o:"6:00–18:00; llenísimo después de las 9",go:{to:"d10b",x:"Bajada a pie, 5 min"}},
+    d10b:{h:"9:15",d:"1.5 h",o:"Tiendas ~9:00–17:00",go:{to:"d10c",x:"10 min a pie"}},
+    d10c:{h:"11:00",d:"2 h",o:"Santuario todo el día"},
+    d11a:{h:"7:00",d:"2.5–3 h",o:"Todo el día; a la cima son ~2 h ida y vuelta",go:{to:"d11b",x:"Tren Keihan a Gion-Shijō, 10 min + 10 min a pie"}},
+    d11b:{h:"11:00",d:"1.5 h",o:"~10:00–17:00"},
+    d12a:{h:"7:30",d:"45 min",o:"Todo el día; vacío antes de las 8",go:{to:"d12b",x:"10 min a pie"}},
+    d12b:{h:"8:45",d:"45 min",go:{to:"d12c",x:"Bus o taxi, 30–40 min"}},
+    d12c:{h:"11:00",d:"1 h",o:"9:00–17:00"},
+    d13a:{h:"9:00",d:"1 h",o:"Todo el día",go:{to:"d13b",x:"15 min a pie"}},
+    d13b:{h:"10:15",d:"1 h",o:"7:30–17:30",go:{to:"d13c",x:"20 min a pie por el parque"}},
+    d13c:{h:"11:45",d:"1 h",o:"6:30–17:30. Luego Kintetsu a Ōsaka-Namba, 40 min"},
+    d14a:{h:"9:00",d:"2.5 h",o:"Torre 9:00–17:00",go:{to:"d14b",x:"Metro a Dōbutsuen-mae, ~25 min"}},
+    d14b:{h:"13:00",d:"2 h",go:{to:"d14c",x:"Metro Midōsuji a Namba, 10 min"}},
+    d14c:{h:"18:00",d:"2 h"},
+    d15a:{h:"8:30",d:"1.5 h",o:"~9:00–18:00",go:{to:"d15b",x:"Metro y JR Yumesaki a Universal City, ~35 min"}},
+    d15b:{h:"10:30",d:"Todo el día",o:"~9:00–21:00, varía por fecha"},
+    d16a:{h:"11:30",d:"1.5 h",o:"Todo el día",go:{to:"d16b",x:"Dentro del parque, 5 min a pie"}},
+    d16b:{h:"13:30",d:"1.5–2 h",o:"~7:30–19:00, varía por mes"},
+    d17a:{h:"8:30",d:"1.5 h",o:"6:30–18:00. Revisen la tabla de mareas",go:{to:"d17b",x:"15 min a pie al teleférico"}},
+    d17b:{h:"10:30",d:"2.5–3 h",o:"Teleférico ~9:00–17:00"},
+    d18a:{h:"19:00",d:"1.5 h"},
+    d19a:{h:"9:00",d:"2.5 h",o:"9:00–17:30; en temporada de cerezos puede pedir reserva"}
+  };
   /* ---------- Days ---------- */
   // Index of activities and their original day
   var ACTS={}, ORIG={};
@@ -1068,7 +1147,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     Object.keys(map).forEach(function(id){
       var v=map[id]; if(!v || !v.t) return;
       var day=Math.min(20,Math.max(1,parseInt(v.day,10)||1));
-      CUSTOM[id]={day:day,t:String(v.t).slice(0,100),note:String(v.note||"").slice(0,300),created:+v.created||0};
+      CUSTOM[id]={day:day,t:String(v.t).slice(0,100),note:String(v.note||"").slice(0,300),h:/^\d{1,2}:\d{2}$/.test(v.h||"")?v.h:"",d:String(v.d||"").slice(0,20),created:+v.created||0};
       ACTS[id]={id:id,t:CUSTOM[id].t,q:CUSTOM[id].t+" "+cityOfDay(day),alts:[],custom:true,note:CUSTOM[id].note};
       ORIG[id]=day;
     });
@@ -1122,10 +1201,19 @@ body.dragging{-webkit-user-select:none;user-select:none}
       }
       var b2=BASES[day.base], ids=L[day.n];
       out+='<li class="day" id="day-'+day.n+'" style="--cc:'+b2.color+'">';
+      var sug=suggestedOrder(day.n, ids), differs=!favOnly && sug.join()!==ids.join();
       out+='<div class="day-head"><span class="num">'+day.n+'</span><div><h3>'+esc(day.t)+(day.fn?'<button class="fn" data-note="'+day.fn+'" aria-label="Ver nota '+day.fn+'">'+day.fn+'</button>':'')+'</h3><span class="date">'+fmt(addDays(start,day.n-1))+'</span><span class="prog" id="prog-'+day.n+'">'+progText(ids)+'</span></div></div>';
+      if(differs) out+='<div class="sugbar"><span>Este día no sigue el orden sugerido por ubicación.</span><button class="chip pick" type="button" data-sug="'+day.n+'">Usar orden sugerido</button></div>';
       if(day.note) out+='<p class="day-note">'+esc(day.note)+'</p>';
       out+='<ul class="acts" data-day="'+day.n+'">';
-      (favOnly ? ids.filter(isFav) : ids).forEach(function(id){ out+=renderAct(ACTS[id]); });
+      var shown = favOnly ? ids.filter(isFav) : ids;
+      if(!favOnly && FROM[day.n] && shown.length) out+='<li class="leg first"><span class="leg-i" aria-hidden="true">'+ICON_GO+'</span><span><b>Cómo llegar:</b> '+esc(FROM[day.n])+'</span></li>';
+      shown.forEach(function(id,k){
+        out+=renderAct(ACTS[id]);
+        var nx=shown[k+1], g=INFO[id]&&INFO[id].go;
+        if(!favOnly && nx && g && g.to===nx) out+='<li class="leg"><span class="leg-i" aria-hidden="true">↓</span><span>'+esc(g.x)+'</span></li>';
+        else if(!favOnly && nx) out+='<li class="leg gap" aria-hidden="true"><span class="leg-i">↓</span><span>Traslado: revisa la ruta en Maps</span></li>';
+      });
       out+='<li class="drop-hint" aria-hidden="true">Arrastra una actividad aquí</li>';
       if(!favOnly) out+= addingDay===day.n ? '<li class="add-li">'+customForm(null,day.n)+'</li>' : '<li class="add-li"><button class="addbtn" type="button" data-addc="'+day.n+'">+ Agregar actividad al día '+day.n+'</button></li>';
       out+='</ul>';
@@ -1136,11 +1224,28 @@ body.dragging{-webkit-user-select:none;user-select:none}
     document.getElementById("dayList").innerHTML = out;
     var f=document.querySelector("#dayList .cform input[name=t]"); if(f && !f.value) f.focus({preventScroll:false});
   }
+  var ICON_GO='<svg viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="14" rx="4"/><path d="M6 11h12M9 21l1.5-3.5M15 21l-1.5-3.5"/></svg>';
+  // Suggested order: the day's planned activities in planned order, then anything else, keeping its relative order
+  function suggestedOrder(n, ids){
+    var plan=(DAYS[n-1]?DAYS[n-1].acts:[]).map(function(a){ return a.id; }).filter(function(id){ return ids.indexOf(id)>=0; });
+    var rest=ids.filter(function(id){ return plan.indexOf(id)<0; });
+    var withH=rest.filter(function(id){ return CUSTOM[id] && CUSTOM[id].h; }), noH=rest.filter(function(id){ return !(CUSTOM[id] && CUSTOM[id].h); });
+    var all=plan.concat(noH);
+    // custom activities with a time slot slide in by hour
+    withH.forEach(function(id){
+      var t=toMin(CUSTOM[id].h), at=all.length;
+      for(var i=0;i<all.length;i++){ var oh=(INFO[all[i]]&&INFO[all[i]].h)||(CUSTOM[all[i]]&&CUSTOM[all[i]].h); if(oh && toMin(oh)>t){ at=i; break; } }
+      all.splice(at,0,id);
+    });
+    return all;
+  }
+  function toMin(h){ var m=/^(\d{1,2}):(\d{2})$/.exec(h||""); return m? (+m[1])*60+(+m[2]) : 9999; }
   function customForm(id,day){
-    var c=id?CUSTOM[id]:{t:"",note:"",day:day};
+    var c=id?CUSTOM[id]:{t:"",note:"",h:"",d:"",day:day};
     var h='<form class="lform cform" data-cform="'+(id||"new")+'" data-day="'+(id?c.day:day)+'" novalidate style="--cc:var(--accent)">';
     h+='<h3 class="form-h">'+(id?'Editar actividad':'Nueva actividad · Día '+day)+'</h3>';
     h+='<label for="cf-t-'+(id||day)+'">Nombre<input id="cf-t-'+(id||day)+'" name="t" maxlength="100" value="'+esc(c.t)+'" placeholder="Ej. Museo Ghibli"></label>';
+    h+='<div class="row2"><label for="cf-h-'+(id||day)+'">Hora (opcional)<input id="cf-h-'+(id||day)+'" name="h" type="time" value="'+esc(c.h||"")+'"></label><label for="cf-d-'+(id||day)+'">Duración (opcional)<input id="cf-d-'+(id||day)+'" name="d" maxlength="20" value="'+esc(c.d||"")+'" placeholder="2 h"></label></div>';
     h+='<label for="cf-n-'+(id||day)+'">Nota (opcional)<textarea id="cf-n-'+(id||day)+'" name="note" maxlength="300" placeholder="Horario, reserva, precio…">'+esc(c.note)+'</textarea></label>';
     if(customErr) h+='<p class="err">'+esc(customErr)+'</p>';
     h+='<div class="actions"><button class="btn small" type="submit">'+(id?'Guardar':'Agregar')+'</button><button class="btn small ghost" type="button" data-ccancel="1">Cancelar</button></div></form>';
@@ -1178,6 +1283,9 @@ body.dragging{-webkit-user-select:none;user-select:none}
     h+='<label class="donebox"><input type="checkbox" id="done-'+a.id+'" data-done="'+a.id+'"'+(ad.done?' checked':'')+'><span class="sr">Marcar como hecha</span></label>';
     h+='<div class="act-title"><span>'+esc(title)+tag+'</span></div>';
     h+='<button class="fav" type="button" data-fav="'+a.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de favoritas':'Marcar como favorita')+': '+esc(title)+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg></button></div>';
+    var inf = a.custom ? (CUSTOM[a.id]||{}) : (INFO[a.id]||{}), swapped = st && typeof st.alt==="number";
+    if(inf.h || inf.d) h+='<div class="act-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>'+(inf.h?'<b>'+esc(inf.h)+'</b>':'')+(inf.h&&inf.d?'<span>·</span>':'')+(inf.d?'<span>'+esc(inf.d)+'</span>':'')+'</div>';
+    if(inf.o && !swapped && !a.custom) h+='<p class="act-open">'+esc(inf.o)+'</p>';
     if(a.custom && a.note) h+='<p class="act-note">'+esc(a.note)+'</p>';
     if(photos.length) h+=renderCarousel(a.id, photos);
     if(uploading[a.id]) h+='<p class="small up">Subiendo '+uploading[a.id]+' foto'+(uploading[a.id]>1?'s':'')+'…</p>';
@@ -1344,6 +1452,10 @@ body.dragging{-webkit-user-select:none;user-select:none}
       var nv=!actData(ds.fav).fav; patchAct(ds.fav,{fav:nv}); saveAct(ds.fav);
       if(favOnly && !nv) renderDays(); else { t.setAttribute("aria-pressed",nv?"true":"false"); t.setAttribute("aria-label",(nv?"Quitar de favoritas":"Marcar como favorita")); t.classList.remove("pop"); void t.offsetWidth; t.classList.add("pop"); var fc=document.getElementById("favCount"); if(fc){ var L0=layoutNow(), n0=0; Object.keys(L0).forEach(function(k){ L0[k].forEach(function(x){ if(isFav(x)) n0++; }); }); fc.textContent="("+n0+")"; } }
     }
+    else if(ds.sug){
+      var n=+ds.sug, L=layoutNow(); L[n]=suggestedOrder(n,L[n]); saveLayout(L); renderDays();
+      var dEl=document.getElementById("day-"+n); if(dEl) flash(dEl);
+    }
     else if(ds.addc){ addingDay=+ds.addc; editingCustom=null; customErr=""; pendingRender=false; renderDays(); }
     else if(ds.ccancel){ addingDay=null; editingCustom=null; customErr=""; pendingRender=false; renderDays(); }
     else if(ds.cedit){ editingCustom=ds.cedit; addingDay=null; customErr=""; renderDays(); }
@@ -1386,11 +1498,11 @@ body.dragging{-webkit-user-select:none;user-select:none}
   dayList.addEventListener("submit",function(e){
     var f=e.target.closest("form.cform"); if(!f) return;
     e.preventDefault();
-    var t=String(f.elements.t.value||"").trim(), note=String(f.elements.note.value||"").trim();
+    var t=String(f.elements.t.value||"").trim(), note=String(f.elements.note.value||"").trim(), hh=String(f.elements.h.value||"").trim(), dd=String(f.elements.d.value||"").trim();
     if(!t){ customErr="Escribe el nombre de la actividad."; renderDays(); return; }
     var isNew=f.dataset.cform==="new", id=isNew ? "c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5) : f.dataset.cform;
     var prev=CUSTOM[id];
-    var data={day:prev?prev.day:+f.dataset.day, t:t.slice(0,100), note:note.slice(0,300), created:prev?prev.created:Date.now()};
+    var data={day:prev?prev.day:+f.dataset.day, t:t.slice(0,100), note:note.slice(0,300), h:hh.replace(/^0(\d):/,"$1:"), d:dd.slice(0,20), created:prev?prev.created:Date.now()};
     addingDay=null; editingCustom=null; customErr="";
     var m=customStore(); m[id]=data; registerCustom(m);
     ls("japon2028-custom",JSON.stringify(customStore()));
@@ -1599,7 +1711,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
       },function(){ syncNote.textContent="Tus cambios se guardan en este dispositivo."; dbRef=null; });
       db.collection("custom").onSnapshot(function(snap){
         var m={};
-        snap.docs.forEach(function(d){ var v=d.data()||{}; if(v.t) m[d.id]={day:v.day,t:v.t,note:v.note||"",created:v.created||0}; });
+        snap.docs.forEach(function(d){ var v=d.data()||{}; if(v.t) m[d.id]={day:v.day,t:v.t,note:v.note||"",h:v.h||"",d:v.d||"",created:v.created||0}; });
         registerCustom(m); ls("japon2028-custom",JSON.stringify(customStore()));
         if(editingCustom && !CUSTOM[editingCustom]) editingCustom=null;
         softRender();
