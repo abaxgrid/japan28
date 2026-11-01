@@ -45,17 +45,20 @@ img{max-width:100%}
   --c-kyoto:#8a5bb0;
   --c-osaka:#d07a2c;
   --c-hiro:#2f8a6a;
+  --c-norte:#5f7d2c;
+  --sea:#e4ecf2;
+  --land:#fbfaf7;
   --display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",Georgia,serif;
   --body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#12141f;--surface:#1b1e2c;--ink:#ecebf2;--muted:#a3a6b8;--line:#2d3144;
   --accent:#f08aa8;--accent-soft:#3a2230;--ok:#7fcfa4;--ok-soft:#1d3329;--warn:#e9b56a;--warn-soft:#33281a;
-  --c-tokio:#f08aa8;--c-fuji:#7fb6dc;--c-kyoto:#c4a0e6;--c-osaka:#f0a764;--c-hiro:#6fcfa8;color-scheme:dark}}
+  --c-tokio:#f08aa8;--c-fuji:#7fb6dc;--c-kyoto:#c4a0e6;--c-osaka:#f0a764;--c-hiro:#6fcfa8;--c-norte:#b4d36f;--sea:#101a26;--land:#262a3a;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#12141f;--surface:#1b1e2c;--ink:#ecebf2;--muted:#a3a6b8;--line:#2d3144;
   --accent:#f08aa8;--accent-soft:#3a2230;--ok:#7fcfa4;--ok-soft:#1d3329;--warn:#e9b56a;--warn-soft:#33281a;
-  --c-tokio:#f08aa8;--c-fuji:#7fb6dc;--c-kyoto:#c4a0e6;--c-osaka:#f0a764;--c-hiro:#6fcfa8;color-scheme:dark}
+  --c-tokio:#f08aa8;--c-fuji:#7fb6dc;--c-kyoto:#c4a0e6;--c-osaka:#f0a764;--c-hiro:#6fcfa8;--c-norte:#b4d36f;--sea:#101a26;--land:#262a3a;color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -471,6 +474,101 @@ body.dragging{-webkit-user-select:none;user-select:none}
 .cr-fab{position:absolute;right:14px;bottom:14px;width:54px;height:54px;border-radius:16px;border:0;background:var(--accent-soft);color:var(--accent);font-size:32px;line-height:1;box-shadow:0 6px 16px rgba(0,0,0,.18);cursor:pointer;z-index:2}
 .cr-fab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
+.lg{position:absolute;display:flex;gap:6px;align-items:flex-start;padding:3px 7px;border-radius:6px;overflow:hidden;font-size:11.5px;line-height:1.3;color:var(--ink);background:repeating-linear-gradient(135deg,var(--bg) 0 6px,var(--surface) 6px 12px);border:1px dashed color-mix(in srgb,var(--muted) 55%,transparent);z-index:0}
+.lg .lg-i{flex:none;width:16px;height:16px;margin-top:1px}
+.lg .lg-i svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lg-t{min-width:0}
+.lg b{display:block;font-weight:700;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg span{display:block;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.lg.one{align-items:center;padding:0 7px}
+.lg.one .lg-i,.lg.one .lg-i svg{width:13px;height:13px;margin:0}
+.lg.one b{font-size:11px}
+.lg.one b i{font-style:normal;font-weight:400;color:var(--muted)}
+.lg-t{line-height:1.25}
+.lg-air{border-color:var(--c-fuji);background:color-mix(in srgb,var(--c-fuji) 12%,var(--surface))}
+.lg-air .lg-i svg{stroke:var(--c-fuji)}
+.lg-hotel{border-color:var(--c-kyoto);background:color-mix(in srgb,var(--c-kyoto) 10%,var(--surface))}
+.lg-hotel .lg-i svg{stroke:var(--c-kyoto)}
+.lg-move{border-style:dotted}
+.lg.est{opacity:.75}
+.ev{z-index:1}
+.cr-flight{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;width:100%}
+.cr-flight label{display:grid;gap:3px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.cr-flight input,.cr-flight select{font:500 14px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 8px}
+.cr-flight .small{flex-basis:100%;font-size:11.5px}
+
+.map-card{display:grid;gap:10px}
+.map-wrap{background:var(--sea);border:1px solid var(--line);border-radius:14px;overflow:hidden;line-height:0}
+.map-svg{display:block;width:100%;height:auto}
+.map-svg .sea{fill:var(--sea)}
+.map-svg .land{fill:var(--land);stroke:color-mix(in srgb,var(--muted) 45%,transparent);stroke-width:.7;stroke-linejoin:round}
+.map-svg .rt{fill:none;stroke-linecap:round}
+.map-svg .rt.sk{stroke:var(--accent);stroke-width:2.6}
+.map-svg .rt.tr{stroke:var(--accent);stroke-width:1.8}
+.map-svg .rt.ex{stroke:var(--muted);stroke-width:1.6;stroke-dasharray:4 3}
+.map-svg .rt.ret{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:1.5 4;opacity:.8}
+.map-svg .pin{cursor:pointer;outline:none}
+.map-svg .lead{stroke:var(--cc);stroke-width:1.2}
+.map-svg .spot{fill:var(--cc);stroke:var(--surface);stroke-width:1}
+.map-svg .pin-halo{fill:var(--land);opacity:.9}
+.map-svg .pin-dot{fill:var(--cc);stroke:var(--surface);stroke-width:1.5}
+.map-svg .pin-n{fill:var(--surface);font:700 10px var(--body)}
+.map-svg .pin-l{fill:var(--ink);font:700 11px var(--body);paint-order:stroke;stroke:var(--land);stroke-width:3px;stroke-linejoin:round}
+.map-svg .pin:hover .pin-dot,.map-svg .pin:focus-visible .pin-dot{stroke:var(--ink);stroke-width:2}
+.map-svg .fuji{fill:color-mix(in srgb,var(--c-fuji) 55%,var(--land))}
+.map-svg .fuji-cap{fill:var(--surface)}
+.map-svg .fuji-l{fill:var(--muted);font:500 10px var(--body);paint-order:stroke;stroke:var(--land);stroke-width:3px}
+.map-svg .inset-box{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:3 2;opacity:.6}
+.map-svg .inset-l{fill:var(--muted);font:500 9.5px var(--body)}
+.map-svg .inset-t{fill:var(--ink);font:700 12px var(--body);paint-order:stroke;stroke:var(--sea);stroke-width:3px}
+.map-svg .ap circle{fill:var(--muted)}
+.map-svg .ap text{fill:var(--muted);font:500 10px var(--body);paint-order:stroke;stroke:var(--land);stroke-width:3px}
+.map-key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.map-key span{display:inline-flex;align-items:center;gap:6px}
+.map-key .k{display:inline-block;width:22px;height:0;border-top:2.6px solid var(--accent)}
+.map-key .k.tr{border-top-width:1.8px}
+.map-key .k.ex{border-top:1.6px dashed var(--muted)}
+.map-key .k.ret{border-top:2px dotted var(--accent)}
+.stops{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.alt-days{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.alt-days li{display:grid;grid-template-columns:82px 1fr;gap:10px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--cc);border-radius:10px;padding:8px 10px}
+.alt-days .ad{font-size:12px;color:var(--muted);line-height:1.3}
+.alt-days .ad b{display:block;color:var(--ink);font-size:13px}
+.alt-days .ap2 b{display:block;font-size:14px}
+.alt-days .ap2 span{font-size:13px;color:var(--muted)}
+.alt-days .opt{font-size:11px;font-weight:700;color:var(--c-hiro);background:color-mix(in srgb,var(--c-hiro) 14%,var(--surface));border-radius:999px;padding:1px 7px;margin-left:4px}
+table.cmp,table.cmp tbody{display:block}
+table.cmp thead{display:none}
+table.cmp tr{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;padding:10px 12px;border-bottom:1px solid var(--line)}
+table.cmp tr:last-child{border-bottom:0}
+table.cmp tbody th{grid-column:1/-1;text-align:left;font-size:14px;font-weight:700;color:var(--ink);text-transform:none;letter-spacing:0;padding:0;border:0}
+table.cmp td{font-size:13px;padding:0;border:0;min-width:0}
+table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.map-svg .alt-pin .pin-l{font-size:10px}
+.map-svg .via circle{fill:var(--muted)}
+.map-svg .via text{fill:var(--muted);font:500 9.5px var(--body);paint-order:stroke;stroke:var(--land);stroke-width:3px}
+.stop-row{width:100%;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;font:inherit;color:var(--ink)}
+.stop-row .sn{width:26px;height:26px;border-radius:50%;background:var(--cc);color:var(--surface);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.stop-row b{display:block;font-size:14px}
+.stop-row small{color:var(--muted);font-size:12.5px}
+.stop-row:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.free{position:absolute;left:3px;right:4px;border:1.5px dashed color-mix(in srgb,var(--ok) 55%,transparent);border-radius:8px;background:color-mix(in srgb,var(--ok) 5%,transparent);padding:6px 8px;display:flex;flex-direction:column;gap:4px;overflow:hidden;z-index:0}
+.free b{font-size:12px;color:var(--ok)}
+.free-tip{font-size:12px;color:var(--muted);line-height:1.35}
+.free-act{display:flex;flex-wrap:wrap;gap:6px}
+.free .chip{padding:3px 9px;font-size:12px}
+.free.small{flex-direction:row;align-items:center;justify-content:space-between;padding:2px 8px}
+.free.small .chip[data-food]{display:none}
+
+.lg-wake{border-color:var(--warn);background:color-mix(in srgb,var(--warn) 9%,var(--surface))}
+.lg-wake .lg-i svg{stroke:var(--warn)}
+.lg-food{border-color:var(--c-osaka);background:color-mix(in srgb,var(--c-osaka) 10%,var(--surface))}
+.lg-food .lg-i svg{stroke:var(--c-osaka)}
+.morn{display:flex;align-items:center;gap:5px;margin-top:3px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.morn svg{width:14px;height:14px;fill:none;stroke:var(--warn);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.morn svg + svg{stroke:var(--c-osaka)}
+
 @media (prefers-reduced-motion:reduce){.note.flash,.day.flash,.act.flash,.fav.pop svg{animation:none}}
 </style>
 
@@ -492,6 +590,12 @@ body.dragging{-webkit-user-select:none;user-select:none}
 <section class="view" id="v-calendario" role="tabpanel" aria-labelledby="t-calendario">
   <p class="eyebrow">20 días · 5 bases</p>
   <h1>Calendario del viaje</h1>
+  <div class="seg" role="tablist" aria-label="Ruta">
+    <button role="tab" data-sub="actual" aria-selected="true">Plan actual</button>
+    <button role="tab" data-sub="circular" aria-selected="false">Ruta circular (comparar)</button>
+  </div>
+
+  <div data-panel="actual">
   <p class="lead">Cada color es una ciudad base. Toca un día para ver su plan.</p>
 
   <div class="datebox">
@@ -502,6 +606,9 @@ body.dragging{-webkit-user-select:none;user-select:none}
 
   <div class="legend" id="legend"></div>
   <div id="months"></div>
+  <h2>Mapa de la ruta</h2>
+  <p class="small">Paradas numeradas en el orden sugerido. Toca una para abrir ese día.</p>
+  <div class="map-card" id="routeMap"></div>
   <h2>Feriados de Panamá</h2>
   <div class="cards" id="holList"></div>
 
@@ -509,6 +616,47 @@ body.dragging{-webkit-user-select:none;user-select:none}
   <div class="stays" id="stays"></div>
 
   <div class="callout"><strong>Sakura 2028:</strong> las fechas de floración todavía no se pueden asegurar. El itinerario es una propuesta flexible, no una reserva confirmada.</div>
+  </div>
+
+  <div data-panel="circular" hidden>
+    <p class="lead">Una alternativa para comparar: subir al norte por los Alpes japoneses, bajar por la costa del Mar de Japón hasta Kioto y Osaka, y volver a Tokio por la costa del Pacífico. Tu plan actual no cambia.</p>
+    <h2>Mapa de la ruta circular</h2>
+    <div class="map-card" id="altMap"></div>
+    <h2>Día a día</h2>
+    <p class="small">Fechas según la llegada que elegiste en «Plan actual».</p>
+    <ol class="alt-days" id="altDays"></ol>
+    <div class="callout"><strong>¿Por qué Tokio al inicio y no al final?</strong> Los cerezos de Tokio suelen estar en plena flor entre el 25 de marzo y el 2 de abril; del 8 al 12 de abril ya se están cayendo. Además, el norte (Nagano, Kanazawa) florece más tarde, así que llegar allí a fines de marzo y principios de abril coincide mejor. Tokio también es la ciudad más fácil para los primeros días con jet lag. Lo que sí conviene dejar para el final son las compras grandes (Akihabara, recuerdos), para no cargarlas por todo el recorrido: la noche del día 19 y la mañana del 20 en Tokio sirven para eso.</div>
+    <h2>Comparación</h2>
+    <div class="tbl" style="margin-top:8px"><table class="cmp">
+      <thead><tr><th></th><th>Plan actual</th><th>Ruta circular</th></tr></thead>
+      <tbody>
+        <tr><th>Recorrido</th><td data-l="Plan actual">Tokio → Kioto → Osaka → Hiroshima, y regreso de 4 h a Tokio</td><td data-l="Ruta circular">Tokio → norte → Kanazawa → Kioto → Osaka → Fuji → Tokio, sin volver atrás</td></tr>
+        <tr><th>Hoteles</th><td data-l="Plan actual">5 (4 cambios)</td><td data-l="Ruta circular">8 (7 cambios)</td></tr>
+        <tr><th>Horas en tren y bus</th><td data-l="Plan actual">~20 h</td><td data-l="Ruta circular">~22 h</td></tr>
+        <tr><th>Transporte entre ciudades</th><td data-l="Plan actual">~¥59,000–61,000 por persona</td><td data-l="Ruta circular">~¥62,000–68,000 por persona (estimado)</td></tr>
+        <tr><th>Hiroshima y Miyajima</th><td data-l="Plan actual">2 noches</td><td data-l="Ruta circular">No se incluyen: quedan muy lejos de la ruta</td></tr>
+        <tr><th>Lugares que suma</th><td data-l="Plan actual">—</td><td data-l="Ruta circular">Nikko, monos de nieve, Kanazawa, Shirakawa-go</td></tr>
+        <tr><th>Cerezos</th><td data-l="Plan actual">Tokio y Kioto en buena fecha; Hiroshima ya pasada a mediados de abril</td><td data-l="Ruta circular">Sigue la floración: Tokio fin de marzo, Kanazawa ~1 abr, Kioto 3–5 abr, Fuji ~10 abr</td></tr>
+        <tr><th>Clima</th><td data-l="Plan actual">Templado (8–18 °C)</td><td data-l="Ruta circular">Más frío 4 días en el norte (3–12 °C, posible nieve en Jigokudani)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card"><h3>A favor</h3><ul>
+        <li>Sin el viaje hasta Hiroshima ni el regreso de 4 horas a Tokio.</li>
+        <li>Cada parada cae cerca de su mejor fecha de cerezos.</li>
+        <li>Kanazawa y Shirakawa-go son de los lugares más bonitos de Japón y menos llenos que Kioto.</li>
+        <li>Kawaguchiko y Hakone pasan de excursiones de ida y vuelta a noches allí, con más tiempo frente al Fuji.</li>
+      </ul></div>
+      <div class="card"><h3>En contra</h3><ul>
+        <li>Sin Hiroshima ni Miyajima.</li>
+        <li>Más cambios de hotel: conviene enviar las maletas grandes de Tokio a Kioto (servicio takkyubin, ~¥2,500 por maleta) y llevar mochila 4 días.</li>
+        <li>Nagano y Kanazawa son más fríos: ropa de abrigo y calzado para nieve en Jigokudani.</li>
+        <li>El bus a Shirakawa-go necesita reserva y se llena en primavera.</li>
+        <li>La Ruta Alpina Tateyama Kurobe abre a mediados de abril, después de este viaje.</li>
+      </ul></div>
+    </div>
+    <div class="callout"><strong>Pase de tren:</strong> el Hokuriku Arch Pass cuesta ¥35,000 por 7 días y cubre Tokio → Nagano → Kanazawa → Tsuruga y el tren Thunderbird hacia Kioto y Osaka. No cubre el Shinkansen Osaka–Tokio. Comprados por separado, esos tramos suman unos ¥27,000–30,000, así que el pase solo conviene si le suman más trenes (<a href="https://www.westjr.co.jp/global/en/ticket/pass/hokuriku-arch-pass/" target="_blank" rel="noopener">JR West</a>). Cerezos de Kanazawa: <a href="https://insidekyoto.com/kanazawa-cherry-blossoms" target="_blank" rel="noopener">Inside Kyoto</a>.</div>
+  </div>
 </section>
 
 <!-- DÍAS -->
@@ -1330,7 +1478,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
       var b2=BASES[day.base], ids=L[day.n];
       out+='<li class="day" id="day-'+day.n+'" style="--cc:'+b2.color+'">';
       var sug=suggestedOrder(day.n, ids), differs=!favOnly && sug.join()!==ids.join();
-      out+='<div class="day-head"><span class="num">'+day.n+'</span><div><h3>'+esc(day.t)+(day.fn?'<button class="fn" data-note="'+day.fn+'" aria-label="Ver nota '+day.fn+'">'+day.fn+'</button>':'')+'</h3><span class="date">'+fmt(addDays(start,day.n-1))+'</span><span class="prog" id="prog-'+day.n+'">'+progText(ids)+'</span></div></div>';
+      out+='<div class="day-head"><span class="num">'+day.n+'</span><div><h3>'+esc(day.t)+(day.fn?'<button class="fn" data-note="'+day.fn+'" aria-label="Ver nota '+day.fn+'">'+day.fn+'</button>':'')+'</h3><span class="date">'+fmt(addDays(start,day.n-1))+'</span><span class="prog" id="prog-'+day.n+'">'+progText(ids)+'</span>'+(favOnly?'':morningLine(day.n))+'</div></div>';
       if(differs) out+='<div class="sugbar"><span>Este día no sigue el orden sugerido por ubicación.</span><button class="chip pick" type="button" data-sug="'+day.n+'">Usar orden sugerido</button></div>';
       if(day.note) out+='<p class="day-note">'+esc(day.note)+'</p>';
       out+='<ul class="acts" data-day="'+day.n+'">';
@@ -1404,7 +1552,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     if(onActs) onActs();
   }
   function customForm(id,day){
-    var c=id?CUSTOM[id]:{t:"",note:"",h:"",d:"",p:null,day:day};
+    var c=id?CUSTOM[id]:{t:"",note:"",h:(addPrefillH||""),d:(addPrefillD||""),p:null,day:day};
     var h='<form class="lform cform" data-cform="'+(id||"new")+'" data-day="'+(id?c.day:day)+'" novalidate style="--cc:var(--accent)">';
     h+='<h3 class="form-h">'+(id?'Editar actividad':'Nueva actividad · Día '+day)+'</h3>';
     h+='<label for="cf-t-'+(id||day)+'">Nombre<input id="cf-t-'+(id||day)+'" name="t" maxlength="100" value="'+esc(c.t)+'" placeholder="Ej. Museo Ghibli"></label>';
@@ -1626,7 +1774,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
       var dEl=document.getElementById("day-"+n); if(dEl) flash(dEl);
     }
     else if(ds.addc){ addingDay=+ds.addc; editingCustom=null; customErr=""; pendingRender=false; renderDays(); }
-    else if(ds.ccancel){ addingDay=null; editingCustom=null; customErr=""; pendingRender=false; renderDays(); }
+    else if(ds.ccancel){ addingDay=null; editingCustom=null; customErr=""; addPrefillH=""; addPrefillD=""; pendingRender=false; renderDays(); }
     else if(ds.cedit){ editingCustom=ds.cedit; addingDay=null; customErr=""; renderDays(); }
     else if(ds.cdel){ confirmCustom=ds.cdel; rerenderAct(ds.cdel); }
     else if(ds.cdelno){ var cc=confirmCustom; confirmCustom=null; if(cc) rerenderAct(cc); }
@@ -1674,7 +1822,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     var isNew=f.dataset.cform==="new", id=isNew ? "c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5) : f.dataset.cform;
     var prev=CUSTOM[id];
     var data={day:prev?prev.day:+f.dataset.day, t:t.slice(0,100), note:note.slice(0,300), h:hh.replace(/^0(\d):/,"$1:"), d:dd.slice(0,20), p:pv, created:prev?prev.created:Date.now()};
-    addingDay=null; editingCustom=null; customErr="";
+    addingDay=null; editingCustom=null; customErr=""; addPrefillH=""; addPrefillD="";
     var m=customStore(); m[id]=data; registerCustom(m);
     ls("japon2028-custom",JSON.stringify(customStore()));
     renderDays();
@@ -1749,6 +1897,124 @@ body.dragging{-webkit-user-select:none;user-select:none}
   document.addEventListener("pointercancel",onEnd);
 
 
+
+  /* ---------- Logistics on the timeline ---------- */
+  // Hotel area per base city, and how each activity is reached from that hotel:
+  // via = line(s), st = station near the activity, m = minutes on the train/bus, w = minutes walking from the station.
+  // hf = hotel it leaves from when it differs (check-out days); back = return route when it differs from the way out.
+  var HOTEL={tokio:"Ueno",fuji:"Ueno",kyoto:"estación de Kioto",osaka:"Namba",hiro:"estación de Hiroshima"};
+  var STN={
+    d1a:{via:"A pie",w:10},
+    d2a:{via:"Metro línea Ginza",st:"Asakusa",m:5,w:5},
+    d2b:{via:"A pie",w:5},
+    d3c:{via:"JR Yamanote",st:"Harajuku",m:25,w:5},
+    d3b:{via:"JR Yamanote",st:"Harajuku",m:25,w:2},
+    d3a:{via:"JR Yamanote",st:"Shibuya",m:25,w:2},
+    d3d:{via:"JR Yamanote",st:"Shinjuku",m:25,w:5},
+    d4a:{via:"JR Yamanote",st:"Akihabara",m:3,w:2},
+    d4b:{via:"Metro Ginza y tren Tobu",st:"Tokyo Skytree",m:15,w:3},
+    d6a:{via:"JR Yokosuka y tren Enoden",st:"Hase",m:65,w:7},
+    d6b:{via:"JR Yokosuka y tren Enoden",st:"Hase",m:65,w:5},
+    d6c:{via:"JR Yokosuka",st:"Kamakura",m:60,w:3},
+    d7b:{via:"JR a Shinjuku y bus desde Busta Shinjuku",st:"Kawaguchiko (terminal de buses)",m:150,w:10},
+    d7a:{via:"JR a Shinjuku, bus a Kawaguchiko y bus línea roja",st:"Kawaguchiko (terminal de buses)",m:175,w:3,back:{via:"Bus a Busta Shinjuku y JR a Ueno",m:150}},
+    d8b:{via:"JR a Shinjuku, Romancecar, tren de montaña, funicular y teleférico",st:"Owakudani (teleférico)",m:175,w:0},
+    d8a:{via:"JR a Shinjuku, Romancecar, tren de montaña, funicular y teleférico",st:"Togendai (muelle)",m:200,w:0},
+    d8c:{via:"JR a Shinjuku, Romancecar y bus",st:"Moto-Hakone (muelle)",m:200,w:10,back:{via:"Bus a Hakone-Yumoto, Romancecar a Shinjuku y JR a Ueno",st:"Moto-Hakone (parada de bus)",m:150}},
+    d9a:{via:"Bus 206 o taxi",st:"Gion (parada de bus)",m:20,w:5},
+    d10a:{via:"Bus 206 o taxi",st:"Gojōzaka (parada de bus)",m:15,w:10},
+    d10b:{via:"Bus 206",st:"Kiyomizu-michi (parada de bus)",m:15,w:5},
+    d10c:{via:"Bus 206",st:"Gion (parada de bus)",m:20,w:2},
+    d11a:{via:"JR línea Nara",st:"Inari",m:5,w:2},
+    d11b:{via:"Metro Karasuma",st:"Shijō",m:5,w:5},
+    d12a:{via:"JR Sagano",st:"Saga-Arashiyama",m:15,w:10},
+    d12b:{via:"JR Sagano",st:"Saga-Arashiyama",m:15,w:12},
+    d12c:{via:"Bus 101 o 205",st:"Kinkakuji-michi (parada de bus)",m:40,w:5},
+    d13a:{hf:"Kioto, check-out",via:"Kintetsu Kioto → Nara",st:"Kintetsu-Nara",m:40,w:10,back:{via:"Kintetsu Nara → Ōsaka-Namba",m:40}},
+    d13b:{hf:"Kioto, check-out",via:"Kintetsu Kioto → Nara",st:"Kintetsu-Nara",m:40,w:20,back:{via:"Kintetsu Nara → Ōsaka-Namba",m:40}},
+    d13c:{hf:"Kioto, check-out",via:"Kintetsu Kioto → Nara",st:"Kintetsu-Nara",m:40,w:25,back:{via:"Kintetsu Nara → Ōsaka-Namba",m:40}},
+    d14a:{via:"Metro Sennichimae y Tanimachi",st:"Tanimachi 4-chōme",m:15,w:10},
+    d14b:{via:"Metro Midōsuji",st:"Dōbutsuen-mae",m:5,w:5},
+    d14c:{via:"A pie",w:5},
+    d15a:{via:"A pie",w:10},
+    d15b:{via:"Metro y JR Yumesaki",st:"Universal City",m:30,w:5},
+    d16a:{hf:"Namba, check-out",via:"Metro a Shin-Ōsaka, Shinkansen a Hiroshima y tranvía 2 o 6",st:"Genbaku Dome-mae (tranvía)",m:130,w:3,back:{via:"Tranvía a la estación de Hiroshima",m:15}},
+    d16b:{hf:"Namba, check-out",via:"Metro a Shin-Ōsaka, Shinkansen a Hiroshima y tranvía 2 o 6",st:"Genbaku Dome-mae (tranvía)",m:130,w:8,back:{via:"Tranvía a la estación de Hiroshima",m:15}},
+    d17a:{via:"JR Sanyō a Miyajimaguchi y ferry JR",st:"Miyajima (muelle)",m:45,w:12},
+    d17b:{via:"JR Sanyō a Miyajimaguchi y ferry JR",st:"Miyajima (muelle)",m:45,w:25},
+    d18a:{via:"A pie",w:5},
+    d19a:{via:"Metro Ginza y Marunouchi",st:"Shinjuku-gyoemmae",m:25,w:5}
+  };
+  var STN_ALT={
+    d2b:[{via:"A pie",w:10}],
+    d3a:[{via:"JR Yamanote",st:"Shibuya",m:25,w:2}],
+    d5a:[{via:"Metro y Yurikamome",st:"Shin-Toyosu",m:35,w:5},{via:"JR Yamanote",st:"Shibuya",m:25,w:2}],
+    d15b:[{via:"Metro Midōsuji",st:"Umeda",m:10,w:10},{via:"Metro Midōsuji",st:"Shinsaibashi",m:3,w:2}],
+    d18a:[{via:"Metro Hanzōmon",st:"Kudanshita",m:20,w:5}]
+  };
+  // Fixed moves on travel days
+  var DAYFIX={
+    9:[{s:"10:00",e:"10:30",k:"hotel",t:"Check-out (Ueno) y JR Yamanote a Tokio",sub:"Llega 10:30 a la estación Tokio"},
+       {s:"11:00",e:"13:15",k:"go",t:"Shinkansen Nozomi: Tokio → Kioto",sub:"Llega 13:15 a la estación Kioto"},
+       {s:"13:30",e:"13:45",k:"hotel",t:"Dejar maletas en el hotel (estación de Kioto)"},
+       {s:"15:00",e:"15:20",k:"hotel",t:"Check-in (estación de Kioto)"}],
+    13:[{s:"15:00",e:"15:20",k:"hotel",t:"Check-in (Namba)",sub:"Las maletas pueden ir por envío o en casillero"}],
+    16:[{s:"16:00",e:"16:20",k:"hotel",t:"Check-in (estación de Hiroshima)"}],
+    18:[{s:"9:15",e:"9:30",k:"hotel",t:"Check-out (estación de Hiroshima)",sub:"A pie a la estación de Hiroshima"},
+        {s:"10:00",e:"14:00",k:"go",t:"Shinkansen Nozomi: Hiroshima → Tokio",sub:"Llega 14:00 a la estación Tokio"},
+        {s:"14:00",e:"14:15",k:"go",t:"JR Yamanote: Tokio → Ueno",sub:"Llega 14:15 a la estación Ueno"},
+        {s:"15:00",e:"15:20",k:"hotel",t:"Check-in (Ueno)"}]
+  };
+  state.flight={arr:"6:20",dep:"14:25",ap:"NRT",ap2:"NRT"};
+  try{ var fl=JSON.parse(ls("japon2028-flight")||"null"); if(fl&&typeof fl==="object") ["arr","dep","ap","ap2"].forEach(function(k){ if(fl[k]) state.flight[k]=String(fl[k]); }); }catch(e){}
+  function airInfo(ap){ return ap==="HND" ? {n:"Haneda",via:"Keikyū y JR Yamanote",st:"Ueno",ride:45} : {n:"Narita",via:"Keisei Skyliner",st:"Keisei Ueno",ride:45}; }
+  function stnOf(id){ var st=actState(id); if(st && typeof st.alt==="number" && STN_ALT[id] && STN_ALT[id][st.alt]) return STN_ALT[id][st.alt]; return STN[id]||null; }
+  function goMin(x){ var tot=0, re=/(\d+)(?:\s*[–-]\s*(\d+))?\s*min/g, m; while((m=re.exec(x))){ tot+= m[2] ? (+m[1]+(+m[2]))/2 : +m[1]; } return Math.round(tot)||15; }
+  function logiEvents(n, acts){
+    var out=[], day=DAYS[n-1], hotel="hotel ("+HOTEL[day.base]+")";
+    (DAYFIX[n]||[]).forEach(function(f){ out.push({s:toMin(f.s),e:toMin(f.e),k:f.k,title:f.t,sub:f.sub||""}); });
+    if(n===1){
+      var A=toMin(state.flight.arr), ai=airInfo(state.flight.ap);
+      if(A<9999){
+        out.push({s:A,e:A+90,k:"air",title:"Aterriza en "+ai.n+": migración, maletas y aduana",sub:"Ten listo el QR de Visit Japan Web · sales hacia las "+hhmm(A+90)});
+        var t1=A+100;
+        out.push({s:t1,e:t1+ai.ride,k:"go",title:ai.via+": aeropuerto → "+ai.st,sub:"Sale "+hhmm(t1)+" · llega "+hhmm(t1+ai.ride)+" a la estación "+ai.st});
+        out.push({s:t1+ai.ride+10,e:t1+ai.ride+25,k:"hotel",title:"Dejar maletas en el hotel (Ueno)",sub:"El check-in suele ser a las 15:00"});
+        if(t1+ai.ride+25<15*60) out.push({s:15*60,e:15*60+20,k:"hotel",title:"Check-in (Ueno)",sub:""});
+      }
+    }
+    if(n===20){
+      var D=toMin(state.flight.dep), ao=airInfo(state.flight.ap2||state.flight.ap);
+      if(D<9999){
+        var counter=D-180, arrive=counter-10, leave=arrive-ao.ride, co=leave-40;
+        out.push({s:co,e:co+20,k:"hotel",title:"Check-out del hotel (Ueno)",sub:"Caminar a la estación "+ao.st});
+        out.push({s:leave,e:arrive,k:"go",title:ao.via+": "+ao.st+" → aeropuerto",sub:(leave<6*60+30?"El primer tren sale cerca de las 6:30: con un vuelo tan temprano, duerman cerca del aeropuerto. ":"")+"Sale "+hhmm(leave)+" de la estación "+ao.st+" · llega "+hhmm(arrive)+" a "+ao.n});
+        out.push({s:counter,e:counter+45,k:"air",title:"Documentar maletas y migración",sub:"Tres horas antes del vuelo"});
+        out.push({s:D,e:D+20,k:"air",title:"Despega el vuelo de regreso",sub:hhmm(D)+" · "+ao.n});
+      }
+    }
+    if(acts.length){
+      var a0=acts[0], z=acts[acts.length-1], o=stnOf(a0.id);
+      if(o){
+        var ride=o.m||0, walk=o.w||0, dep=a0.s-walk-ride-(ride?5:0);
+        out.push({s:dep,e:a0.s,k:"go",anchorEnd:true,title:"Salida del "+(o.hf?"hotel ("+o.hf+")":hotel),
+          sub: o.st ? (o.via+" · llega "+hhmm(a0.s-walk)+" a la estación "+o.st) : (o.via+(walk?", "+walk+" min":""))});
+      } else out.push({s:a0.s-20,e:a0.s,k:"go",anchorEnd:true,est:true,title:"Salida del "+hotel,sub:"Ruta por definir: revísala en Maps"});
+      for(var i=0;i<acts.length-1;i++){
+        var g=INFO[acts[i].id]&&INFO[acts[i].id].go;
+        if(g && g.to===acts[i+1].id){ var mm=goMin(g.x); out.push({s:acts[i].e,e:acts[i].e+mm,k:"move",title:g.x,sub:"Llega "+hhmm(acts[i].e+mm)}); }
+      }
+      var zs=stnOf(z.id);
+      if(zs){
+        var bk=zs.back||zs, wz=zs.w||0, r=bk.m||0, stName=bk.st||zs.st, tot=Math.max(10,wz+r+(r?5:0));
+        out.push({s:z.e,e:z.e+tot,k:"go",title:"Regreso al "+hotel,
+          sub: (r && stName) ? ("Sale ~"+hhmm(z.e+wz)+" de "+(/parada|muelle|terminal|teleférico|tranvía/.test(stName)?"":"la estación ")+stName+" · "+bk.via+" · llega "+hhmm(z.e+tot)) : (bk.via+(wz?", "+wz+" min":"")+" · llega "+hhmm(z.e+tot))});
+      } else out.push({s:z.e,e:z.e+20,k:"go",est:true,title:"Regreso al "+hotel,sub:"Ruta por definir: revísala en Maps"});
+    }
+    return out.filter(function(x){ return x.s<9999 && x.e<9999; });
+  }
+  function timeVal(h){ var m=/^(\d{1,2}):(\d{2})$/.exec(h||""); return m ? (m[1].length<2?"0":"")+m[1]+":"+m[2] : ""; }
+  function saveFlight(){ ls("japon2028-flight",JSON.stringify(state.flight)); if(dbRef) dbRef.doc("settings/vuelo").set(state.flight).catch(function(){}); }
   /* ---------- Day timeline (Cronograma) ---------- */
   var dview = ls("japon2028-dview")==="crono" ? "crono" : "lista";
   var cronoDay = parseInt(ls("japon2028-cday"),10) || 0;
@@ -1777,11 +2043,15 @@ body.dragging{-webkit-user-select:none;user-select:none}
     });
     // Side-by-side lanes for overlapping activities
     timed.sort(function(x,y){ return x.s-y.s || y.dur-x.dur; });
+    var lgs = favOnly ? [] : logiEvents(cronoDay, timed.slice());
+    if(!favOnly) lgs = lgs.concat(morning(cronoDay, timed.concat(lgs)));
+    lgs.forEach(function(x){ x.lg=true; x.dur=x.e-x.s; });
+    var all=timed.concat(lgs).sort(function(x,y){ return x.s-y.s || (x.lg?0:1)-(y.lg?0:1) || y.dur-x.dur; });
     var clusters=[], cur=null, endMax=-1;
-    timed.forEach(function(ev){ if(!cur || ev.s>=endMax){ cur=[]; clusters.push(cur); endMax=-1; } cur.push(ev); endMax=Math.max(endMax,ev.e); });
+    all.forEach(function(ev){ if(!cur || ev.s>=endMax){ cur=[]; clusters.push(cur); endMax=-1; } cur.push(ev); endMax=Math.max(endMax,ev.e); });
     clusters.forEach(function(cl){ var lanes=[]; cl.forEach(function(ev){ var i=0; while(lanes[i]!==undefined && lanes[i]>ev.s) i++; lanes[i]=ev.e; ev.lane=i; }); cl.forEach(function(ev){ ev.lanes=lanes.length; }); });
     var h0=H0, h1=22;
-    timed.forEach(function(ev){ h0=Math.min(h0,Math.floor(ev.s/60)); h1=Math.max(h1,Math.ceil(ev.e/60)); });
+    all.forEach(function(ev){ h0=Math.min(h0,Math.max(0,Math.floor(ev.s/60))); h1=Math.max(h1,Math.ceil(ev.e/60)); });
     h1=Math.min(24,h1);
 
     var strip='<div class="cr-strip" role="tablist" aria-label="Días del viaje">';
@@ -1793,14 +2063,39 @@ body.dragging{-webkit-user-select:none;user-select:none}
       '<div class="cr-title"><b>Día '+cronoDay+' · '+esc(day.t)+'</b><span>'+fmt(date)+' · '+esc(b.name)+'</span></div>'+
       '<button type="button" class="cr-nav" data-cnav="1" aria-label="Día siguiente"'+(cronoDay>=20?' disabled':'')+'>›</button></div>';
     h+='<div class="cr-all" style="--cc:'+b.color+'"><span class="cr-allh">'+DOW[date.getDay()].toUpperCase()+'<b>'+date.getDate()+'</b></span><div class="cr-allb">';
-    if(!timed.length && !untimed.length) h+='<span class="cr-empty">Nada planeado</span>';
+    if(!timed.length && !untimed.length && !lgs.length) h+='<span class="cr-empty">Nada planeado</span>';
+    if(cronoDay===1 || cronoDay===20){
+      var isIn=cronoDay===1, apv=isIn?state.flight.ap:(state.flight.ap2||state.flight.ap);
+      h+='<div class="cr-flight"><label for="fl-t">'+(isIn?'Aterriza':'Despega')+'<input type="time" id="fl-t" data-fl="'+(isIn?'arr':'dep')+'" value="'+timeVal(isIn?state.flight.arr:state.flight.dep)+'"></label>'+
+         '<label for="fl-ap">Aeropuerto<select id="fl-ap" data-flap="'+(isIn?'ap':'ap2')+'"><option value="NRT"'+(apv==="NRT"?' selected':'')+'>Narita</option><option value="HND"'+(apv==="HND"?' selected':'')+'>Haneda</option></select></label>'+
+         '<span class="small">Horario de referencia de Aeroméxico vía Ciudad de México. Cámbialo cuando tengas el boleto.</span></div>';
+    }
     untimed.forEach(function(ev){ h+='<button type="button" class="ev-chip" data-evgo="'+ev.id+'">'+(ev.fav?'♥ ':'')+esc(ev.title)+' <small>sin hora</small></button>'; });
-    if(FROM[cronoDay] && (timed.length||untimed.length) && !favOnly) h+='<span class="cr-from"><b>Cómo llegar:</b> '+esc(FROM[cronoDay])+'</span>';
     h+='</div></div>';
 
     h+='<div class="cr-scroll" id="crScroll"><div class="cr-grid" style="height:'+((h1-h0)*HOURPX)+'px;--cc:'+b.color+'">';
     for(var k=h0;k<=h1;k++) h+='<div class="cr-line" style="top:'+((k-h0)*HOURPX)+'px"><span>'+(k===24?'0':k)+':00</span></div>';
     h+='<div class="cr-evs">';
+    lgs.forEach(function(ev){
+      var room;
+      if(ev.anchorEnd){ var pe=h0*60; all.forEach(function(o){ if(o!==ev && o.e<=ev.s+1 && o.e>pe) pe=o.e; }); room=ev.e-pe; }
+      else { var ns=h1*60; all.forEach(function(o){ if(o!==ev && o.s>ev.s && o.s<ns) ns=o.s; }); room=ns-ev.s; }
+      var w=100/ev.lanes, real=(ev.e-ev.s)/60*HOURPX, roomPx=room/60*HOURPX-2;
+      var hh=Math.max(16, Math.max(real-2, Math.min(36, roomPx))), top=(ev.s-h0*60)/60*HOURPX;
+      if(ev.anchorEnd && hh>real) top=top+real-hh-2;
+      var one = hh<32;
+      var ic = ev.k==="air" ? ICON_PLANE : ev.k==="hotel" ? ICON_BED : ev.k==="wake" ? ICON_SUN : ev.k==="food" ? ICON_CUP : ICON_GO;
+      h+='<div class="lg lg-'+ev.k+(ev.est?' est':'')+(one?' one':'')+'" style="top:'+top.toFixed(1)+'px;height:'+hh.toFixed(1)+'px;left:calc('+(ev.lane*w)+'% + 2px);width:calc('+w+'% - 4px)" title="'+esc(hhmm(ev.s)+' · '+ev.title+(ev.sub?' · '+ev.sub:''))+'">'+
+        '<span class="lg-i" aria-hidden="true">'+ic+'</span><div class="lg-t">'+(one ? '<b>'+hhmm(ev.s)+' · '+esc(ev.title)+(ev.sub?' <i>· '+esc(ev.sub)+'</i>':'')+'</b>' : '<b>'+hhmm(ev.s)+' · '+esc(ev.title)+'</b>'+(ev.sub?'<span>'+esc(ev.sub)+'</span>':''))+'</div></div>';
+    });
+    if(!favOnly) freeGaps(cronoDay, all).forEach(function(g){
+      var top=(g.s-h0*60)/60*HOURPX+2, hh=(g.e-g.s)/60*HOURPX-4, big=hh>=92;
+      h+='<div class="free'+(big?'':' small')+'" style="top:'+top.toFixed(1)+'px;height:'+hh.toFixed(1)+'px">'+
+        '<b>Libre · '+hhmm(g.s)+'–'+hhmm(g.e)+' ('+durTxt(g.e-g.s)+')</b>'+
+        (big && g.tip ? '<span class="free-tip">'+esc(g.tip)+'</span>' : '')+
+        '<span class="free-act">'+(g.meal?'<button type="button" class="chip" data-food="'+DAYS[cronoDay-1].base+'">'+(g.meal==="cena"?'Dónde cenar':'Dónde almorzar')+'</button>':'')+
+        '<button type="button" class="chip pick" data-cfree="'+cronoDay+'" data-h="'+hhmm(g.s)+'" data-d="'+durTxt(Math.min(120,g.e-g.s))+'">+ Agregar aquí</button></span></div>';
+    });
     timed.forEach(function(ev){
       var top=(ev.s-h0*60)/60*HOURPX, hh=Math.max(26,(ev.e-ev.s)/60*HOURPX-2), w=100/ev.lanes;
       h+='<button type="button" class="ev'+(ev.done?' done':'')+(ev.custom?' mine':'')+(hh<46?' short':'')+'" data-evgo="'+ev.id+'" style="top:'+top.toFixed(1)+'px;height:'+hh.toFixed(1)+'px;left:calc('+(ev.lane*w)+'% + 2px);width:calc('+w+'% - 4px)" aria-label="'+esc(ev.title)+', '+hhmm(ev.s)+' a '+hhmm(ev.e)+(ev.done?', hecha':'')+'">'+
@@ -1815,7 +2110,60 @@ body.dragging{-webkit-user-select:none;user-select:none}
     var strp=box.querySelector(".cr-strip"), chip=box.querySelector('.cr-chip[aria-selected="true"]');
     if(strp && chip) strp.scrollLeft=chip.offsetLeft-strp.clientWidth/2+chip.offsetWidth/2;
     var sc=document.getElementById("crScroll");
-    if(sc){ var first=timed.length?timed[0].s:8*60; sc.scrollTop=Math.max(0,(first-h0*60-30)/60*HOURPX); }
+    if(sc){ var first=all.length?all[0].s:8*60; sc.scrollTop=Math.max(0,(first-h0*60-30)/60*HOURPX); }
+  }
+  var ICON_SUN='<svg viewBox="0 0 24 24"><path d="M4 18h16M7 18a5 5 0 0 1 10 0M12 7v3M5.6 10.6l2 2M18.4 10.6l-2 2M3 14.5h2M19 14.5h2"/></svg>';
+  var ICON_CUP='<svg viewBox="0 0 24 24"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5c0 1.5 1 1.5 1 3M12 3.5c0 1.5 1 1.5 1 3"/></svg>';
+  // Activities with a time, for a given day (same rules as the timeline)
+  function timedActs(n){
+    var L=layoutNow(), out=[];
+    (L[n]||[]).forEach(function(id){
+      var a=ACTS[id], st=actState(id); if(!a || (st&&st.dropped)) return;
+      var inf=a.custom?(CUSTOM[id]||{}):(INFO[id]||{}), s0=toMin(inf.h); if(s0>=9999) return;
+      var d=durMin(inf.d); out.push({id:id,s:s0,e:Math.min(1440,s0+d),dur:d});
+    });
+    return out.sort(function(x,y){ return x.s-y.s; });
+  }
+  // Wake-up and breakfast, worked back from the first thing of the day. Day 1 starts on the plane.
+  var GETREADY=45, BFAST=40;
+  function morning(n, evs){
+    if(n===1 || !evs.length) return [];
+    var T=Math.min.apply(null, evs.map(function(e){ return e.s; }));
+    if(!(T<9999)) return [];
+    var b=Math.floor((T-BFAST)/5)*5, w=Math.floor((b-GETREADY)/5)*5, early=b<7*60;
+    return [
+      {s:w,e:b,k:"wake",title:"Despertar y alistarse",sub:"Alarma a las "+hhmm(w)},
+      {s:b,e:T,k:"food",title:early?"Desayuno rápido":"Desayuno",sub: early ? "Onigiri o sándwich de konbini: el desayuno del hotel suele abrir a las 6:30–7:00" : "En el hotel o en una cafetería cercana"}
+    ];
+  }
+  function morningLine(n){
+    if(n===1) return "";
+    var t=timedActs(n), mo=morning(n, t.concat(logiEvents(n, t)));
+    return mo.length ? '<span class="morn">'+ICON_SUN+'Despertar '+hhmm(mo[0].s)+'<span aria-hidden="true">·</span>'+ICON_CUP+(mo[1].title==="Desayuno rápido"?'desayuno rápido ':'desayuno ')+hhmm(mo[1].s)+'</span>' : "";
+  }
+  var ICON_PLANE='<svg viewBox="0 0 24 24"><path d="M10.5 20l1.5-1v-5l8 2.5v-2L12 9V4.5a1.5 1.5 0 0 0-3 0V9l-8 5.5v2l8-2.5v5l1.5 1z"/></svg>';
+  var ICON_BED='<svg viewBox="0 0 24 24"><path d="M3 18V7M3 14h18v4M21 14v-2.5A2.5 2.5 0 0 0 18.5 9H11v5"/><circle cx="7" cy="11" r="1.6"/></svg>';
+  var addPrefillH="", addPrefillD="";
+  function durTxt(m){ var h=Math.floor(m/60), r=m%60; return h ? (r ? h+" h "+r+" min" : h+" h") : r+" min"; }
+  // Gaps of 75+ minutes between 8:00 and 21:30 (day 1 from landing; day 20 until the flight)
+  function freeGaps(n, evs){
+    var w0=8*60, w1=21*60+30;
+    if(n===1){ var A=toMin(state.flight.arr); if(A<9999) w0=Math.max(w0, A); }
+    if(n===20){ var D=toMin(state.flight.dep); if(D<9999) w1=Math.min(w1, D-200); }
+    // logistics blocks are drawn at least ~40 min tall, so reserve that space
+    var busy=evs.map(function(e){ var vs=e.s, ve=e.e; if(e.lg){ if(e.anchorEnd) vs=Math.min(e.s,e.e-40); else ve=Math.max(e.e,e.s+40); } return [vs,ve]; }).sort(function(a,b){ return a[0]-b[0]; }), merged=[];
+    busy.forEach(function(b){ var l=merged[merged.length-1]; if(l && b[0]<=l[1]) l[1]=Math.max(l[1],b[1]); else merged.push([b[0],b[1]]); });
+    var gaps=[], c=w0;
+    merged.forEach(function(b){ if(b[0]-c>=75 && b[0]>w0) gaps.push([c,Math.min(b[0],w1)]); c=Math.max(c,b[1]); });
+    if(w1-c>=75) gaps.push([c,w1]);
+    var day=DAYS[n-1], ideas=[];
+    day.acts.forEach(function(a){ var st=actState(a.id); a.alts.forEach(function(o,i){ if(!(st && st.alt===i)) ideas.push(o.t); }); });
+    return gaps.filter(function(g){ return g[1]-g[0]>=75; }).map(function(g){
+      var meal = (g[0]<=13*60+30 && g[1]>=12*60+30) ? "almuerzo" : (g[0]<=20*60 && g[1]>=19*60) ? "cena" : "";
+      var tip = (n===1 && g[0]<15*60) ? "Buen momento para descansar del vuelo antes del check-in." :
+                ideas.length ? "Ideas cerca: "+ideas.slice(0,2).join(", ")+"." : "";
+      return {s:g[0],e:g[1],meal:meal,tip:tip};
+    });
   }
   function setCronoDay(n){ cronoDay=Math.min(20,Math.max(1,n)); ls("japon2028-cday",String(cronoDay)); renderCrono(); }
   function setDView(v){
@@ -1836,11 +2184,23 @@ body.dragging{-webkit-user-select:none;user-select:none}
       var id=t.dataset.evgo; setDView("lista");
       setTimeout(function(){ var li=document.querySelector('#dayList [data-act="'+id+'"]'); if(li){ li.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); li.classList.remove("flash"); void li.offsetWidth; li.classList.add("flash"); } },40);
     }
+    else if(t.dataset.cfree){
+      var nf=+t.dataset.cfree; if(favOnly) favOnly=false;
+      addPrefillH=t.dataset.h; addPrefillD=t.dataset.d;
+      setDView("lista"); addingDay=nf; editingCustom=null; customErr=""; renderDays();
+      setTimeout(function(){ var f=document.querySelector("#dayList .cform"); if(f) f.scrollIntoView({block:"center"}); },40);
+    }
+    else if(t.dataset.food){ foodFilter=t.dataset.food; renderFoodFilter(); renderFood(); go("comida"); }
     else if(t.dataset.cadd){
       var n=+t.dataset.cadd; if(favOnly) favOnly=false;
       setDView("lista"); addingDay=n; editingCustom=null; customErr=""; renderDays();
       setTimeout(function(){ var f=document.querySelector("#dayList .cform"); if(f) f.scrollIntoView({block:"center"}); },40);
     }
+  });
+  cronoBox.addEventListener("change",function(e){
+    var t=e.target;
+    if(t.dataset.fl){ if(!t.value) return; state.flight[t.dataset.fl]=t.value.replace(/^0(\d):/,"$1:"); saveFlight(); renderCrono(); }
+    else if(t.dataset.flap){ state.flight[t.dataset.flap]=t.value==="HND"?"HND":"NRT"; saveFlight(); renderCrono(); }
   });
   // Swipe sideways on the hour grid to change day
   (function(){
@@ -1850,6 +2210,152 @@ body.dragging{-webkit-user-select:none;user-select:none}
   })();
   // Keep the "now" line moving while the timeline is open
   setInterval(function(){ if(dview==="crono" && !document.hidden && current==="dias"){ var sc=document.getElementById("crScroll"), keep=sc?sc.scrollTop:0; renderCrono(); var sc2=document.getElementById("crScroll"); if(sc2) sc2.scrollTop=keep; } },60000);
+
+
+  /* ---------- Route map (Natural Earth coastline, public domain) ---------- */
+  var MAPD = {"main":{"w":360,"h":189,"d":"M35.6 206.3L36.1 207.8L36.6 208.6L35.7 209.2L34.8 209.6L34.4 211.1L34.3 212.1L33.4 213.5L33.0 215.5L32.4 216.9L32.0 218.9L31.3 221.5L30.2 225.4L28.8 229.8L28.5 230.9L28.5 232.2L28.8 233.2L30.2 234.3L29.6 235.3L28.6 240.2L28.8 241.5L27.7 242.4L27.1 243.6L26.7 244.5L26.4 245.4L26.7 246.8L26.1 247.8L25.7 249.7L25.1 250.8L24.8 251.7L23.0 251.3L21.8 251.0L21.7 250.1L20.8 248.6L19.5 248.4L18.5 247.6L17.1 247.9L15.9 248.5L15.0 249.4L14.4 250.5L13.9 252.1L15.5 252.8L17.0 253.5L16.2 254.8L16.6 255.6L17.7 255.1L15.5 257.7L14.5 257.6L13.7 258.7L12.7 260.5L12.0 261.6L10.9 262.3L9.1 263.0L7.4 263.4L6.4 263.8L5.6 264.6L4.2 265.1L3.2 266.2L1.9 266.9L2.2 264.2L3.0 263.3L4.4 262.4L5.6 259.3L6.1 257.0L6.4 255.7L6.7 253.6L6.2 251.7L5.7 250.4L5.0 249.1L3.5 248.1L3.2 247.0L3.5 245.3L1.2 244.2L0.4 243.7L-0.4 242.9L0.5 241.8L2.1 241.6L3.8 241.8L4.0 243.6L5.0 244.0L5.9 243.1L6.7 241.8L7.0 240.2L6.9 238.8L5.9 237.8L4.6 237.9L2.9 237.2L1.5 237.6L0.5 239.0L0.3 240.4L-0.8 241.9L-1.4 243.7L-1.9 244.7L-2.4 245.9L-2.8 247.6L-2.7 249.2L-1.7 251.6L-1.2 253.3L-0.4 254.4L0.7 255.6L2.1 255.8L1.7 257.8L1.3 259.3L0.1 259.9L-0.5 260.6L-1.7 260.3L-2.7 260.1L-2.8 259.2L-3.1 258.3L-5.0 256.7L-10.2 256.5L-11.9 256.9L-13.1 256.2L-13.3 254.9L-13.7 254.0L-13.2 253.1L-14.4 251.5L-15.5 250.6L-15.3 249.7L-14.3 249.9L-12.9 250.9L-12.0 250.4L-10.3 248.7L-9.9 247.4L-9.2 245.2L-9.0 243.9L-9.3 242.9L-8.8 242.0L-9.2 240.6L-10.2 239.5L-11.5 237.4L-13.4 236.0L-14.4 234.5L-14.0 233.0L-12.7 233.1L-13.2 232.3L-12.9 230.6L-12.8 228.8L-13.3 227.0L-14.3 225.9L-13.9 224.8L-13.3 223.9L-13.3 222.9L-14.2 222.1L-13.2 220.9L-11.9 220.4L-10.8 221.8L-9.4 221.0L-8.6 219.3L-8.1 218.2L-5.7 215.3L-5.3 214.3L-4.7 213.6L-4.7 212.5L-4.4 211.7L-3.3 212.5L-2.9 211.5L-3.0 210.3L-2.0 208.8L-1.0 207.4L-1.1 206.3L-1.4 205.3L0.0 205.1L-1.1 204.0L1.3 201.0L1.9 200.3L2.3 199.2L1.3 199.3L-4.1 200.3L-5.1 200.3L-4.2 199.3L-1.9 198.1L-1.2 197.4L-0.2 197.3L0.9 197.0L0.0 196.0L-0.2 195.1L0.4 194.0L-0.2 192.4L-2.8 190.2L-4.4 188.6L-5.3 187.9L-5.8 184.5L-5.8 182.7L-5.9 181.4L-6.8 180.9L-7.6 180.1L-7.9 179.1L-8.8 178.9L-10.0 178.7L-11.5 177.5L-12.8 178.3L-14.2 179.3L-15.1 180.2L-15.3 181.3L-14.8 182.6L-13.3 185.2L-12.7 185.9L-13.3 186.8L-13.3 187.7L-14.6 188.6L-15.6 189.4L-16.6 189.9L-15.7 190.8L-15.0 191.3L-13.7 191.2L-12.0 189.9L-9.8 189.9L-8.7 190.7L-8.3 191.7L-7.6 193.3L-7.5 195.2L-8.2 196.5L-8.1 197.6L-8.7 198.5L-9.9 199.2L-11.1 199.2L-11.6 200.2L-12.3 200.8L-13.6 201.1L-14.6 201.5L-14.5 200.5L-15.3 199.9L-15.9 198.8L-15.9 197.8L-14.5 197.2L-13.8 196.6L-13.1 195.8L-13.6 194.8L-13.8 193.7L-15.3 193.2L-17.1 193.3L-18.0 193.7L-19.1 194.7L-20.5 195.2L-21.4 195.0L-22.2 196.0L-23.0 197.2L-23.7 198.7L-24.5 199.2L-25.5 199.7L-25.8 200.6L-26.6 201.4L-27.4 201.9L-28.6 202.4L-28.2 201.5L-27.1 199.9L-26.4 198.7L-27.0 197.8L-26.4 197.1L-25.4 197.1L-24.9 196.1L-26.2 196.3L-26.8 194.2L-27.6 193.4L-27.8 192.4L-28.8 192.6L-29.5 192.0L-30.4 191.4L-31.0 190.2L-31.1 189.2L-31.6 188.3L-32.6 186.6L-32.6 185.7L-31.8 184.7L-31.8 183.4L-31.5 182.0L-30.9 181.0L-29.5 181.6L-29.1 182.4L-28.5 183.1L-28.9 184.0L-28.9 185.2L-28.1 184.1L-27.0 184.4L-26.2 185.6L-26.4 187.4L-26.6 188.3L-27.1 187.0L-27.2 188.4L-26.6 189.5L-26.4 190.4L-25.5 191.2L-24.6 190.8L-24.1 189.9L-22.4 190.6L-20.6 191.3L-20.7 190.4L-22.5 187.7L-22.5 186.5L-21.9 185.0L-23.1 183.4L-24.2 182.2L-25.2 182.6L-26.2 183.1L-27.0 181.6L-27.7 182.5L-28.7 182.1L-29.2 180.6L-28.7 179.7L-29.5 178.8L-30.0 180.0L-31.1 180.6L-31.6 179.6L-30.8 179.0L-31.5 178.0L-31.8 177.0L-33.1 176.8L-34.0 176.1L-35.2 175.6L-34.9 174.3L-34.5 173.4L-34.1 172.5L-34.6 171.6L-34.4 170.5L-34.3 169.6L-32.9 170.0L-31.2 168.4L-31.1 170.0L-30.3 170.3L-28.8 169.8L-26.6 170.5L-26.3 172.3L-25.7 173.1L-25.5 171.8L-25.3 170.5L-24.6 169.3L-26.4 167.3L-27.0 166.6L-27.0 165.6L-26.3 164.9L-25.7 165.7L-25.3 166.6L-25.4 165.0L-25.7 163.7L-25.1 163.0L-24.0 162.8L-22.2 163.0L-21.5 163.8L-22.0 164.7L-21.3 165.4L-20.6 166.4L-19.6 166.5L-18.9 165.9L-18.6 164.9L-17.3 164.0L-16.3 163.9L-15.4 163.4L-14.5 162.9L-15.9 162.6L-16.5 161.9L-16.8 161.0L-15.9 160.5L-14.9 159.9L-14.8 158.9L-13.8 158.9L-13.2 157.5L-12.3 158.0L-12.3 159.4L-11.0 159.7L-11.3 160.7L-10.4 161.2L-9.6 160.3L-8.1 160.3L-7.0 160.0L-6.7 158.9L-6.7 157.8L-8.0 158.3L-9.3 158.0L-10.3 157.6L-10.3 156.5L-9.7 157.2L-8.6 157.6L-7.1 157.0L-6.2 156.0L-5.2 155.3L-4.5 154.3L-4.5 152.8L-5.1 151.9L-4.4 151.2L-3.7 149.7L-2.3 149.4L-1.7 148.7L0.4 148.7L1.8 148.0L2.8 146.5L3.9 146.3L5.2 146.0L6.4 146.0L7.6 146.2L8.9 146.8L9.5 148.1L10.5 148.2L11.5 147.2L12.7 145.5L13.7 145.1L13.9 146.4L13.6 147.4L13.6 148.4L13.1 149.3L12.7 150.2L12.1 151.2L13.0 151.6L13.6 152.8L13.8 154.2L14.2 155.0L15.2 156.8L15.6 158.0L16.2 158.7L17.5 159.1L18.4 159.3L19.8 159.5L20.8 159.8L22.1 160.0L23.0 160.9L24.4 161.0L25.8 161.2L27.5 161.0L29.0 159.5L29.7 158.0L31.0 157.1L32.0 156.9L33.3 156.8L34.5 157.4L35.9 157.4L36.7 158.5L37.4 160.0L38.0 161.0L38.4 162.7L38.0 163.8L38.3 164.9L37.9 165.8L37.3 167.1L37.2 168.0L36.1 167.7L35.0 167.7L34.9 168.9L33.9 169.7L32.8 170.6L31.9 170.4L30.5 169.9L30.2 170.9L30.7 173.6L31.9 174.3L34.0 174.4L35.5 173.6L37.0 174.4L39.1 174.4L41.1 174.8L42.0 174.5L43.3 173.8L43.1 175.1L42.8 176.0L42.5 176.9L41.4 177.9L40.7 179.6L41.8 180.2L42.6 179.5L43.7 179.5L43.3 180.3L42.5 181.4L44.0 181.6L44.9 181.1L45.7 182.0L46.6 182.2L47.0 181.1L47.6 182.2L46.5 182.9L45.3 182.9L44.5 183.6L43.9 185.5L44.9 186.5L45.7 187.1L46.6 187.0L47.5 187.3L49.2 187.0L49.9 187.6L48.6 187.8L46.9 188.8L46.6 189.7L46.8 190.8L45.9 191.5L47.0 191.8L46.4 193.1L45.3 193.3L43.1 193.8L42.9 195.7L42.3 197.1L41.1 197.0L40.3 197.9L39.5 199.0L39.4 199.9L38.6 201.5L37.3 201.8L37.0 202.7L36.5 204.0L36.8 204.9L38.3 205.7L37.6 206.4L36.3 206.4ZM137.6 150.8L138.7 150.5L139.7 150.5L138.0 151.4L136.8 152.0L135.2 152.7L133.9 153.5L133.6 154.6L132.5 155.4L129.7 157.3L128.0 158.0L127.1 158.7L126.6 160.1L126.2 161.0L124.9 161.3L124.9 162.5L123.6 163.9L122.6 165.9L121.6 169.3L121.4 170.9L121.0 172.0L120.8 173.7L120.8 174.6L119.7 173.8L119.2 172.8L118.0 172.7L117.1 170.9L115.7 169.1L115.2 167.7L114.2 167.4L113.4 166.9L112.4 165.9L111.9 164.6L109.5 164.3L106.5 163.4L105.6 162.8L103.3 163.1L101.1 163.7L99.1 164.8L96.4 166.2L95.9 167.1L95.6 168.3L94.7 168.7L93.4 168.9L92.4 169.4L91.8 170.3L91.2 169.4L89.8 170.6L89.3 171.4L89.3 172.7L89.6 173.6L89.6 174.6L89.3 175.9L88.4 176.8L88.1 178.0L87.1 178.2L86.2 179.2L85.2 181.2L84.3 182.3L84.1 183.5L82.5 183.2L81.4 183.8L80.8 185.4L80.6 186.9L81.0 188.8L80.8 190.2L79.5 190.4L79.3 191.6L79.7 192.8L80.2 193.5L80.9 194.2L81.6 195.5L80.8 196.7L80.0 196.1L79.5 195.1L78.7 194.2L77.2 194.1L76.8 195.0L76.0 194.3L75.0 195.1L73.8 195.5L72.6 195.0L71.6 194.1L69.4 193.9L68.2 195.0L68.1 193.1L68.8 192.0L69.4 190.7L70.4 189.6L71.0 188.6L68.7 188.6L66.5 187.7L65.2 187.7L64.6 188.6L63.6 188.9L63.0 187.6L63.7 186.9L63.4 186.1L64.0 185.1L63.4 183.8L61.9 183.0L60.5 184.1L60.6 183.0L60.8 182.0L62.3 182.7L63.4 182.0L62.9 180.9L62.3 180.1L63.2 180.0L62.3 179.2L61.8 178.4L62.5 177.7L61.8 177.0L60.6 177.1L61.2 176.2L62.1 176.4L63.2 177.4L64.0 176.7L65.2 175.9L65.2 174.9L64.7 174.0L63.6 173.7L64.1 172.3L61.2 172.3L60.2 171.8L60.8 171.0L61.3 169.4L60.2 169.4L60.2 168.5L60.8 167.7L60.7 166.8L60.0 165.7L58.8 165.7L57.9 166.0L56.5 166.4L54.3 167.5L53.2 168.1L52.1 168.9L51.5 169.9L50.5 169.6L49.5 169.8L48.0 170.7L48.8 169.4L50.3 168.0L51.6 167.6L52.7 167.5L52.8 166.5L53.8 166.2L55.2 165.7L56.9 164.9L60.9 162.8L61.8 161.6L62.9 160.1L64.0 159.1L67.4 157.7L68.8 156.5L69.9 155.4L70.5 153.7L70.5 152.6L70.3 151.4L70.6 149.9L70.9 148.8L71.1 147.7L72.6 147.4L72.6 146.5L73.0 145.6L73.0 143.9L74.0 143.2L75.6 142.1L78.0 141.0L78.4 139.9L77.6 139.1L78.9 137.9L79.5 138.8L81.8 141.6L82.7 144.1L83.3 145.4L84.4 146.2L85.6 146.6L86.6 146.2L87.8 145.9L88.9 145.6L90.1 144.4L91.6 144.2L92.9 144.4L94.7 144.3L97.2 145.1L98.6 144.9L99.7 144.0L100.5 142.9L101.6 141.9L102.4 140.5L102.6 138.6L102.5 136.9L102.0 135.6L101.0 134.6L100.1 133.8L99.6 133.1L101.3 134.0L102.2 134.2L103.3 134.6L104.3 134.3L105.4 133.4L106.1 132.7L107.1 131.9L109.1 130.9L110.1 130.3L110.7 129.3L111.4 128.6L112.7 128.3L114.0 128.9L114.8 129.4L115.9 129.2L117.1 129.5L117.7 128.3L118.3 129.0L118.6 128.1L119.6 127.9L119.8 128.8L119.8 130.0L120.5 130.6L121.5 129.5L123.2 130.0L123.1 131.7L124.4 132.4L126.0 133.5L127.3 133.5L128.0 134.1L129.2 135.2L130.2 135.2L131.1 134.5L133.2 134.7L134.3 134.3L134.8 133.4L134.6 134.4L135.5 134.2L135.5 135.2L135.5 136.1L135.8 137.0L135.3 138.0L134.7 139.2L134.7 140.3L134.5 141.9L134.6 143.3L135.4 143.8L136.3 144.3L137.8 145.8L138.0 147.0L137.6 148.1L136.6 148.9L136.2 149.8L138.6 150.0L137.6 150.5ZM84.8 57.1L85.3 58.0L84.9 59.0L84.1 60.0L83.5 60.7L83.3 59.6L83.5 58.3L83.9 57.4ZM83.2 56.4L82.7 57.4L82.6 58.5L82.3 59.3L81.3 58.9L80.4 58.4L80.9 59.6L80.1 60.0L79.1 59.1L79.7 58.2L81.3 57.1L82.0 56.2L83.2 56.4ZM95.0 125.4L94.6 126.3L92.2 129.5L90.7 130.4L89.6 130.2L90.7 129.6L91.3 128.7L90.2 128.0L89.8 126.5L88.4 128.3L87.3 129.3L87.6 130.3L87.6 131.9L86.4 131.8L84.9 132.4L84.2 133.2L83.1 132.4L83.2 130.7L84.2 129.6L84.7 130.4L85.8 129.3L85.9 128.4L84.9 127.9L83.8 127.7L83.6 129.3L82.7 130.1L81.4 130.5L77.8 130.9L76.8 131.3L75.8 132.0L75.2 131.0L74.0 132.1L72.8 132.7L73.3 133.8L71.6 134.3L69.2 135.6L68.2 135.6L67.7 134.8L66.1 135.8L65.9 134.8L65.1 133.7L64.7 132.7L64.1 132.0L64.2 131.1L64.7 130.0L63.8 128.8L62.6 129.4L60.7 128.6L58.8 129.4L57.7 130.3L54.6 134.0L55.1 135.4L55.2 136.9L55.1 137.9L54.3 138.6L53.8 141.1L54.2 142.7L54.3 144.2L53.2 145.5L52.3 145.8L51.6 147.3L52.5 149.6L52.1 150.8L50.6 151.6L49.7 152.5L48.5 153.0L49.3 151.7L49.8 150.5L50.8 150.8L50.8 149.4L50.0 148.7L49.1 148.1L46.9 147.3L45.2 145.8L43.9 145.1L42.8 144.2L41.6 144.0L40.8 144.9L39.7 145.0L40.6 143.5L41.2 142.6L40.3 142.2L38.4 141.5L37.1 141.9L35.1 142.6L33.8 142.6L33.6 143.6L33.0 144.3L32.4 143.5L30.9 143.4L30.0 142.6L29.2 143.5L28.7 144.3L27.7 144.0L26.7 144.3L27.0 143.1L26.5 142.2L25.4 144.2L24.6 145.3L22.7 146.7L21.8 146.3L20.8 145.8L20.0 146.3L18.9 145.7L19.0 144.7L17.6 143.8L17.0 142.5L15.9 142.2L14.7 141.8L13.9 143.1L12.4 144.9L11.2 146.0L11.0 146.9L10.1 146.9L9.5 145.8L10.4 144.9L10.5 143.8L10.5 142.9L10.5 141.5L9.3 141.0L9.1 140.0L8.9 139.1L9.6 138.1L10.4 137.4L10.9 136.2L10.4 134.5L9.9 133.7L9.3 132.7L9.5 131.7L9.7 130.2L10.1 129.2L11.0 129.4L11.9 128.9L13.3 128.6L14.5 128.1L13.6 127.6L12.2 127.3L11.3 127.5L11.8 126.6L12.6 125.7L13.6 126.3L14.2 127.0L15.2 126.7L16.0 126.3L16.8 126.8L17.9 126.8L18.2 128.2L19.3 128.6L19.9 127.6L19.3 126.9L20.0 126.3L21.3 125.9L22.4 126.2L22.9 127.0L21.9 126.6L21.0 127.0L20.6 128.0L23.0 128.0L24.4 127.6L24.7 126.7L25.7 126.7L27.4 126.3L27.4 125.1L28.8 123.6L28.7 122.5L29.7 122.1L31.0 121.1L32.0 119.9L32.2 118.5L33.2 118.4L33.4 117.4L34.2 116.4L35.5 116.9L36.1 116.2L37.4 116.1L38.5 116.0L40.1 115.6L41.2 115.1L42.3 114.4L42.5 113.4L42.9 112.5L43.7 112.1L44.6 111.4L45.7 110.4L47.0 109.4L47.9 108.2L48.9 107.9L49.2 106.5L50.9 105.1L51.5 104.4L52.5 103.7L54.4 102.1L55.0 101.2L56.2 101.0L57.8 100.1L58.1 98.9L59.1 98.1L59.8 97.6L60.7 96.1L62.9 94.0L63.8 93.1L64.9 92.6L65.7 91.9L66.5 91.5L68.0 91.0L69.1 89.9L69.7 88.1L69.8 86.9L69.1 86.0L68.3 85.4L69.2 84.5L70.7 84.2L71.8 84.2L71.5 83.3L72.4 83.1L74.1 82.4L75.2 81.9L76.2 81.7L78.1 81.6L79.7 81.5L79.8 80.4L81.3 80.5L82.1 79.6L83.0 78.8L83.8 78.0L84.8 78.6L85.5 79.3L87.1 79.2L88.3 78.8L88.8 79.5L89.8 79.1L91.1 79.0L90.4 79.9L89.4 80.6L89.5 81.7L90.6 82.9L91.8 83.6L92.9 83.8L94.2 84.0L95.6 82.5L97.3 81.7L98.5 81.2L100.3 80.8L102.0 81.3L105.4 82.0L111.4 81.5L114.7 80.6L115.6 81.3L120.3 80.6L122.3 80.2L123.9 79.5L124.3 78.6L126.0 78.3L127.1 77.6L128.3 77.2L130.1 76.5L131.2 75.9L132.5 75.1L134.2 75.6L136.2 75.4L137.6 75.4L140.1 75.3L141.2 75.4L142.5 75.7L143.4 75.6L144.6 76.0L145.6 76.3L146.4 75.6L147.7 74.3L149.0 74.2L150.9 72.9L152.5 71.8L154.2 71.5L155.7 70.9L156.5 71.6L157.3 72.7L157.8 73.4L158.3 74.4L158.1 75.6L156.7 75.7L156.4 76.5L155.9 77.4L154.9 78.6L154.3 79.5L154.7 80.5L155.5 79.3L156.4 78.4L156.6 79.3L156.0 80.4L158.2 81.6L159.3 81.8L158.9 82.7L158.6 83.8L159.5 83.3L160.5 82.7L161.3 83.1L161.6 81.9L160.6 82.1L159.8 81.7L159.4 80.6L160.1 79.9L161.6 79.7L162.7 78.8L163.6 77.9L163.3 79.2L164.3 79.7L164.3 80.8L165.2 80.2L165.1 81.7L165.8 82.4L166.8 82.5L168.1 82.0L169.1 80.8L170.6 80.7L169.6 81.3L169.3 82.4L171.5 82.5L172.9 82.2L173.2 80.8L172.2 81.3L171.3 80.3L172.9 79.3L173.5 80.2L174.8 80.8L176.1 80.7L175.0 79.3L176.2 79.1L176.2 78.1L175.5 76.8L176.7 77.0L178.4 77.0L179.0 77.7L180.0 76.8L181.1 76.8L180.5 75.8L180.7 74.9L180.7 73.8L180.2 72.7L181.1 72.3L182.3 71.3L182.8 72.0L183.0 73.0L183.1 74.3L183.1 75.2L184.0 75.5L184.5 74.6L184.8 73.3L184.8 72.2L185.1 70.8L184.6 70.0L184.0 68.8L183.3 68.2L182.1 66.9L181.6 65.2L181.5 64.3L180.7 63.2L180.5 61.6L181.7 60.6L182.3 59.3L182.8 58.3L183.1 57.1L184.8 55.0L185.3 54.0L186.2 52.4L185.7 51.5L186.5 51.2L188.4 50.7L191.0 48.4L191.7 47.3L193.3 46.6L194.5 45.5L196.1 43.8L203.3 34.4L204.8 31.6L207.3 25.8L207.5 24.1L207.0 23.2L207.5 21.3L206.6 20.0L206.3 18.6L205.8 17.4L206.2 15.3L205.6 14.4L204.5 14.9L204.3 13.3L204.6 12.4L205.4 11.1L205.7 10.2L206.2 9.5L206.0 8.3L205.9 7.2L206.9 5.8L208.1 5.2L210.0 4.1L211.4 3.8L213.2 4.1L216.8 2.1L217.8 1.9L218.4 1.1L219.1 0.5L224.0 -1.0L225.3 -1.3L226.8 -0.7L226.9 0.5L227.4 1.4L226.3 2.5L224.9 2.3L223.8 2.9L223.4 4.9L223.7 5.9L224.2 7.1L223.4 8.2L222.4 8.5L220.9 8.2L219.0 8.9L218.4 9.8L217.7 10.7L217.2 11.9L216.2 12.7L214.6 12.5L213.5 11.6L214.0 10.9L212.9 11.4L212.5 12.4L211.7 13.4L211.2 14.6L211.7 15.7L210.9 16.9L211.7 17.5L213.1 17.2L214.0 18.4L215.5 18.3L216.1 16.6L217.2 17.2L216.9 19.6L217.2 21.9L216.2 23.1L216.2 24.0L214.9 25.8L215.5 27.3L217.1 28.3L218.0 29.2L219.6 29.7L220.6 30.4L221.9 30.5L223.5 30.2L225.4 30.5L226.5 30.3L227.1 29.5L228.2 28.8L228.6 27.7L229.1 26.9L229.4 25.6L229.7 23.8L232.1 22.4L235.1 21.8L238.3 21.1L242.5 19.3L245.5 18.2L248.9 16.0L250.7 15.2L251.6 14.4L252.3 13.5L254.5 13.9L255.9 13.6L257.2 13.0L259.9 11.1L263.7 7.3L267.4 5.0L268.4 4.0L269.0 2.7L269.9 1.0L271.2 -1.0L273.1 -2.7L274.1 -4.0L274.7 -5.5L276.2 -10.7L276.8 -12.2L277.9 -13.5L280.3 -15.4L284.6 -18.3L285.7 -18.7L287.1 -18.8L289.9 -20.1L290.7 -20.7L292.9 -22.3L296.4 -26.0L296.9 -26.7L298.2 -35.9L298.6 -37.5L299.2 -39.2L300.4 -41.4L302.1 -45.4L302.8 -47.2L303.7 -48.5L306.7 -51.1L307.8 -52.5L308.6 -54.1L310.1 -59.2L311.4 -62.9L311.8 -64.2L312.0 -65.6L312.6 -67.1L312.9 -69.6L313.0 -70.8L313.5 -72.4L314.0 -73.4L315.1 -73.9L316.1 -75.1L317.0 -78.3L317.8 -82.3L318.2 -90.3L318.2 -91.5L317.6 -93.2L317.6 -94.2L317.2 -95.5L316.4 -96.6L315.2 -97.7L313.6 -98.5L312.1 -98.3L311.4 -97.4L310.4 -96.8L308.1 -96.8L307.4 -98.2L306.5 -99.5L306.3 -100.4L306.1 -102.2L307.7 -102.0L309.6 -101.1L311.8 -102.0L313.0 -103.4L315.5 -107.9L316.0 -109.7L316.4 -111.8L317.0 -116.4L316.6 -117.8L315.1 -119.2L314.3 -120.6L314.4 -122.3L314.3 -124.1L314.3 -125.1L313.8 -126.1L312.1 -126.7L311.5 -127.7L312.3 -128.4L312.9 -129.1L314.2 -130.2L315.3 -131.2L315.8 -132.1L316.1 -133.2L317.8 -134.2L319.4 -133.5L320.4 -133.2L321.5 -133.9L322.9 -135.0L324.4 -134.8L325.3 -136.0L326.2 -138.6L326.7 -141.2L326.9 -142.9L327.0 -144.9L327.8 -143.9L328.7 -143.2L328.9 -144.3L329.6 -144.8L328.6 -145.3L327.8 -145.8L327.2 -146.6L326.3 -148.3L325.2 -148.7L324.5 -149.3L325.7 -149.5L327.0 -149.9L327.3 -150.8L327.3 -152.0L327.4 -153.5L327.6 -154.4L329.0 -153.8L330.1 -153.0L330.9 -151.9L331.8 -151.3L333.5 -151.9L333.9 -152.8L336.2 -152.8L337.6 -151.8L337.9 -150.8L337.7 -149.7L337.6 -148.5L337.5 -147.6L337.7 -146.7L337.8 -145.5L338.3 -144.1L338.9 -139.5L339.9 -137.8L341.6 -137.0L343.2 -137.1L344.2 -138.3L345.0 -139.0L345.6 -140.3L345.5 -141.4L344.5 -141.8L345.2 -142.6L345.9 -144.1L347.0 -143.6L348.2 -143.4L348.7 -142.5L349.1 -141.6L350.3 -140.9L351.5 -140.3L352.4 -139.6L353.1 -138.9L354.2 -138.5L355.4 -139.3L356.1 -140.1L357.6 -143.2L357.8 -144.4L358.0 -147.1L358.2 -148.2L358.8 -148.9L359.3 -150.1L359.0 -151.4L358.5 -152.5L357.8 -153.5L356.8 -154.6L356.1 -155.2L355.0 -154.6L354.5 -153.7L355.3 -154.3L354.9 -153.4L353.7 -152.5L352.4 -151.8L351.0 -151.4L350.1 -151.8L348.7 -151.6L348.1 -150.9L346.8 -150.9L345.7 -150.6L344.1 -149.8L343.2 -149.1L342.1 -149.7L342.1 -151.4L342.4 -152.3L342.7 -153.4L342.9 -155.2L343.2 -156.2L343.3 -157.3L344.0 -158.7L344.1 -159.7L344.4 -160.9L346.1 -162.9L346.8 -164.3L346.5 -165.3L347.0 -166.2L348.2 -165.2L349.2 -164.2L350.1 -163.8L352.1 -163.5L353.6 -162.8L354.7 -161.5L355.3 -160.9L356.1 -160.1L357.8 -158.8L359.1 -158.3L360.6 -158.3L361.7 -158.6L362.8 -159.0L363.7 -159.8L364.5 -160.4L365.4 -161.4L365.6 -160.4L365.3 -159.3L364.7 -158.1L364.1 -156.6L363.6 -154.3L363.5 -153.2L363.0 -150.4L363.1 -149.4L363.1 -148.5L363.3 -147.5L362.9 -145.0L363.0 -142.8L363.0 -141.0L363.5 -136.2L364.1 -132.5L364.6 -130.2L365.7 -127.1L366.2 -126.2L367.4 -124.8L368.3 -124.5L369.3 -124.9L369.7 -124.1L370.9 -123.3L372.8 -121.2L374.2 -119.7L374.9 -118.5L375.4 -117.4L375.9 -116.4L376.3 -115.3L376.9 -114.6L377.8 -113.0L378.3 -112.0L377.3 -111.0L377.7 -109.9L378.6 -109.5L379.4 -108.4L378.4 -107.4L378.0 -106.5L378.3 -105.6L380.8 -103.0L381.9 -102.5L382.0 -101.6L382.2 -100.4L381.7 -99.6L382.2 -98.5L382.8 -96.6L383.6 -93.6L383.8 -92.5L383.4 -91.8L383.0 -90.7L382.9 -88.8L382.4 -87.3L382.4 -86.2L384.0 -87.8L384.6 -87.0L384.5 -86.0L385.5 -84.7L385.9 -83.8L385.3 -83.1L384.1 -81.7L382.4 -81.0L382.5 -79.8L383.5 -79.9L384.2 -80.5L384.8 -81.5L385.5 -80.7L384.8 -79.7L384.6 -78.7L383.6 -78.6L382.6 -78.3L381.9 -77.7L382.0 -76.4L381.1 -75.8L380.3 -75.2L381.8 -75.2L382.9 -76.0L383.0 -75.1L382.3 -74.4L380.7 -73.7L381.3 -72.9L380.2 -72.9L380.2 -71.8L381.3 -71.8L381.8 -71.0L380.2 -70.0L381.1 -69.3L380.0 -68.1L378.3 -67.8L380.5 -66.1L379.9 -65.3L378.0 -65.9L378.9 -64.6L378.0 -63.9L378.4 -63.1L377.1 -62.8L375.7 -62.6L374.4 -63.1L374.6 -62.0L375.1 -61.1L373.9 -60.6L374.6 -60.0L373.6 -59.6L372.8 -60.4L373.2 -61.4L371.9 -61.5L371.5 -60.2L371.6 -58.4L372.5 -56.4L372.6 -55.5L371.9 -56.1L371.5 -57.0L370.0 -56.9L369.6 -55.6L369.7 -54.5L369.2 -53.6L367.7 -52.6L368.0 -51.6L369.0 -50.4L369.0 -49.4L368.0 -49.5L367.3 -48.6L366.0 -48.2L365.4 -47.5L366.3 -46.8L367.9 -46.8L367.4 -45.3L365.7 -43.9L366.6 -42.8L367.7 -43.1L368.3 -41.8L368.2 -40.3L367.4 -41.0L366.8 -39.8L367.0 -38.9L365.8 -38.4L365.9 -37.3L367.4 -37.1L368.3 -36.4L367.4 -36.6L366.8 -35.8L367.6 -35.3L367.7 -33.6L368.0 -32.7L367.6 -31.5L366.4 -32.5L365.4 -32.8L365.7 -33.8L364.2 -34.6L364.7 -35.8L363.7 -36.1L362.5 -36.4L361.8 -37.1L360.1 -37.3L357.7 -36.7L356.7 -36.4L356.0 -35.8L355.7 -34.8L355.7 -33.9L354.3 -35.8L353.2 -35.8L352.1 -34.8L351.5 -33.2L352.6 -33.3L352.4 -32.4L350.5 -30.6L349.4 -29.0L348.8 -27.6L347.4 -22.6L347.1 -20.8L347.1 -19.1L347.6 -16.1L348.5 -14.4L349.7 -12.3L350.1 -10.8L350.5 -9.9L350.7 -8.5L350.2 -7.6L350.8 -6.5L351.3 5.0L351.1 6.4L350.4 9.4L350.4 10.7L350.2 15.0L349.4 16.8L349.1 20.4L348.6 21.9L347.4 23.1L346.3 23.4L345.2 24.0L343.9 24.9L343.3 25.7L343.0 26.8L341.6 29.4L339.6 36.3L337.7 39.4L337.2 40.8L336.7 43.8L337.2 46.0L337.0 47.8L335.8 49.1L335.3 50.0L335.3 51.5L335.8 55.0L336.7 57.7L337.9 61.1L342.8 69.5L344.2 71.4L345.0 72.4L345.8 73.1L345.5 74.1L344.5 73.8L343.3 73.6L342.2 74.1L340.5 74.7L338.5 74.4L336.4 75.9L332.5 79.5L330.6 82.5L329.2 87.0L329.9 89.2L330.2 90.3L329.8 92.0L329.7 93.5L329.5 94.6L329.0 95.4L328.0 95.3L327.4 96.2L327.0 97.4L326.2 96.7L324.7 97.1L324.3 98.0L323.0 98.0L321.5 97.8L319.8 98.7L319.7 99.6L318.8 100.3L317.0 101.1L315.9 101.9L315.4 103.1L315.1 104.4L314.7 105.6L313.8 106.5L312.9 106.6L311.9 106.6L310.9 106.8L310.3 105.9L309.8 105.0L308.9 104.6L307.9 104.2L309.0 103.7L310.2 103.5L311.5 103.2L311.8 102.1L310.7 101.6L311.1 100.8L311.2 99.9L310.7 98.6L310.8 97.1L310.2 96.2L310.2 95.1L311.3 93.9L311.8 92.6L311.2 91.5L311.2 90.6L309.8 90.1L308.9 89.8L310.3 89.2L310.8 87.9L312.6 87.7L313.1 86.5L312.9 85.3L314.3 84.5L315.7 83.8L316.5 83.2L317.7 81.6L318.7 80.4L319.5 79.9L319.0 78.6L318.4 77.4L317.4 76.3L316.5 75.6L315.7 75.2L314.6 75.1L313.6 75.5L314.2 76.5L313.4 77.0L312.3 77.0L311.2 76.5L310.8 77.4L310.2 76.5L309.6 77.2L308.6 77.3L308.8 76.3L308.5 78.0L309.0 78.8L309.5 80.5L309.1 81.6L307.7 82.8L306.7 83.6L305.7 83.8L304.5 83.6L305.5 84.7L305.7 86.3L304.5 85.8L304.3 86.7L304.6 88.8L304.5 89.9L304.8 90.9L306.0 91.7L307.3 91.8L307.1 93.1L307.1 94.2L305.8 94.1L305.0 94.7L305.1 96.1L305.7 96.9L304.1 96.9L303.2 96.9L303.3 95.6L302.8 94.4L303.7 94.0L302.7 92.8L301.7 91.7L301.1 90.8L300.4 90.3L298.9 90.3L296.5 89.6L293.7 90.2L292.2 90.5L290.5 91.0L288.8 91.9L287.6 93.1L287.4 95.1L287.9 97.1L286.7 96.5L285.6 98.2L285.3 99.6L285.1 100.5L286.2 100.7L285.9 102.2L286.0 103.7L287.1 104.1L287.4 105.1L287.6 106.6L287.3 108.0L286.0 108.6L285.5 109.7L285.1 110.5L284.4 111.8L283.6 112.3L283.0 113.1L282.7 114.1L282.2 115.0L282.2 116.4L281.7 117.3L280.7 116.6L279.1 118.0L278.0 118.6L277.0 119.3L276.0 118.6L275.0 117.2L275.0 116.2L274.1 115.4L274.0 113.8L274.6 113.0L274.5 111.6L274.1 110.3L274.6 109.0L274.6 108.0L274.6 107.1L275.6 106.5L275.0 105.5L274.7 104.5L274.6 103.5L275.1 102.6L275.4 101.6L276.8 101.7L277.7 101.9L279.1 101.9L277.7 99.4L277.1 98.6L276.0 97.7L274.0 97.1L272.4 97.0L271.3 97.5L270.4 97.9L268.7 98.0L267.6 98.7L266.7 100.6L265.8 101.4L265.6 102.6L266.5 101.9L266.2 103.5L264.8 104.4L263.5 105.0L262.5 105.5L261.3 106.1L260.7 107.3L260.1 108.7L260.4 109.8L259.9 110.6L258.8 112.3L257.4 113.4L256.2 114.5L255.7 116.6L255.7 118.2L257.0 119.0L255.3 119.1L250.6 116.8L247.8 116.4L245.4 116.4L242.0 117.5L238.4 116.2L235.4 115.9L233.8 115.9L229.7 116.4L226.8 117.2L220.1 119.5L218.5 119.4L216.8 119.9L215.9 120.0L216.3 119.2L216.7 118.4L217.1 117.2L217.8 116.4L218.8 117.5L220.0 117.3L220.9 116.8L222.0 116.1L223.5 115.1L224.8 113.7L225.4 114.7L226.5 114.1L225.8 113.5L226.3 112.3L225.3 111.0L224.3 110.7L222.9 110.3L221.9 110.6L221.7 112.1L220.6 111.6L219.4 111.4L218.3 111.8L217.1 111.8L216.0 111.6L215.4 110.8L214.5 109.8L214.0 108.5L214.8 106.9L214.6 105.8L213.9 107.4L213.3 108.4L212.8 109.8L212.5 111.9L213.2 113.1L214.0 113.6L214.4 114.5L213.5 115.0L212.5 114.6L211.2 113.9L210.2 112.8L210.4 111.4L210.8 110.0L210.5 108.6L209.6 108.0L209.3 107.0L209.3 106.0L209.4 104.6L210.0 103.1L210.5 102.3L211.2 100.9L211.4 99.8L211.0 98.9L210.5 100.1L210.3 101.0L210.0 99.6L209.9 101.4L208.9 100.7L208.6 101.7L207.0 101.6L206.0 101.6L204.6 102.6L203.9 103.3L203.5 104.2L204.0 105.1L203.5 106.3L203.1 107.3L202.4 108.7L200.7 110.9L199.6 112.3L199.4 114.1L199.1 115.8L199.6 116.6L200.0 117.5L199.9 118.4L200.8 119.3L202.3 119.3L203.5 120.0L204.5 121.0L207.0 122.7L208.7 123.4L209.9 123.6L210.9 124.5L211.4 125.8L212.5 125.9L212.8 126.8L212.6 128.3L211.4 128.2L211.5 129.1L211.4 130.3L211.9 131.4L211.9 132.8L210.3 133.5L209.2 133.6L207.7 133.0L208.9 132.5L210.0 133.1L210.5 131.7L209.6 130.9L208.8 131.7L207.7 131.1L206.2 131.8L205.6 131.0L206.0 130.2L204.5 130.4L203.5 130.9L204.1 131.5L202.6 132.4L201.6 132.9L201.0 132.2L200.6 133.1L199.6 132.6L198.9 133.4L199.0 134.3L197.6 134.0L196.1 134.9L194.7 135.4L193.0 136.2L191.7 137.4L191.6 138.6L192.5 139.3L191.7 140.2L190.4 139.5L189.4 140.4L189.9 141.1L190.8 142.6L190.9 143.5L190.9 144.6L190.1 144.9L189.4 144.0L188.6 144.9L189.6 145.9L188.6 146.7L187.3 147.2L186.5 148.1L185.2 148.2L184.0 150.1L182.3 154.7L181.5 156.7L181.1 158.0L180.2 159.1L179.6 160.1L179.9 161.1L178.8 162.3L177.8 163.1L175.9 163.7L174.9 164.5L174.4 165.4L174.5 166.7L173.6 167.1L173.9 165.6L170.6 164.7L169.5 164.5L164.5 162.6L163.0 162.2L161.8 161.2L161.1 160.4L161.2 159.4L160.6 158.4L159.5 157.8L159.5 156.3L160.7 156.2L159.5 154.2L158.6 153.4L157.0 152.8L155.9 152.7L154.7 151.4L153.8 150.4L153.2 148.9L152.0 148.1L150.2 148.5L150.7 147.6L150.3 146.6L151.4 145.6L150.6 144.7L151.9 144.0L153.2 143.3L153.5 142.2L152.5 141.4L151.2 141.0L151.9 139.6L152.4 138.8L153.0 138.1L154.3 138.2L154.1 137.0L153.6 136.1L152.6 134.4L151.2 133.1L150.1 132.8L151.5 130.7L155.0 129.7L156.6 128.3L157.5 127.5L158.8 126.1L159.9 124.5L160.6 123.8L160.6 122.9L161.5 121.8L162.0 120.9L162.0 120.0L162.1 118.7L161.7 117.7L161.6 116.7L162.0 115.3L160.9 115.8L159.5 114.6L157.7 114.8L157.7 115.8L156.6 115.9L156.6 115.0L155.4 115.4L156.1 117.1L155.2 116.8L154.9 115.9L154.2 117.0L151.8 117.5L150.7 118.0L149.6 118.1L148.6 117.4L147.3 117.4L146.0 116.4L144.9 115.9L142.5 114.1L141.4 113.7L140.0 112.7L137.8 111.8L133.5 112.3L132.5 112.3L131.4 112.5L130.9 111.4L130.2 112.1L128.9 113.7L127.8 113.7L126.8 113.5L126.2 114.3L125.4 114.8L123.7 114.3L122.7 114.3L121.9 113.9L123.8 115.1L122.8 115.2L122.0 116.4L121.0 117.0L119.6 117.6L120.8 117.6L120.4 118.5L119.3 119.2L118.2 119.7L117.3 119.9L116.0 118.9L114.2 118.8L112.9 119.4L111.9 120.0L112.4 120.9L113.9 119.5L115.1 119.3L115.9 119.9L115.6 121.1L114.6 121.8L113.3 122.9L112.9 124.3L112.3 125.2L109.6 124.7L108.4 124.7L108.5 125.8L107.4 125.6L107.0 124.7L106.6 123.7L105.8 122.9L105.1 122.1L103.8 122.4L102.4 123.2L100.8 123.9L100.2 124.7L99.2 125.0L96.5 126.3L97.9 124.7L98.4 123.9L97.3 123.6L96.5 124.2L95.2 124.3L94.7 125.2ZM-15.0 217.5L-13.9 217.8L-13.8 219.1L-14.4 220.8L-15.1 221.4L-15.9 220.5L-16.1 219.3L-16.5 218.0L-15.7 217.2ZM-6.4 204.9L-5.3 204.4L-4.5 204.9L-5.6 205.7L-7.0 209.6L-8.0 210.5L-8.1 208.9L-9.3 209.1L-10.6 209.2L-12.1 209.6L-12.7 208.6L-12.9 207.4L-12.1 207.0L-11.1 206.0L-10.4 205.5L-8.7 204.8L-8.0 204.2L-7.3 205.0ZM-14.8 203.5L-13.8 204.4L-13.4 206.2L-13.4 209.6L-13.2 210.5L-13.3 211.7L-13.8 212.6L-14.9 213.2L-15.7 215.0L-16.6 215.5L-17.7 216.9L-19.0 217.7L-20.3 218.1L-19.9 215.5L-20.7 215.9L-21.5 215.5L-20.3 214.3L-19.1 213.8L-18.0 213.3L-19.1 213.0L-20.5 213.0L-21.1 211.3L-20.6 210.2L-20.6 209.3L-20.0 207.6L-19.1 206.1L-20.1 204.0L-19.1 204.4L-17.6 204.1L-16.1 203.6L-14.8 203.5ZM309.2 179.3L310.8 180.0L311.7 180.4L312.1 181.2L311.1 182.9L309.6 182.9L308.8 181.6L307.7 180.0L307.9 178.8L309.2 179.3ZM55.2 152.2L56.3 153.1L55.0 153.3L54.0 152.7L54.8 152.0ZM-27.7 153.0L-26.9 153.4L-27.5 154.5L-29.1 154.6L-29.5 155.4L-30.6 155.4L-30.9 154.3L-32.0 153.8L-31.0 153.6L-31.6 152.6L-31.7 151.3L-31.0 149.9L-30.6 149.0L-28.0 150.1L-28.2 151.0L-27.6 152.3ZM55.0 149.2L53.7 148.0L53.4 147.0L53.9 146.0L54.8 145.7L56.5 146.2L58.0 148.0L59.0 147.7L59.7 147.2L60.8 146.9L61.5 146.2L62.9 146.3L61.8 147.7L60.3 147.9L59.8 149.4L58.5 150.1L58.1 149.3L57.2 148.5L56.7 149.4L55.7 149.3ZM299.1 141.3L299.3 139.9L300.3 139.1L301.4 139.1L302.0 140.1L301.5 141.4L300.6 142.2L299.7 142.3L299.1 141.3ZM65.8 140.8L63.2 140.4L63.0 139.5L63.8 139.0L63.8 137.3L64.6 136.6L65.7 136.7L65.5 137.8L65.5 138.8L66.5 138.9L66.3 140.6ZM80.7 135.2L79.6 135.8L79.5 134.8L80.3 134.5L80.3 133.6L80.3 132.5L81.0 131.8L82.3 132.5L82.6 133.8L81.9 135.2L80.7 135.2ZM291.7 127.5L292.4 126.8L292.6 128.6L292.2 130.0L291.2 129.7L291.6 127.8ZM148.1 118.8L149.0 119.5L148.6 120.5L147.9 122.0L147.5 123.0L146.6 123.8L145.7 125.1L144.8 126.6L144.6 128.1L144.6 129.4L145.4 130.6L146.3 132.0L146.0 132.9L145.0 133.2L144.1 133.7L143.2 134.0L141.4 135.5L139.7 135.8L138.8 135.2L138.0 134.7L138.5 133.9L137.5 133.8L136.8 132.9L136.5 131.9L137.4 130.3L138.7 130.2L141.2 125.4L142.1 124.8L143.1 124.2L143.5 123.2L144.1 122.0L145.5 121.4L146.8 119.9L147.4 119.0ZM296.6 111.7L297.7 112.7L298.1 114.4L298.0 115.4L296.8 115.9L294.7 114.9L294.5 112.3L294.6 111.0L296.2 111.4ZM81.2 61.0L82.3 60.8L83.0 61.4L81.6 61.8L81.2 61.0ZM93.2 50.3L93.5 53.0L92.9 53.7L91.9 53.5L92.2 54.4L91.5 55.1L90.1 54.8L89.2 54.7L87.6 53.3L87.3 50.2L87.8 49.4L90.6 47.6L91.2 48.3L91.8 49.1L92.7 49.5L93.2 50.3ZM264.4 -23.4L265.6 -23.3L267.2 -23.7L268.3 -23.6L268.3 -22.0L266.6 -19.0L265.8 -16.7L261.4 -13.5L257.9 -12.2L256.8 -12.2L256.1 -13.1L258.1 -14.0L258.6 -14.9L258.6 -16.7L260.1 -18.5L259.6 -20.4L257.3 -19.6L256.8 -20.8L256.8 -21.8L256.9 -22.7L257.5 -24.2L258.8 -26.1L259.5 -27.4L260.7 -28.5L262.5 -30.5L263.3 -31.1L264.8 -33.4L266.2 -33.8L266.0 -30.5L265.4 -28.0L263.9 -24.7L263.7 -23.2ZM126.7 121.0L126.8 122.2L126.8 123.8L126.1 126.1L125.1 125.4L125.1 124.5L123.9 125.2L123.2 126.5L122.7 125.2L121.9 124.3L120.6 124.6L119.8 124.1L120.2 122.9L121.3 122.7L123.6 121.6L125.1 121.3L126.3 121.0ZM303.5 148.5L303.5 149.6L302.6 149.7L302.1 148.7L303.2 148.0ZM-12.0 213.5L-11.3 214.1L-12.0 215.1L-12.9 215.5L-13.1 214.6L-12.5 213.9ZM-5.2 201.4L-5.0 202.8L-5.7 203.3L-6.5 202.8L-6.8 201.8L-6.3 200.7L-5.2 200.6ZM66.0 195.4L66.3 196.5L65.4 196.8L65.3 195.8ZM68.7 143.2L68.7 144.2L68.4 145.2L67.4 145.8L66.9 145.0L67.5 144.2L68.6 143.4ZM83.9 136.6L82.3 138.9L81.3 138.9L81.4 137.6L81.6 136.5L82.6 135.8L83.3 136.3ZM72.0 135.6L72.7 136.5L72.0 137.2L70.6 136.3L71.0 135.4L72.0 135.6ZM78.1 132.4L78.4 133.4L77.9 134.7L76.8 135.2L75.7 134.9L75.6 133.9L76.9 133.2L78.1 132.4ZM58.5 131.3L58.8 132.2L58.0 132.9L57.1 133.8L56.1 133.7L56.7 132.3L57.7 131.4ZM104.8 127.5L105.1 128.5L104.5 129.2L104.1 128.2L104.5 127.5ZM154.9 126.1L156.1 125.1L156.7 125.9L155.5 126.6ZM116.0 124.3L116.8 123.3L117.9 123.6L117.3 124.9L116.0 124.3ZM208.6 107.8L209.4 108.4L209.1 109.3L208.6 107.8ZM216.9 14.3L216.8 15.3L216.1 15.9L214.9 16.1L213.5 16.6L212.5 15.3L212.3 14.3L213.3 14.6L214.2 14.3L215.2 14.8L216.2 14.1Z","p":{"tokio":[308.8,73.4],"kamakura":[301,89.7],"kawaguchiko":[274.6,82.2],"fuji":[273.4,87.9],"hakone":[283.4,93.1],"kyoto":[173.9,102.2],"nara":[176.1,115.6],"osaka":[164.9,115.3],"hiroshima":[62.4,127.9],"miyajima":[57.9,131.6],"narita":[329.2,71],"haneda":[308.9,80.1]},"box":[[265.8,63.7],[336.4,104.7]]},"inset":{"w":360,"h":209,"d":"M-870.4 314.8L-872.2 319.4L-884.6 335.3L-887.1 337.8L-892.0 340.2L-894.5 340.9L-896.3 340.6L-897.5 338.8L-896.3 337.0L-894.5 336.3L-892.0 336.0L-890.8 334.9L-888.9 331.4L-890.8 328.9L-894.5 327.9L-898.8 328.2L-898.8 326.4L-895.7 324.0L-896.9 320.1L-900.6 318.7L-903.7 329.3L-906.2 332.1L-909.3 334.2L-911.7 336.7L-908.0 339.5L-906.8 343.8L-908.0 347.6L-911.1 349.4L-912.4 349.1L-914.2 346.9L-915.4 346.6L-917.9 349.1L-921.6 350.1L-925.3 354.4L-927.2 355.1L-929.6 353.7L-930.9 350.1L-930.3 341.6L-927.8 339.9L-925.3 336.0L-923.5 334.6L-922.8 336.3L-922.8 339.9L-923.5 342.3L-919.8 341.6L-917.3 334.6L-914.2 333.9L-914.2 332.1L-916.7 330.0L-919.8 328.2L-921.6 327.5L-923.5 327.9L-925.3 327.5L-927.2 326.4L-929.0 328.2L-928.4 334.6L-932.7 338.5L-939.5 340.6L-958.0 342.3L-963.0 344.5L-967.9 348.0L-971.0 343.1L-974.1 344.5L-977.2 348.7L-980.9 350.8L-983.3 351.5L-983.3 352.9L-982.1 355.1L-980.9 357.2L-982.1 359.0L-984.6 359.3L-989.5 359.7L-993.8 360.7L-1001.8 366.4L-1006.8 366.7L-1007.4 365.7L-1008.0 364.3L-1008.6 362.8L-1010.5 362.8L-1011.7 363.5L-1011.7 364.6L-1012.3 365.3L-1017.3 367.8L-1019.1 367.8L-1021.0 365.3L-1018.5 362.5L-1019.7 359.7L-1022.8 356.8L-1024.7 351.5L-1027.1 348.7L-1027.8 348.0L-1027.8 345.2L-1027.1 343.4L-1027.1 342.0L-1027.8 339.5L-1026.5 339.2L-1024.7 338.1L-1023.4 338.1L-1024.1 335.6L-1025.3 334.2L-1029.0 332.1L-1032.1 333.9L-1035.2 334.9L-1038.9 334.9L-1045.0 331.0L-1048.7 331.4L-1054.9 334.9L-1060.5 339.5L-1075.9 358.2L-1074.7 361.1L-1073.4 365.3L-1072.8 368.5L-1072.8 373.1L-1073.4 378.4L-1075.3 380.5L-1077.8 381.9L-1079.6 385.5L-1080.2 394.6L-1078.4 402.8L-1077.8 410.2L-1083.3 416.9L-1087.6 418.7L-1090.1 419.4L-1091.3 421.1L-1091.3 426.1L-1090.7 430.0L-1087.0 438.1L-1086.4 441.3L-1088.9 443.8L-1096.3 448.0L-1101.2 452.6L-1104.9 454.7L-1107.4 455.1L-1106.8 451.2L-1103.1 448.4L-1102.4 447.7L-1101.2 444.5L-1100.6 442.7L-1099.4 444.8L-1097.5 444.8L-1095.6 443.8L-1095.0 440.6L-1095.6 436.7L-1097.5 434.9L-1099.4 433.5L-1101.2 431.8L-1104.3 430.0L-1115.4 426.1L-1119.1 425.4L-1119.7 424.7L-1124.0 418.3L-1125.9 417.3L-1130.8 415.1L-1132.7 414.1L-1136.4 410.5L-1139.5 408.4L-1142.6 409.1L-1146.3 414.1L-1143.8 414.1L-1143.8 415.5L-1150.0 415.5L-1151.8 414.4L-1152.4 410.9L-1147.5 407.0L-1144.4 403.8L-1144.4 402.4L-1146.3 402.1L-1148.7 400.3L-1158.6 396.4L-1165.4 398.9L-1167.9 398.2L-1169.7 399.6L-1175.3 402.1L-1177.1 402.4L-1182.0 402.4L-1182.7 401.7L-1183.3 400.7L-1185.1 402.4L-1183.9 404.9L-1183.3 407.4L-1183.9 409.8L-1186.4 410.9L-1187.6 411.3L-1188.8 410.2L-1188.8 408.8L-1189.5 407.0L-1191.3 407.7L-1196.9 406.3L-1198.1 405.6L-1201.2 402.1L-1203.0 401.4L-1205.5 402.4L-1204.3 404.2L-1204.3 405.2L-1205.5 406.7L-1207.4 408.1L-1207.4 409.5L-1208.0 410.2L-1208.6 412.0L-1209.8 412.7L-1211.1 412.3L-1212.3 410.9L-1212.9 409.5L-1213.5 408.1L-1214.8 410.2L-1215.4 411.6L-1216.6 412.0L-1218.5 410.9L-1216.6 408.1L-1216.6 404.5L-1217.2 401.4L-1219.1 399.9L-1220.3 401.0L-1224.6 410.2L-1229.0 415.8L-1230.8 418.0L-1238.8 423.3L-1241.3 424.0L-1243.1 421.1L-1244.4 421.9L-1245.6 422.2L-1246.8 421.9L-1247.5 420.4L-1248.1 418.3L-1249.9 419.0L-1251.2 419.7L-1252.4 421.1L-1253.6 422.2L-1254.9 422.6L-1256.1 421.9L-1256.7 420.1L-1258.0 418.0L-1258.0 415.5L-1257.3 413.7L-1258.6 412.7L-1264.7 408.1L-1267.8 401.7L-1273.4 400.3L-1279.6 398.2L-1283.3 404.9L-1291.3 414.1L-1297.5 419.4L-1298.1 424.3L-1299.9 426.1L-1303.0 424.0L-1303.6 422.2L-1306.1 421.1L-1306.1 418.3L-1303.0 418.7L-1301.2 413.7L-1301.8 411.3L-1300.5 408.1L-1299.9 406.0L-1300.5 403.5L-1301.8 402.1L-1300.5 396.8L-1302.4 394.3L-1306.7 393.9L-1307.3 391.8L-1307.9 389.0L-1309.2 386.9L-1309.2 384.4L-1307.3 381.2L-1305.5 379.1L-1303.0 377.7L-1301.2 375.9L-1299.3 372.4L-1298.7 369.6L-1299.3 367.8L-1299.9 366.4L-1301.2 361.1L-1303.6 356.8L-1303.6 354.4L-1304.2 353.7L-1306.7 351.5L-1307.9 349.8L-1307.3 348.0L-1306.1 346.6L-1305.5 345.2L-1304.9 338.8L-1304.2 336.3L-1303.0 333.9L-1301.2 334.6L-1298.1 334.9L-1295.6 334.6L-1294.4 333.2L-1293.8 332.5L-1286.3 330.7L-1283.9 329.3L-1280.2 328.2L-1282.6 325.7L-1285.1 325.7L-1291.9 324.3L-1293.1 323.6L-1294.4 325.4L-1295.0 326.1L-1296.8 325.4L-1296.2 322.9L-1294.4 320.4L-1292.5 318.7L-1290.0 316.2L-1287.6 316.9L-1285.1 319.0L-1285.7 321.1L-1283.9 322.2L-1282.0 322.6L-1279.6 322.2L-1277.1 321.1L-1275.2 320.1L-1272.8 319.0L-1268.4 321.5L-1266.0 322.2L-1262.9 321.9L-1261.7 328.9L-1259.2 330.7L-1256.1 331.0L-1254.9 328.9L-1253.0 325.7L-1256.1 322.2L-1256.7 320.8L-1256.1 318.3L-1252.4 319.0L-1249.9 318.3L-1245.6 317.3L-1242.5 316.5L-1240.1 318.7L-1237.6 322.6L-1240.1 322.6L-1242.5 320.4L-1244.4 320.1L-1246.2 320.8L-1247.5 322.6L-1248.7 325.0L-1249.3 327.9L-1249.9 330.7L-1248.7 330.3L-1246.2 328.6L-1245.0 328.2L-1237.0 327.9L-1230.2 325.7L-1228.3 321.1L-1223.4 321.1L-1214.8 319.4L-1214.8 313.0L-1212.9 310.5L-1207.4 305.6L-1206.7 303.5L-1208.0 299.6L-1206.7 298.5L-1203.0 297.8L-1196.2 292.5L-1193.8 289.7L-1191.3 286.5L-1190.7 284.0L-1190.1 279.4L-1188.8 278.4L-1185.1 278.7L-1183.3 279.1L-1183.9 277.3L-1183.9 273.8L-1183.3 269.9L-1180.2 268.8L-1177.7 270.3L-1173.4 271.3L-1170.9 269.6L-1170.3 267.8L-1169.1 266.7L-1163.5 267.4L-1158.0 266.7L-1150.0 264.6L-1144.4 262.1L-1141.3 260.4L-1138.8 258.6L-1137.6 253.6L-1137.0 251.9L-1135.8 249.1L-1132.1 248.3L-1131.4 246.9L-1127.1 243.0L-1121.6 238.1L-1114.8 232.8L-1110.5 226.8L-1108.6 224.7L-1104.9 225.4L-1103.7 222.9L-1103.7 218.3L-1095.0 210.9L-1091.9 207.4L-1087.0 203.8L-1077.1 196.0L-1074.0 191.5L-1067.9 190.4L-1064.2 188.6L-1059.9 185.8L-1058.0 179.4L-1053.1 175.6L-1049.4 172.7L-1047.5 170.6L-1048.1 168.5L-1045.0 165.3L-1044.4 162.1L-1033.9 154.3L-1029.0 150.1L-1023.4 147.6L-1022.8 144.8L-1019.7 143.7L-1015.4 141.6L-1008.0 139.2L-1004.9 137.0L-1002.5 133.5L-1000.6 130.0L-999.4 124.7L-998.8 120.8L-998.8 118.3L-999.4 115.1L-1002.5 113.7L-1006.2 110.9L-1007.4 108.8L-1005.5 106.6L-1001.8 105.9L-997.5 104.9L-993.8 104.9L-988.3 104.9L-985.8 104.2L-985.2 103.5L-986.4 101.7L-990.1 100.3L-988.3 99.9L-985.2 98.9L-981.5 98.2L-976.5 95.3L-971.0 92.9L-966.0 91.8L-956.2 91.4L-951.9 90.4L-948.1 90.7L-947.5 85.4L-944.4 84.7L-940.1 85.8L-937.0 84.4L-935.8 81.2L-934.0 78.7L-931.5 77.3L-929.0 78.4L-927.2 75.9L-927.2 73.1L-924.7 73.8L-922.2 76.3L-918.5 79.4L-916.1 81.2L-910.5 79.1L-907.4 79.1L-904.3 77.0L-903.1 77.7L-904.3 79.8L-903.7 80.5L-901.9 80.8L-900.6 80.1L-896.9 78.7L-893.8 78.4L-890.1 78.0L-887.1 79.8L-889.5 81.2L-891.4 81.9L-893.8 83.0L-896.3 83.7L-898.8 86.5L-899.4 87.2L-899.4 89.7L-898.2 92.2L-897.5 95.0L-892.6 98.2L-886.4 101.3L-880.9 102.4L-877.8 103.5L-874.1 103.8L-871.0 103.1L-867.3 96.0L-858.7 92.2L-852.5 89.3L-843.2 87.2L-834.6 89.7L-817.3 93.6L-786.5 91.1L-769.8 86.5L-765.5 90.0L-741.4 86.5L-730.9 84.4L-726.6 83.0L-722.9 80.5L-721.0 76.3L-712.4 74.5L-711.2 74.5L-709.3 74.1L-706.8 71.0L-700.7 68.8L-691.4 65.3L-685.9 62.1L-679.1 58.2L-670.4 60.7L-660.6 59.6L-653.2 60.0L-640.2 59.3L-634.6 59.6L-632.2 60.4L-628.5 61.4L-627.2 63.9L-623.5 61.1L-620.4 61.4L-619.8 63.5L-617.4 62.8L-614.3 63.9L-612.4 64.6L-609.3 61.8L-608.1 61.1L-606.2 60.4L-606.9 57.9L-601.9 54.3L-598.2 54.3L-595.1 53.6L-592.1 51.9L-585.3 46.9L-585.9 44.1L-577.2 41.6L-568.6 39.9L-564.3 39.1L-561.2 37.0L-556.9 40.2L-555.0 44.1L-552.6 45.9L-550.1 49.7L-547.6 54.7L-547.6 58.2L-548.9 61.1L-551.9 58.9L-555.6 61.4L-557.5 65.7L-558.7 68.5L-560.0 70.2L-564.9 75.9L-568.0 80.5L-568.0 84.7L-566.1 85.8L-564.3 85.4L-564.3 81.9L-561.8 79.8L-560.0 76.6L-557.5 74.8L-556.3 79.4L-554.4 80.1L-553.8 80.8L-555.0 82.3L-556.9 82.3L-558.7 81.9L-559.3 85.4L-548.2 91.4L-545.8 90.4L-544.5 89.0L-542.7 92.5L-543.3 95.3L-544.5 97.1L-545.8 101.0L-546.4 102.8L-545.2 105.2L-543.3 103.8L-541.4 100.3L-539.6 96.7L-536.5 97.1L-532.2 99.2L-531.0 97.8L-531.0 92.9L-535.9 93.9L-540.2 92.2L-542.1 86.5L-538.4 83.0L-535.9 82.3L-531.0 81.9L-528.5 81.2L-527.3 79.4L-525.4 77.3L-524.8 75.2L-520.5 72.7L-521.7 75.9L-522.3 79.1L-519.2 80.5L-517.4 81.9L-518.0 85.1L-517.4 87.2L-518.0 88.6L-516.1 89.7L-514.9 89.3L-513.7 87.6L-512.4 84.0L-512.4 87.9L-513.1 91.8L-512.4 94.6L-509.4 95.7L-504.4 96.0L-502.6 95.7L-501.3 95.0L-497.6 93.2L-496.4 90.7L-492.7 87.6L-489.0 85.1L-485.3 86.9L-485.9 87.9L-490.2 89.7L-491.5 95.7L-493.3 97.1L-489.6 98.2L-480.4 96.0L-476.0 96.0L-473.6 94.3L-471.7 91.4L-471.7 87.2L-476.6 89.7L-478.5 85.8L-481.6 84.7L-479.1 81.2L-473.6 79.4L-471.7 80.8L-470.5 84.0L-466.8 83.7L-463.7 87.6L-461.2 88.6L-456.9 86.9L-458.8 86.1L-460.0 84.4L-462.5 79.8L-461.8 78.4L-460.0 78.0L-458.1 79.8L-456.3 78.7L-453.2 77.7L-453.8 76.3L-455.0 74.8L-456.3 73.4L-456.9 70.6L-457.5 69.5L-460.0 66.7L-460.6 64.2L-458.8 63.9L-455.7 66.4L-453.8 68.1L-451.3 69.5L-445.2 68.1L-443.9 70.2L-442.1 71.7L-439.0 69.5L-437.1 67.1L-433.4 67.8L-431.6 66.7L-431.6 64.2L-434.7 61.8L-433.4 57.2L-432.8 54.3L-433.4 51.9L-435.9 52.2L-435.9 46.2L-431.6 44.1L-425.4 38.8L-423.0 42.7L-423.0 44.4L-421.7 47.6L-420.5 51.5L-421.1 54.0L-423.0 54.0L-424.2 56.5L-421.1 58.6L-420.5 61.1L-416.8 60.4L-415.5 56.8L-414.3 55.8L-414.3 54.3L-414.3 51.5L-412.5 49.0L-412.5 47.3L-412.5 43.4L-411.2 39.9L-411.2 36.3L-413.7 32.4L-415.5 28.9L-416.8 26.1L-420.5 23.2L-426.7 16.5L-429.7 13.7L-429.1 7.7L-429.7 3.1L-433.4 -2.2L-435.9 -4.7L-434.7 -10.3L-431.0 -12.8L-428.5 -15.6L-425.4 -22.3L-423.0 -27.3L-421.1 -33.6L-412.5 -44.2L-410.0 -49.2L-408.1 -52.4L-405.7 -57.3L-408.1 -61.9L-407.5 -63.3L-403.8 -63.7L-400.7 -63.3L-394.6 -65.8L-381.0 -77.8L-377.3 -83.1L-369.3 -87.0L-363.1 -92.3L-355.1 -101.1L-318.7 -149.2L-310.6 -163.3L-298.3 -192.7L-297.1 -196.6L-297.1 -201.5L-298.3 -202.9L-300.1 -204.3L-299.5 -206.1L-298.3 -209.6L-297.1 -215.6L-298.3 -219.9L-301.4 -222.7L-303.2 -229.8L-305.1 -231.2L-305.7 -235.8L-303.8 -246.4L-305.1 -249.6L-306.9 -251.0L-308.8 -250.6L-309.4 -248.1L-312.5 -248.5L-313.7 -251.0L-313.1 -256.6L-311.9 -261.2L-310.0 -264.8L-307.5 -267.6L-308.8 -269.7L-306.3 -272.2L-303.8 -276.1L-302.6 -279.2L-304.5 -282.1L-305.1 -287.7L-300.1 -294.8L-294.0 -298.0L-284.1 -303.3L-277.3 -305.0L-273.6 -303.3L-268.1 -303.3L-249.5 -313.5L-244.6 -314.6L-241.5 -318.8L-237.8 -321.7L-213.1 -329.4L-206.3 -330.8L-198.9 -328.0L-197.1 -325.5L-198.3 -321.7L-197.7 -319.2L-195.8 -317.4L-195.8 -314.6L-197.1 -313.2L-201.4 -311.8L-204.5 -311.8L-208.2 -312.5L-211.3 -311.0L-213.7 -309.6L-215.0 -306.5L-216.2 -299.4L-214.4 -294.4L-211.3 -294.1L-211.9 -290.9L-211.9 -288.1L-213.1 -285.6L-216.2 -282.8L-217.4 -281.0L-221.1 -281.0L-228.6 -282.8L-238.4 -278.9L-241.5 -274.3L-245.2 -269.7L-245.2 -265.5L-247.7 -263.7L-251.4 -262.6L-252.6 -259.8L-254.5 -258.4L-260.6 -260.9L-263.7 -263.0L-266.2 -265.1L-264.3 -267.6L-263.7 -269.0L-265.6 -268.6L-266.8 -266.9L-269.3 -266.2L-269.9 -264.4L-271.8 -261.2L-275.5 -255.9L-277.9 -249.9L-274.8 -248.9L-275.5 -244.3L-276.7 -242.8L-279.8 -242.8L-279.8 -238.3L-281.0 -235.8L-278.5 -234.4L-275.5 -235.1L-271.8 -236.8L-268.7 -236.5L-263.7 -230.5L-260.6 -229.4L-256.3 -231.2L-253.2 -239.7L-250.8 -241.1L-248.9 -240.4L-247.7 -236.5L-248.9 -224.5L-247.7 -212.8L-252.6 -206.8L-252.6 -201.9L-259.4 -192.7L-256.3 -185.2L-248.3 -180.3L-243.4 -175.7L-235.3 -172.9L-230.4 -169.7L-223.6 -169.0L-215.6 -170.4L-205.7 -169.0L-200.2 -170.1L-197.1 -174.3L-191.5 -177.8L-189.7 -183.5L-187.2 -187.4L-186.6 -190.9L-185.4 -194.1L-186.0 -198.3L-184.1 -203.3L-180.4 -205.7L-171.8 -210.3L-156.3 -213.5L-140.3 -217.1L-118.7 -226.2L-103.3 -231.9L-86.0 -242.8L-76.7 -247.1L-72.4 -251.0L-68.7 -255.6L-57.6 -253.4L-50.2 -255.2L-44.0 -258.0L-29.8 -267.9L-10.7 -287.0L8.4 -298.7L13.4 -304.0L16.5 -310.7L20.8 -319.5L27.6 -329.4L37.4 -337.9L42.4 -344.6L45.5 -352.4L52.9 -378.9L56.0 -386.7L61.5 -393.0L73.8 -402.9L96.1 -417.8L97.3 -419.5L101.6 -419.5L108.4 -420.2L122.6 -427.0L126.9 -429.8L138.0 -437.9L155.9 -456.6L158.4 -460.5L159.6 -464.4L165.2 -507.5L167.0 -515.3L170.1 -524.1L176.3 -535.4L184.9 -555.9L188.6 -564.8L193.0 -571.5L208.4 -584.9L213.9 -592.0L218.3 -600.1L225.7 -625.9L232.5 -645.0L234.3 -651.4L235.5 -658.8L236.8 -662.3L238.6 -666.2L239.2 -670.1L239.9 -678.9L240.5 -685.3L242.9 -693.1L245.4 -698.4L251.0 -700.8L256.5 -706.8L260.8 -723.4L265.2 -743.9L267.0 -784.2L267.0 -790.6L263.9 -799.4L263.9 -804.4L262.1 -810.7L257.8 -816.4L251.6 -822.4L243.6 -826.3L236.2 -825.2L233.7 -823.1L232.5 -820.6L230.6 -818.5L227.5 -817.8L215.8 -817.8L214.6 -819.6L212.1 -824.9L210.9 -827.3L207.2 -831.6L206.5 -836.2L209.0 -837.6L205.9 -839.3L205.3 -845.0L205.9 -848.9L213.3 -843.9L223.2 -839.7L226.9 -839.3L234.3 -844.3L240.5 -851.4L253.4 -874.0L255.9 -883.2L255.3 -887.4L257.8 -894.1L259.0 -897.0L260.8 -917.4L261.5 -921.7L259.0 -924.5L257.1 -926.6L251.0 -931.9L247.9 -935.1L247.3 -938.6L247.9 -947.5L247.3 -956.7L247.3 -961.6L245.4 -963.7L244.8 -966.9L242.3 -970.1L236.2 -969.7L232.5 -971.2L233.1 -975.0L236.8 -978.6L239.9 -982.1L244.2 -982.8L246.7 -987.8L250.4 -989.5L252.2 -992.7L254.7 -997.7L256.5 -1003.0L265.2 -1008.3L268.9 -1007.9L273.2 -1004.4L275.7 -1003.3L278.1 -1003.3L281.2 -1004.4L283.7 -1006.9L291.1 -1012.2L294.8 -1010.4L298.5 -1011.4L301.6 -1013.9L303.4 -1017.5L307.7 -1030.5L310.2 -1043.6L311.5 -1047.1L311.5 -1052.4L312.1 -1056.7L312.1 -1062.7L315.8 -1057.7L317.0 -1056.3L319.5 -1055.3L320.7 -1053.9L322.6 -1054.6L321.3 -1059.5L320.7 -1061.3L321.9 -1062.7L323.2 -1063.0L325.0 -1062.3L326.9 -1062.3L326.3 -1064.1L325.6 -1065.2L321.9 -1064.8L320.1 -1064.8L317.0 -1064.8L316.4 -1066.2L315.8 -1067.3L314.5 -1066.2L313.3 -1065.5L312.7 -1066.2L312.7 -1071.5L312.1 -1074.3L308.4 -1080.0L305.3 -1081.8L302.8 -1082.1L299.7 -1082.8L299.1 -1084.9L301.0 -1086.0L305.3 -1086.4L309.0 -1085.3L312.1 -1088.1L313.3 -1092.7L313.9 -1097.0L313.3 -1099.1L313.9 -1101.2L313.9 -1106.5L315.8 -1108.3L315.2 -1111.1L315.8 -1112.5L318.9 -1110.0L321.9 -1107.9L324.4 -1107.2L327.5 -1104.0L331.8 -1098.4L336.1 -1095.2L339.8 -1095.2L344.8 -1098.4L347.2 -1103.0L350.9 -1104.0L359.0 -1103.0L365.8 -1097.7L367.6 -1092.7L366.4 -1087.1L365.8 -1081.1L365.1 -1078.9L365.1 -1076.5L366.4 -1071.9L367.0 -1065.5L369.5 -1058.4L372.5 -1035.1L377.5 -1026.3L386.1 -1022.4L394.1 -1023.1L399.7 -1029.1L403.4 -1032.6L406.5 -1039.0L405.3 -1040.4L405.3 -1042.9L405.9 -1044.7L406.5 -1045.4L405.3 -1045.7L403.4 -1045.4L402.2 -1045.7L400.9 -1047.1L402.8 -1047.8L404.6 -1047.8L404.6 -1049.6L404.6 -1051.0L406.5 -1052.1L405.9 -1053.5L406.5 -1054.6L408.3 -1058.4L409.6 -1059.2L412.0 -1058.8L413.9 -1056.0L418.2 -1055.6L420.1 -1054.9L421.3 -1052.1L422.5 -1050.3L425.6 -1048.5L425.6 -1047.1L424.4 -1045.7L424.4 -1044.0L425.0 -1043.2L426.9 -1043.2L430.6 -1042.2L434.3 -1039.7L436.7 -1039.0L438.6 -1039.4L440.4 -1038.3L441.1 -1035.8L442.9 -1033.0L444.8 -1031.9L447.8 -1030.2L450.3 -1030.2L454.0 -1031.6L456.5 -1034.1L460.2 -1038.3L467.6 -1054.2L468.8 -1060.2L470.1 -1074.0L471.3 -1077.5L470.7 -1079.3L471.9 -1081.8L473.8 -1083.2L475.0 -1085.3L476.2 -1089.2L475.0 -1095.5L472.5 -1101.2L468.8 -1106.5L463.9 -1112.2L460.2 -1115.0L456.5 -1115.0L454.6 -1112.2L453.4 -1110.4L452.2 -1108.6L452.2 -1107.6L453.4 -1107.6L454.0 -1109.0L455.2 -1110.0L455.2 -1108.6L454.0 -1106.2L447.8 -1101.6L444.8 -1100.8L441.1 -1098.0L438.6 -1095.2L434.3 -1095.9L429.3 -1097.7L427.5 -1097.3L425.0 -1098.0L422.5 -1096.6L419.5 -1093.1L412.7 -1093.1L409.6 -1091.0L407.1 -1091.7L405.3 -1091.3L399.1 -1087.4L396.6 -1083.9L394.1 -1083.9L388.6 -1087.1L388.6 -1095.5L388.6 -1098.0L390.4 -1100.1L391.7 -1106.2L391.1 -1109.7L392.9 -1115.0L394.1 -1120.3L394.8 -1124.2L394.8 -1125.9L396.6 -1127.4L398.5 -1133.0L399.1 -1138.0L400.3 -1144.3L403.4 -1146.8L409.0 -1154.6L410.8 -1156.3L411.4 -1157.4L412.7 -1161.6L412.7 -1164.1L411.4 -1166.6L412.0 -1167.3L412.7 -1169.4L413.9 -1171.2L415.8 -1168.3L420.1 -1166.2L422.5 -1163.4L425.0 -1160.9L427.5 -1159.5L429.3 -1158.8L432.4 -1158.1L439.8 -1157.4L447.2 -1153.9L452.8 -1147.5L455.9 -1144.0L459.6 -1141.8L460.2 -1140.1L462.0 -1138.0L468.8 -1133.7L475.6 -1130.9L483.0 -1130.9L488.6 -1132.3L494.1 -1134.8L499.1 -1138.7L502.8 -1141.8L505.2 -1144.3L507.7 -1146.8L508.3 -1146.1L508.3 -1144.7L507.7 -1143.3L508.3 -1141.5L507.7 -1140.8L506.5 -1139.7L507.7 -1138.0L507.1 -1135.8L504.6 -1133.4L504.0 -1130.2L502.8 -1125.9L500.9 -1122.4L498.4 -1110.4L497.8 -1105.1L497.8 -1103.0L495.4 -1090.6L496.0 -1085.7L496.6 -1083.5L496.0 -1081.1L496.0 -1078.2L496.6 -1076.1L494.7 -1063.0L495.4 -1052.1L495.4 -1042.9L496.0 -1040.4L497.8 -1018.5L500.9 -999.4L503.4 -987.8L508.9 -971.9L511.4 -967.6L512.6 -965.2L517.6 -960.2L520.0 -958.8L522.5 -958.8L524.4 -960.6L527.5 -960.9L528.1 -959.1L529.3 -956.7L535.5 -952.4L545.4 -941.8L547.2 -940.1L552.1 -934.1L552.8 -929.8L555.8 -928.0L557.7 -924.9L558.3 -922.7L560.8 -917.4L561.4 -916.0L562.0 -913.6L563.2 -911.8L566.3 -908.3L570.7 -900.1L573.1 -894.8L571.9 -892.4L570.0 -891.6L568.2 -889.9L567.6 -887.8L568.2 -886.0L570.0 -884.2L575.0 -882.5L576.8 -881.0L578.7 -876.8L576.8 -874.3L573.7 -871.5L571.9 -867.3L573.1 -862.3L575.0 -859.1L586.1 -849.2L587.9 -848.5L589.8 -847.8L591.6 -846.8L592.3 -842.2L592.9 -840.1L593.5 -837.9L592.9 -835.8L590.4 -833.3L590.4 -831.9L591.6 -828.0L592.9 -826.3L594.1 -824.9L595.3 -823.1L596.0 -816.7L596.6 -813.9L600.3 -801.2L600.9 -800.1L600.9 -799.1L600.9 -797.3L601.5 -795.9L600.9 -794.1L599.0 -792.0L598.4 -791.3L597.2 -786.3L596.6 -776.8L596.6 -774.0L594.1 -769.4L593.5 -766.2L594.1 -763.4L602.1 -771.5L606.4 -771.9L605.2 -770.1L605.2 -768.7L605.2 -767.6L606.4 -766.2L604.6 -762.7L605.2 -760.5L610.2 -756.0L611.4 -754.9L612.0 -753.5L612.0 -751.4L611.4 -750.7L610.2 -749.9L609.5 -748.5L608.9 -747.8L602.7 -740.4L599.7 -739.0L594.1 -736.9L591.6 -734.7L594.7 -731.2L599.7 -731.6L603.4 -734.4L605.2 -738.3L606.4 -739.7L608.9 -738.3L610.2 -735.8L607.7 -734.7L607.1 -733.3L606.4 -730.5L606.4 -727.0L605.2 -725.6L601.5 -725.2L600.3 -724.9L598.4 -724.9L596.6 -724.5L595.3 -723.4L591.6 -720.3L589.8 -718.8L594.1 -716.7L592.3 -713.9L587.3 -710.7L583.6 -707.5L587.3 -706.1L591.0 -707.5L594.1 -709.7L596.6 -711.8L597.2 -706.8L593.5 -703.7L585.5 -700.1L586.7 -699.1L587.9 -697.6L588.6 -695.9L587.3 -695.9L584.2 -695.9L583.0 -695.9L582.4 -693.1L583.0 -690.2L588.6 -690.2L591.0 -690.6L591.0 -686.0L587.9 -682.8L583.0 -681.0L579.3 -681.7L579.9 -678.6L581.8 -677.5L587.3 -677.5L585.5 -674.0L581.8 -671.5L577.4 -670.4L573.1 -670.1L576.2 -667.3L584.2 -661.2L584.8 -658.8L581.1 -657.0L571.9 -660.2L568.8 -657.4L576.2 -653.5L578.1 -651.4L576.2 -650.6L573.7 -650.3L571.9 -649.9L569.4 -650.3L569.4 -648.5L571.3 -647.5L573.7 -645.7L575.0 -643.6L573.7 -642.9L567.0 -644.3L560.2 -643.6L556.5 -643.9L553.4 -646.1L553.4 -642.9L554.6 -640.4L555.8 -638.3L557.1 -635.8L554.6 -636.2L553.4 -635.8L550.9 -633.0L553.4 -631.9L554.6 -630.1L554.0 -628.0L551.5 -627.3L549.1 -628.0L547.2 -629.8L545.4 -632.3L544.1 -634.4L546.0 -635.5L547.2 -637.2L540.4 -637.6L537.9 -635.1L538.6 -630.9L539.2 -622.0L543.5 -611.8L544.1 -607.2L540.4 -610.0L539.8 -611.1L539.2 -613.9L538.6 -615.0L537.9 -615.7L536.7 -615.3L535.5 -614.6L534.2 -614.2L531.2 -614.2L529.3 -613.5L528.7 -611.8L528.7 -607.9L529.3 -603.6L529.3 -601.9L529.3 -600.5L526.8 -597.6L519.4 -592.3L518.2 -589.9L520.0 -588.8L520.7 -587.4L522.5 -584.2L525.6 -581.4L526.8 -579.3L525.6 -576.1L524.4 -575.4L523.8 -576.1L522.5 -577.1L520.7 -576.4L518.8 -573.3L517.0 -572.2L512.6 -570.8L510.8 -569.7L507.7 -567.2L507.7 -566.2L509.6 -564.1L512.0 -563.0L520.0 -562.7L520.0 -561.2L518.8 -558.4L517.6 -555.2L516.3 -554.2L508.9 -548.2L511.4 -545.7L513.9 -542.5L517.0 -541.1L519.4 -543.9L521.3 -540.7L522.5 -537.6L522.5 -534.0L521.9 -529.8L519.4 -530.1L518.2 -531.6L517.6 -533.3L517.0 -535.4L514.5 -527.3L513.3 -525.6L514.5 -524.8L515.1 -524.1L515.7 -522.4L511.4 -521.3L509.6 -520.2L508.9 -518.8L510.2 -516.7L510.2 -514.6L510.2 -513.2L512.0 -511.1L513.9 -512.5L517.6 -513.2L520.7 -512.5L522.5 -509.6L520.0 -510.7L517.6 -510.7L515.7 -509.6L514.5 -506.8L518.8 -504.3L519.4 -500.1L519.4 -495.5L521.9 -492.3L520.7 -490.9L518.8 -484.9L517.6 -485.6L512.6 -490.2L511.4 -490.9L508.9 -490.9L507.7 -491.6L507.7 -493.0L507.7 -494.5L508.9 -495.5L508.9 -496.6L507.1 -498.3L501.5 -500.8L502.2 -502.2L504.0 -506.8L502.2 -508.6L500.3 -508.6L499.1 -508.2L496.6 -507.9L494.7 -508.6L492.9 -509.6L489.2 -513.2L485.5 -514.6L480.6 -514.2L468.2 -511.4L463.3 -509.6L459.6 -506.8L458.3 -501.9L458.3 -496.9L454.6 -496.6L454.0 -498.0L450.9 -506.8L449.7 -505.8L448.5 -505.4L446.6 -505.8L445.4 -506.8L442.3 -504.7L439.8 -501.5L438.0 -498.0L436.7 -493.7L438.6 -494.8L440.4 -494.8L442.3 -494.1L442.9 -492.3L442.3 -490.6L441.1 -489.5L439.2 -488.4L437.4 -487.4L431.8 -480.3L426.2 -472.2L423.2 -464.8L415.8 -439.3L414.5 -430.5L414.5 -421.7L417.0 -406.5L421.3 -397.6L427.5 -387.0L429.3 -379.6L429.9 -376.8L431.8 -374.7L432.4 -371.8L432.4 -367.6L431.8 -365.8L429.9 -363.0L429.9 -361.9L430.6 -360.5L433.0 -357.3L433.6 -355.2L435.5 -298.7L434.9 -292.0L431.2 -276.4L431.2 -270.1L429.9 -267.2L429.9 -247.8L429.3 -245.3L426.2 -238.6L424.4 -220.2L421.9 -212.8L415.8 -206.8L414.5 -206.4L410.2 -205.4L404.6 -201.9L400.3 -200.4L397.9 -197.6L396.6 -196.9L394.8 -195.8L394.8 -193.4L394.8 -189.8L393.5 -187.7L392.9 -185.6L386.1 -174.6L384.3 -171.1L376.3 -139.7L366.4 -123.4L363.9 -116.3L361.4 -101.1L362.1 -98.0L363.9 -89.8L364.5 -86.7L362.7 -81.0L356.5 -74.3L354.0 -69.7L354.0 -61.9L356.5 -44.2L361.4 -30.5L367.6 -13.2L392.3 29.6L399.7 39.5L401.6 43.4L403.4 44.4L404.6 44.8L407.1 46.2L407.7 48.0L405.9 52.9L404.6 55.1L402.2 53.3L400.9 51.5L399.1 49.4L394.8 50.5L389.2 52.9L380.6 56.1L380.0 52.6L370.7 54.7L359.6 62.5L339.8 80.5L330.0 96.0L323.2 119.0L326.9 130.0L328.1 135.6L326.3 144.5L325.6 152.2L324.4 157.5L321.9 161.8L317.0 161.1L313.9 165.7L314.5 169.2L312.1 171.7L309.0 171.0L307.7 168.1L304.7 171.3L300.3 170.6L297.9 175.2L291.7 174.8L283.7 174.1L280.0 173.1L275.0 178.4L274.4 183.0L270.1 186.5L266.4 186.5L260.8 190.7L255.3 194.6L254.1 197.1L252.8 201.0L251.0 203.8L251.0 207.4L250.4 211.2L249.1 213.7L247.3 215.8L244.8 218.3L239.9 219.0L236.8 219.4L234.9 218.7L232.5 219.4L230.0 219.7L229.4 218.7L226.9 217.3L226.9 215.1L226.9 212.3L224.4 210.5L219.5 208.4L215.2 208.1L214.6 206.3L214.6 203.8L217.0 203.8L220.1 204.2L222.0 204.5L224.4 203.8L226.3 202.8L227.5 201.0L230.0 200.6L233.1 201.7L234.3 200.6L234.9 198.9L234.3 196.0L232.5 194.3L228.8 193.2L228.8 191.1L230.6 189.0L231.2 186.5L231.2 184.4L229.4 180.5L228.8 178.0L229.4 170.6L226.3 165.7L226.9 163.2L226.3 160.0L226.9 157.2L231.8 154.0L234.3 151.9L234.3 147.3L231.2 142.0L231.2 137.4L224.4 134.9L219.5 133.1L219.5 132.1L223.2 132.4L226.9 130.0L226.9 126.1L229.4 123.6L230.6 120.1L238.6 122.5L241.1 119.7L241.1 116.5L239.9 110.2L242.3 108.1L247.3 106.3L250.4 103.5L254.1 102.8L258.4 99.6L260.8 96.0L264.5 91.4L269.5 85.1L272.6 85.8L273.8 82.6L274.4 80.1L272.0 80.1L271.3 76.3L270.7 72.4L268.3 69.9L265.2 66.7L262.7 64.6L258.4 60.7L256.5 61.4L254.1 58.9L248.5 58.2L243.6 60.4L246.7 65.7L242.3 68.1L239.2 70.2L238.6 68.5L236.8 68.1L234.9 66.7L233.7 66.7L231.2 65.3L230.0 67.1L229.4 70.2L226.9 68.5L226.3 65.3L223.8 65.3L223.2 69.2L220.7 72.7L218.3 69.5L218.9 64.6L217.0 62.1L215.8 66.7L217.6 73.1L220.1 77.3L220.1 79.8L222.6 85.8L220.7 88.6L220.7 91.4L218.9 93.9L213.3 97.5L208.4 101.7L203.5 102.4L199.7 101.0L197.3 101.7L196.0 103.8L199.1 105.2L202.2 107.0L203.5 108.4L202.8 111.2L203.5 115.1L201.6 114.8L197.3 113.0L194.8 114.8L196.0 117.6L198.5 120.1L197.9 127.8L197.3 130.3L197.3 133.9L196.7 136.3L198.5 138.8L199.7 136.3L201.6 137.7L204.7 142.7L211.5 143.4L213.3 146.6L210.2 150.1L210.9 150.8L211.5 152.2L210.2 155.4L204.1 155.1L199.7 158.2L199.1 161.4L200.4 165.3L202.2 167.4L203.5 169.5L201.6 170.3L199.7 170.6L195.4 169.5L193.0 171.3L191.1 170.6L190.5 169.2L191.1 166.7L191.1 162.5L188.6 156.5L193.0 154.3L191.7 152.9L189.3 151.9L188.0 148.7L183.1 142.7L183.1 140.9L181.9 138.8L180.0 138.4L178.8 134.2L176.3 135.6L172.6 135.3L168.9 136.0L165.8 133.1L156.5 132.1L142.4 135.3L134.3 136.7L125.7 139.2L117.1 143.7L110.9 149.8L110.3 160.4L112.7 170.3L106.6 167.4L101.0 175.9L99.2 183.0L98.5 187.6L104.1 188.6L102.9 192.5L102.2 196.4L100.4 199.2L102.9 204.2L108.4 205.9L110.3 210.9L110.9 218.7L109.6 225.7L105.9 226.4L102.9 228.9L101.0 231.7L100.4 234.6L98.5 238.8L96.1 242.3L94.8 245.2L93.0 247.3L90.5 248.0L88.7 250.1L87.4 251.9L85.6 254.7L86.2 257.2L85.0 258.6L83.7 261.4L83.1 265.0L83.7 268.8L84.3 272.0L82.5 273.1L81.3 273.1L79.4 271.7L75.7 269.9L67.7 276.6L62.1 279.8L57.2 283.3L54.7 281.9L52.2 279.8L50.4 277.0L46.7 272.7L47.9 269.2L46.7 267.8L45.5 266.7L44.2 266.0L43.0 265.3L42.4 263.5L42.4 259.7L41.8 255.4L44.2 253.6L44.8 251.5L47.3 250.8L44.2 244.5L42.4 237.7L44.2 234.6L44.8 231.0L44.8 226.1L43.6 224.0L44.8 221.1L47.3 218.7L49.8 218.3L47.9 215.1L46.7 213.0L45.5 208.1L44.8 203.1L47.3 198.2L49.2 193.2L56.0 193.9L60.9 195.0L64.6 194.6L67.7 194.6L70.1 192.5L60.9 182.3L57.8 178.0L52.2 173.4L41.8 170.6L33.7 169.9L28.2 172.4L23.2 174.5L14.6 174.8L9.0 178.7L4.7 188.3L-0.2 192.2L-0.8 198.5L1.0 200.6L1.0 196.4L3.5 194.6L5.3 195.3L2.3 203.1L-5.1 207.4L-11.9 210.5L-16.9 213.0L-23.0 216.2L-24.9 219.0L-26.1 222.2L-28.0 225.0L-29.2 229.3L-29.2 231.0L-27.4 235.3L-29.8 239.2L-31.7 240.9L-35.4 248.0L-42.8 253.3L-49.0 258.9L-51.4 269.9L-52.7 273.8L-51.4 278.0L-47.1 279.1L-44.6 281.9L-45.9 283.7L-53.3 282.3L-77.4 271.0L-91.5 268.5L-103.9 268.5L-121.2 274.1L-139.7 267.8L-155.1 266.4L-163.1 266.4L-184.1 268.5L-198.9 272.7L-232.9 284.7L-240.9 284.0L-249.5 286.5L-252.0 286.9L-254.5 286.9L-253.2 284.4L-252.0 283.0L-250.2 278.7L-248.3 272.7L-244.6 268.8L-239.7 274.5L-239.0 275.9L-238.4 277.3L-236.6 275.6L-236.6 274.5L-233.5 273.1L-231.0 271.7L-228.6 270.6L-223.0 267.1L-215.6 262.1L-212.5 260.7L-208.8 255.1L-205.7 255.8L-205.7 260.0L-206.3 263.5L-205.1 263.9L-203.9 260.4L-203.9 256.1L-200.2 257.2L-198.9 256.1L-203.9 254.0L-202.0 250.1L-201.4 247.6L-202.0 246.2L-206.3 241.3L-209.4 238.8L-211.3 239.9L-215.0 238.8L-218.7 237.4L-221.8 240.2L-223.6 239.2L-224.2 243.0L-224.9 246.9L-227.9 248.3L-227.9 244.1L-230.4 244.5L-232.9 243.0L-236.6 243.0L-239.7 243.8L-242.1 245.5L-244.6 243.8L-248.3 245.5L-252.0 244.8L-253.9 244.1L-256.9 240.2L-258.2 238.8L-261.3 235.3L-264.3 233.9L-263.7 228.6L-260.0 220.1L-260.6 214.8L-262.5 217.3L-264.3 222.9L-267.4 227.9L-268.7 231.0L-269.9 234.9L-271.8 245.9L-269.9 248.3L-268.1 251.9L-263.7 254.4L-261.9 258.9L-261.9 262.5L-266.2 261.8L-271.8 259.3L-277.9 255.8L-281.6 253.3L-283.5 250.5L-284.1 247.3L-282.2 243.4L-281.6 239.5L-280.4 236.3L-280.4 233.2L-281.6 228.9L-284.1 225.7L-286.6 225.7L-287.8 220.8L-287.8 215.5L-287.8 211.6L-287.2 208.4L-285.9 204.5L-284.1 201.0L-281.6 197.1L-280.4 193.6L-277.9 189.7L-277.3 184.0L-276.7 180.1L-279.2 179.4L-281.6 185.8L-282.9 190.4L-284.1 186.2L-284.1 183.0L-286.6 182.3L-284.7 192.2L-289.0 193.2L-289.7 188.6L-291.5 188.6L-291.5 193.9L-295.2 194.6L-299.5 193.2L-300.8 193.9L-304.5 193.2L-311.9 198.5L-315.6 202.1L-317.4 205.2L-317.4 206.6L-318.0 208.8L-318.7 209.8L-318.0 210.9L-315.0 211.2L-318.0 213.4L-317.4 217.3L-319.3 222.2L-323.0 229.6L-331.6 240.6L-337.2 248.0L-338.4 257.2L-339.0 261.1L-339.6 265.7L-339.0 266.7L-337.2 269.9L-336.6 270.6L-334.7 271.7L-335.3 274.1L-335.9 277.0L-335.9 279.1L-334.1 282.3L-331.0 283.3L-323.6 283.3L-319.9 284.4L-317.4 286.9L-315.0 289.7L-312.5 292.2L-299.5 300.6L-290.9 304.5L-289.0 306.3L-287.2 305.6L-284.7 305.6L-282.2 306.3L-281.0 307.7L-279.8 310.2L-279.2 312.3L-278.5 314.4L-277.3 316.5L-274.8 317.3L-273.0 317.3L-271.8 317.3L-269.9 319.4L-269.9 321.9L-271.1 329.3L-273.6 328.2L-275.5 328.2L-277.3 328.9L-278.5 330.7L-277.9 332.1L-276.7 333.5L-274.8 333.9L-272.4 333.9L-275.5 336.3L-276.1 337.8L-277.3 339.5L-276.1 341.6L-274.8 345.2L-274.2 349.1L-274.8 352.2L-276.7 353.7L-282.9 355.8L-285.3 356.5L-288.4 356.1L-292.1 355.1L-295.8 353.3L-295.8 350.8L-293.4 350.1L-289.7 350.8L-286.6 352.2L-284.1 353.7L-284.7 352.2L-284.7 350.5L-285.3 349.4L-282.9 350.8L-281.6 346.6L-283.5 343.8L-286.6 342.7L-290.3 343.8L-289.7 345.2L-290.3 346.6L-290.3 348.0L-295.8 343.8L-298.9 346.2L-303.8 347.3L-308.2 346.2L-306.9 343.1L-304.5 338.8L-307.5 338.1L-312.5 339.9L-317.4 342.3L-314.3 343.4L-314.3 345.9L-316.2 348.4L-321.7 350.5L-324.2 352.6L-327.3 352.9L-330.4 349.4L-331.0 350.8L-332.2 351.9L-332.2 353.7L-337.2 351.2L-339.0 350.8L-339.6 353.3L-340.9 355.4L-342.1 356.5L-340.3 360.0L-342.1 360.0L-347.7 358.2L-355.1 363.2L-356.9 365.3L-362.5 365.3L-371.1 369.6L-377.3 375.9L-377.9 381.9L-375.4 383.3L-374.2 384.0L-373.6 385.5L-374.8 388.3L-375.4 389.3L-377.3 390.1L-378.5 390.8L-379.8 391.1L-381.6 390.1L-384.1 386.2L-385.3 385.5L-386.5 386.5L-389.0 390.8L-390.9 392.5L-390.9 393.9L-388.4 393.9L-386.5 394.6L-385.9 396.4L-385.3 398.9L-382.2 402.1L-380.4 404.5L-381.0 405.6L-381.6 406.7L-381.6 412.3L-381.6 414.1L-384.1 415.1L-385.9 414.1L-387.8 411.6L-389.0 409.5L-390.9 412.0L-393.3 414.1L-393.3 415.5L-389.6 416.2L-388.4 419.0L-389.6 421.1L-392.1 419.7L-393.3 423.3L-394.6 424.7L-400.1 425.7L-401.4 426.1L-402.6 427.9L-403.8 430.3L-405.1 431.0L-406.9 431.0L-410.6 430.7L-416.8 440.2L-425.4 463.9L-429.7 473.8L-430.4 474.5L-431.6 480.9L-435.3 483.0L-435.9 486.5L-439.6 488.3L-439.0 491.1L-435.3 493.2L-437.8 496.4L-443.3 502.8L-446.4 503.8L-448.3 506.7L-458.1 509.8L-461.2 511.6L-463.1 513.7L-465.5 518.3L-464.3 522.6L-464.9 525.0L-467.4 524.3L-469.9 526.8L-470.5 522.9L-468.0 519.4L-468.6 516.6L-485.3 514.8L-490.8 513.7L-516.1 504.2L-523.6 502.1L-529.7 497.1L-531.6 495.4L-533.4 492.9L-533.4 490.1L-532.8 487.9L-534.7 484.1L-535.9 482.6L-538.4 480.5L-541.4 479.8L-543.9 477.0L-541.4 472.0L-535.3 471.3L-531.0 470.6L-532.8 468.1L-541.4 461.4L-545.2 459.7L-546.4 457.2L-549.5 457.5L-554.4 454.0L-560.0 453.7L-560.6 450.1L-566.1 446.9L-570.5 442.0L-573.5 434.2L-579.7 430.3L-582.8 431.0L-589.0 432.1L-590.2 433.2L-589.6 431.0L-588.4 429.6L-590.2 428.6L-589.0 427.9L-586.5 427.9L-586.5 425.0L-588.4 422.6L-585.3 420.1L-582.8 417.6L-583.4 416.6L-586.5 416.6L-587.1 412.7L-584.0 409.8L-580.3 409.5L-577.9 408.4L-573.5 406.0L-572.3 402.8L-572.3 399.9L-573.5 397.8L-577.2 396.1L-580.9 394.3L-584.0 393.9L-580.3 386.9L-578.5 385.8L-577.9 384.4L-577.9 382.6L-579.1 379.5L-574.8 379.1L-568.0 379.8L-567.4 376.6L-569.2 373.4L-571.7 368.8L-574.8 369.2L-576.6 360.4L-579.7 357.5L-584.0 353.7L-589.6 352.2L-587.7 348.4L-582.2 341.6L-564.3 336.3L-556.3 329.3L-551.9 325.0L-545.2 318.3L-539.6 310.2L-535.9 306.7L-535.9 301.7L-535.9 299.6L-532.8 298.5L-531.6 296.4L-529.7 295.0L-529.1 291.5L-529.1 286.9L-528.5 280.5L-530.3 275.2L-531.0 270.3L-529.1 263.2L-531.6 264.6L-534.7 265.7L-537.7 263.9L-541.4 259.7L-545.8 260.0L-550.7 260.4L-550.7 265.7L-556.3 266.4L-556.3 261.4L-562.4 263.5L-558.7 272.0L-563.7 271.0L-564.9 266.4L-568.0 266.7L-568.6 271.7L-580.9 274.1L-586.5 276.6L-592.1 277.3L-597.0 273.8L-603.8 273.8L-606.9 273.4L-610.6 268.5L-616.1 266.4L-619.2 263.5L-628.5 257.2L-634.0 255.1L-640.8 249.8L-643.9 247.6L-651.9 245.5L-674.1 247.6L-675.4 247.3L-676.6 246.6L-678.5 246.9L-679.1 247.6L-680.3 248.3L-681.5 249.1L-684.6 248.7L-686.5 248.0L-687.1 246.2L-687.1 243.4L-688.3 243.8L-689.6 244.5L-690.2 245.5L-690.8 246.9L-690.8 248.7L-692.0 248.7L-693.3 249.1L-697.6 255.1L-698.8 256.1L-701.3 256.1L-703.1 255.1L-704.4 253.6L-706.2 253.3L-708.1 254.0L-709.9 255.8L-711.2 258.2L-710.5 260.4L-715.5 260.7L-724.1 258.2L-729.1 257.9L-733.4 255.8L-735.8 255.8L-734.0 258.9L-732.8 260.0L-723.5 262.1L-724.7 262.5L-728.4 262.8L-729.7 263.5L-732.8 268.5L-733.4 269.2L-735.2 269.6L-737.7 271.7L-740.8 272.4L-742.0 272.7L-745.1 274.9L-743.9 275.9L-742.0 275.9L-740.8 275.9L-738.9 274.9L-740.8 279.4L-746.3 283.0L-751.9 285.5L-756.8 286.5L-759.3 285.5L-763.0 281.6L-766.7 280.5L-772.3 280.9L-774.7 281.2L-779.1 284.0L-782.1 285.1L-784.0 287.2L-783.4 290.8L-781.5 291.8L-778.4 290.0L-774.1 284.7L-771.0 283.7L-767.9 283.3L-765.5 284.0L-763.6 286.5L-763.6 290.0L-765.5 292.5L-768.6 294.3L-770.4 296.4L-769.8 297.5L-769.2 299.2L-774.1 297.5L-777.2 302.1L-779.1 308.8L-782.1 313.7L-795.7 311.2L-801.9 311.2L-801.3 316.5L-806.8 315.5L-809.3 311.2L-811.1 305.9L-815.5 302.1L-816.7 303.1L-817.9 302.1L-818.5 299.9L-818.5 297.8L-819.8 299.2L-822.9 298.2L-825.3 299.2L-827.8 301.4L-832.7 303.1L-840.8 307.0L-842.6 308.4L-842.6 309.8L-843.9 311.2L-845.1 312.0L-848.8 312.3L-850.0 313.4L-850.6 314.1L-851.9 314.8L-862.4 319.4L-855.6 311.2L-853.1 307.0L-856.8 305.2L-858.7 305.6L-862.4 308.4L-864.8 309.1L-869.2 309.1L-871.0 310.2L-871.6 313.7L-870.4 314.8ZM169.5 395.4L170.7 388.6L175.7 384.4L181.2 384.4L184.3 389.3L181.9 396.1L177.5 400.3L172.6 400.7L169.5 395.4ZM131.9 325.4L133.7 324.0L135.6 321.5L137.4 320.8L137.4 324.3L136.8 331.0L134.3 337.8L131.9 340.6L129.4 336.7L129.4 334.2L131.2 326.8L131.9 325.4ZM157.2 244.8L160.9 246.6L162.7 249.8L164.0 253.6L164.6 258.6L164.0 263.5L163.3 266.0L161.5 266.4L157.8 266.4L147.3 261.1L146.1 257.5L146.1 247.6L146.7 241.3L154.7 243.0L157.2 244.8Z","p":{"tokio":[218.9,49.4],"kamakura":[179.3,132.5],"kawaguchiko":[45.1,94.6],"fuji":[38.9,123.3],"hakone":[89.8,150.1],"kyoto":[-468.3,196.5],"nara":[-457.2,264.7],"osaka":[-513.9,262.9],"hiroshima":[-1036.3,327.5],"miyajima":[-1059.4,346.1],"narita":[323.3,37.3],"haneda":[219.6,83.9]}}};
+  var STOPS = [
+    {n:1,  k:"tokio",       name:"Tokio",                 days:"Días 1–6",   day:1,  c:"var(--c-tokio)", how:"Llegada por Narita o Haneda"},
+    {n:2,  k:"kamakura",    name:"Kamakura",              days:"Día 6",      day:6,  c:"var(--c-tokio)", how:"Excursión desde Tokio: JR Yokosuka, ~1 h", trip:1},
+    {n:3,  k:"kawaguchiko", name:"Kawaguchiko · Fuji",    days:"Día 7",      day:7,  c:"var(--c-fuji)",  how:"Excursión desde Tokio: bus, ~2 h", trip:1},
+    {n:4,  k:"hakone",      name:"Hakone",                days:"Día 8",      day:8,  c:"var(--c-fuji)",  how:"Excursión desde Tokio: Romancecar, ~1 h 25", trip:1},
+    {n:5,  k:"kyoto",       name:"Kioto",                 days:"Días 9–12",  day:9,  c:"var(--c-kyoto)", how:"Shinkansen desde Tokio, 2 h 15"},
+    {n:6,  k:"nara",        name:"Nara",                  days:"Día 13",     day:13, c:"var(--c-osaka)", how:"Kintetsu desde Kioto, ~40 min"},
+    {n:7,  k:"osaka",       name:"Osaka",                 days:"Días 13–15", day:13, c:"var(--c-osaka)", how:"Kintetsu desde Nara, ~40 min"},
+    {n:8,  k:"hiroshima",   name:"Hiroshima",             days:"Día 16",     day:16, c:"var(--c-hiro)",  how:"Shinkansen desde Osaka, 1 h 30"},
+    {n:9,  k:"miyajima",    name:"Miyajima",              days:"Día 17",     day:17, c:"var(--c-hiro)",  how:"Excursión desde Hiroshima: JR y ferry, ~45 min", trip:1},
+    {n:10, k:"tokio",       name:"Tokio, regreso",        days:"Días 18–20", day:18, c:"var(--c-tokio)", how:"Shinkansen desde Hiroshima, ~4 h"}
+  ];
+  function pin(P, st, label, dx, dy, anchor, r, ox, oy){
+    var tx=P[st.k][0], ty=P[st.k][1]; r=r||11; ox=ox||0; oy=oy||0;
+    var x=+(tx+ox).toFixed(1), y=+(ty+oy).toFixed(1);
+    var lead = (ox||oy) ? '<line x1="'+tx+'" y1="'+ty+'" x2="'+x+'" y2="'+y+'" class="lead"/><circle cx="'+tx+'" cy="'+ty+'" r="2.6" class="spot"/>' : '';
+    return '<g class="pin" role="button" tabindex="0" data-mapday="'+st.day+'" aria-label="Parada '+label+': '+esc(st.name)+', '+esc(st.days)+'" style="--cc:'+st.c+'">'+lead+
+      '<circle cx="'+x+'" cy="'+y+'" r="'+(r+4)+'" class="pin-halo"/><circle cx="'+x+'" cy="'+y+'" r="'+r+'" class="pin-dot"/>'+
+      '<text x="'+x+'" y="'+(y+0.5)+'" class="pin-n" dominant-baseline="middle" text-anchor="middle">'+label+'</text>'+
+      '<text x="'+(x+dx)+'" y="'+(y+dy)+'" class="pin-l" text-anchor="'+(anchor||"start")+'" dominant-baseline="middle">'+esc(st.name.split(",")[0])+'</text></g>';
+  }
+  function fujiIcon(P){ var x=P.fuji[0], y=P.fuji[1]; return '<path class="fuji" d="M'+(x-9)+' '+(y+6)+'L'+x+' '+(y-8)+'L'+(x+9)+' '+(y+6)+'Z"/><path class="fuji-cap" d="M'+(x-3.2)+' '+(y-3)+'L'+x+' '+(y-8)+'L'+(x+3.2)+' '+(y-3)+'Z"/>'; }
+  function line(P,a,b,cls){ return '<line x1="'+P[a][0]+'" y1="'+P[a][1]+'" x2="'+P[b][0]+'" y2="'+P[b][1]+'" class="rt '+cls+'"/>'; }
+  function plane(P,k,lbl,dx,dy){ var x=P[k][0], y=P[k][1]; return '<g class="ap"><circle cx="'+x+'" cy="'+y+'" r="3"/><text x="'+(x+dx)+'" y="'+(y+dy)+'" text-anchor="start" dominant-baseline="middle">✈ '+lbl+'</text></g>'; }
+  function renderMap(){
+    var box=document.getElementById("routeMap"); if(!box) return;
+    var A=MAPD.main, P=A.p, bx=A.box;
+    var m='<svg viewBox="0 0 '+A.w+' '+A.h+'" class="map-svg" role="img" aria-label="Mapa de Japón con la ruta del viaje de Tokio a Hiroshima">'+
+      '<rect width="'+A.w+'" height="'+A.h+'" class="sea"/><path d="'+A.d+'" class="land"/>';
+    // return arc Hiroshima -> Tokyo, drawn to the south of the outbound line
+    var h=P.hiroshima, t=P.tokio, cx=(h[0]+t[0])/2, cy=Math.max(h[1],t[1])+70;
+    m+='<path class="rt ret" d="M'+h[0]+' '+h[1]+'Q'+cx.toFixed(1)+' '+cy.toFixed(1)+' '+t[0]+' '+t[1]+'"/>';
+    m+=line(P,"tokio","kyoto","sk")+line(P,"kyoto","nara","tr")+line(P,"nara","osaka","tr")+line(P,"osaka","hiroshima","sk")+line(P,"hiroshima","miyajima","ex");
+    m+='<rect x="'+bx[0][0]+'" y="'+bx[0][1]+'" width="'+(bx[1][0]-bx[0][0]).toFixed(1)+'" height="'+(bx[1][1]-bx[0][1]).toFixed(1)+'" class="inset-box" rx="4"/>'+
+       '<text x="'+(bx[1][0]-2)+'" y="'+(bx[1][1]+10)+'" class="inset-l" text-anchor="end">Paradas 2–4 abajo</text>';
+    m+=fujiIcon(P);
+    m+=pin(P,STOPS[0],"1·10",0,-19,"middle",12)+
+       pin(P,STOPS[4],"5",0,-18,"middle",11,-4,-30)+pin(P,STOPS[5],"6",15,0,"start",11,26,12)+pin(P,STOPS[6],"7",-15,0,"end",11,-28,14)+
+       pin(P,STOPS[7],"8",0,-18,"middle",11,14,-28)+pin(P,STOPS[8],"9",15,0,"start",11,8,24);
+    m+='</svg>';
+    var I=MAPD.inset, Q=I.p;
+    var n='<svg viewBox="0 0 '+I.w+' '+I.h+'" class="map-svg" role="img" aria-label="Detalle de los alrededores de Tokio: Kamakura, Kawaguchiko y Hakone">'+
+      '<rect width="'+I.w+'" height="'+I.h+'" class="sea"/><path d="'+I.d+'" class="land"/>';
+    n+=line(Q,"tokio","kamakura","ex")+line(Q,"tokio","kawaguchiko","ex")+line(Q,"tokio","hakone","ex");
+    n+=fujiIcon(Q)+'<text x="'+(Q.fuji[0])+'" y="'+(Q.fuji[1]+16)+'" class="fuji-l" text-anchor="middle">Monte Fuji</text>';
+    n+=plane(Q,"narita","Narita",-50,0)+plane(Q,"haneda","Haneda",6,8);
+    n+=pin(Q,STOPS[0],"1",0,-20,"middle",12)+pin(Q,STOPS[1],"2",15,4,"start")+pin(Q,STOPS[2],"3",4,-19,"start")+pin(Q,STOPS[3],"4",-15,4,"end");
+    n+='<text x="8" y="16" class="inset-t">Alrededores de Tokio</text></svg>';
+    var key='<div class="map-key"><span><i class="k sk"></i>Shinkansen</span><span><i class="k tr"></i>Tren regional</span><span><i class="k ex"></i>Excursión de un día</span><span><i class="k ret"></i>Regreso a Tokio</span></div>';
+    var list='<ol class="stops">'+STOPS.map(function(st){
+      return '<li><button type="button" class="stop-row" data-mapday="'+st.day+'" style="--cc:'+st.c+'"><span class="sn">'+st.n+'</span><span class="st"><b>'+esc(st.name)+'</b><small>'+esc(st.days)+' · '+esc(st.how)+'</small></span></button></li>';
+    }).join("")+'</ol>';
+    box.innerHTML='<div class="map-wrap">'+m+'</div>'+key+'<div class="map-wrap inset">'+n+'</div>'+list+
+      '<p class="small" style="margin-top:6px">Mapa: costas de Natural Earth (dominio público). Ubicaciones aproximadas.</p>';
+  }
+  function openMapDay(n){
+    go("dias");
+    if(dview==="crono"){ setCronoDay(n); setTimeout(function(){ window.scrollTo(0,0); },30); }
+    else setTimeout(function(){ var el=document.getElementById("day-"+n); if(el){ scrollToEl(el); flash(el); } },60);
+  }
+  var rmap=document.getElementById("routeMap");
+  rmap.addEventListener("click",function(e){ var g=e.target.closest("[data-mapday]"); if(g) openMapDay(+g.getAttribute("data-mapday")); });
+  rmap.addEventListener("keydown",function(e){ if((e.key==="Enter"||e.key===" ") && e.target.matches("[data-mapday]")){ e.preventDefault(); openMapDay(+e.target.getAttribute("data-mapday")); } });
+  renderMap();
+
+  /* ---------- Alternative: circular route (comparison only) ---------- */
+  (function(){
+    var CK=360/(10.7*Math.cos(35*Math.PI/180));
+    function pj(lon,lat){ return [+((lon-130.6)*360/10.7).toFixed(1), +((37.5-lat)*CK).toFixed(1)]; }
+    var Q={tokio:pj(139.777,35.714),nikko:pj(139.605,36.75),nagano:pj(138.188,36.648),kanazawa:pj(136.648,36.578),shirakawa:pj(136.906,36.258),
+      tsuruga:pj(136.055,35.645),kyoto:pj(135.768,35.011),nara:pj(135.833,34.685),osaka:pj(135.502,34.694),hiroshima:pj(132.455,34.385),
+      kawaguchiko:pj(138.763,35.498),hakone:pj(139.024,35.233),kamakura:pj(139.546,35.317),mishima:pj(138.911,35.126)};
+    var N="var(--c-norte)", T="var(--c-tokio)", K="var(--c-kyoto)", O="var(--c-osaka)", F="var(--c-fuji)", H="var(--c-hiro)";
+    var DAYS=[
+      [1,1,"Tokio",T,"Llegada; Ueno y Asakusa"],
+      [2,4,"Tokio",T,"Meiji, Harajuku, Shibuya y Shinjuku; Akihabara y Skytree. Cerezos de Tokio en plena flor"],
+      [5,5,"Nikko",N,"Excursión al norte: santuario Tōshō-gū y cascadas. Tren Tobu, ~2 h por trayecto"],
+      [6,6,"Nagano",N,"Shinkansen Hokuriku, ~1 h 20. Templo Zenkō-ji"],
+      [7,7,"Jigokudani → Kanazawa",N,"Monos de nieve en la mañana; Shinkansen ~1 h a Kanazawa"],
+      [8,8,"Kanazawa",N,"Jardín Kenroku-en, castillo, Higashi Chaya y mercado Ōmichō"],
+      [9,9,"Shirakawa-go",N,"Aldea de casas de techo de paja. Bus ~1 h 15, con reserva"],
+      [10,10,"Kanazawa → Kioto",K,"Shinkansen a Tsuruga y tren Thunderbird, ~2 h. Gion al atardecer"],
+      [11,13,"Kioto",K,"Kiyomizu; Fushimi Inari y Nishiki; Arashiyama y Kinkaku-ji"],
+      [14,14,"Nara → Osaka",O,"Ciervos, Tōdai-ji y Kasuga; dormir en Osaka"],
+      [15,16,"Osaka",O,"Castillo, Shinsekai y Dōtonbori",
+        "Día 16: castillo de Himeji (~1 h en tren), Kobe o Universal Studios"],
+      [17,17,"Osaka → Kawaguchiko",F,"Shinkansen a Mishima y bus, ~4 h. Noche frente al Fuji"],
+      [18,18,"Kawaguchiko → Hakone",F,"Pagoda Chureito en la mañana; bus a Hakone; noche en ryokan"],
+      [19,19,"Hakone → Kamakura → Tokio",T,"Owakudani y lago Ashi; Gran Buda en la tarde; dormir en Tokio"],
+      [20,20,"Regreso",T,"Tokio → aeropuerto"]
+    ];
+    var STOPS2=[
+      {n:"1·12",k:"tokio",name:"Tokio",c:T,dx:16,dy:-2,a:"start",ox:4,oy:-12},
+      {n:"2",k:"nikko",name:"Nikko",c:N,dx:14,dy:0,a:"start"},
+      {n:"3",k:"nagano",name:"Nagano",c:N,dx:0,dy:-16,a:"middle"},
+      {n:"4",k:"kanazawa",name:"Kanazawa",c:N,dx:0,dy:-16,a:"middle",ox:-4,oy:-6},
+      {n:"5",k:"shirakawa",name:"Shirakawa-go",c:N,dx:13,dy:0,a:"start",ox:10,oy:7},
+      {n:"6",k:"kyoto",name:"Kioto",c:K,dx:13,dy:0,a:"start",ox:10,oy:-6},
+      {n:"7",k:"nara",name:"Nara",c:O,dx:13,dy:0,a:"start",ox:14,oy:10},
+      {n:"8",k:"osaka",name:"Osaka",c:O,dx:-13,dy:0,a:"end",ox:-14,oy:6},
+      {n:"9",k:"kawaguchiko",name:"Kawaguchiko",c:F,dx:0,dy:15,a:"middle",ox:-13,oy:8},
+      {n:"10",k:"hakone",name:"Hakone",c:F,dx:0,dy:15,a:"middle",ox:-4,oy:30},
+      {n:"11",k:"kamakura",name:"Kamakura",c:T,dx:0,dy:15,a:"middle",ox:21,oy:14}
+    ];
+    function apin(st){
+      var tx=Q[st.k][0], ty=Q[st.k][1], ox=st.ox||0, oy=st.oy||0, r=st.n.length>2?11:9;
+      var x=+(tx+ox).toFixed(1), y=+(ty+oy).toFixed(1);
+      var lead=(ox||oy)?'<line x1="'+tx+'" y1="'+ty+'" x2="'+x+'" y2="'+y+'" class="lead"/><circle cx="'+tx+'" cy="'+ty+'" r="2.4" class="spot"/>':'';
+      return '<g class="alt-pin" style="--cc:'+st.c+'">'+lead+'<circle cx="'+x+'" cy="'+y+'" r="'+(r+3)+'" class="pin-halo"/><circle cx="'+x+'" cy="'+y+'" r="'+r+'" class="pin-dot"/>'+
+        '<text x="'+x+'" y="'+(y+0.5)+'" class="pin-n" dominant-baseline="middle" text-anchor="middle"'+(r>9?' style="font-size:9px"':'')+'>'+st.n+'</text>'+
+        '<text x="'+(x+st.dx)+'" y="'+(y+st.dy)+'" class="pin-l" text-anchor="'+st.a+'" dominant-baseline="middle">'+esc(st.name)+'</text></g>';
+    }
+    function ln(a,b,cls){ return '<line x1="'+Q[a][0]+'" y1="'+Q[a][1]+'" x2="'+Q[b][0]+'" y2="'+Q[b][1]+'" class="rt '+cls+'"/>'; }
+    function renderAltMap(){
+      var box=document.getElementById("altMap"); if(!box) return;
+      var A=MAPD.main;
+      var m='<svg viewBox="0 0 '+A.w+' '+A.h+'" class="map-svg" role="img" aria-label="Mapa de la ruta circular: Tokio, Nikko, Nagano, Kanazawa, Shirakawa-go, Kioto, Nara, Osaka, Kawaguchiko, Hakone, Kamakura y Tokio">'+
+        '<rect width="'+A.w+'" height="'+A.h+'" class="sea"/><path d="'+A.d+'" class="land"/>';
+      m+=ln("tokio","nikko","ex")+ln("tokio","nagano","sk")+ln("nagano","kanazawa","sk")+ln("kanazawa","shirakawa","ex")+
+         ln("kanazawa","tsuruga","sk")+ln("tsuruga","kyoto","tr")+ln("kyoto","nara","tr")+ln("nara","osaka","tr");
+      var o=Q.osaka, mi=Q.mishima;
+      m+='<path class="rt sk" d="M'+o[0]+' '+o[1]+'Q'+((o[0]+mi[0])/2).toFixed(1)+' '+(Math.max(o[1],mi[1])+34).toFixed(1)+' '+mi[0]+' '+mi[1]+'"/>';
+      m+=ln("mishima","kawaguchiko","tr")+ln("kawaguchiko","hakone","tr")+ln("hakone","kamakura","tr")+ln("kamakura","tokio","tr");
+      m+='<g class="via"><circle cx="'+Q.tsuruga[0]+'" cy="'+Q.tsuruga[1]+'" r="2.6"/><text x="'+(Q.tsuruga[0]-5)+'" y="'+Q.tsuruga[1]+'" text-anchor="end" dominant-baseline="middle">Tsuruga</text></g>';
+      m+='<g class="via"><circle cx="'+mi[0]+'" cy="'+mi[1]+'" r="2.6"/></g>';
+      m+=STOPS2.map(apin).join("")+'</svg>';
+      var key='<div class="map-key"><span><i class="k sk"></i>Shinkansen</span><span><i class="k tr"></i>Tren o bus</span><span><i class="k ex"></i>Excursión de un día</span></div>';
+      box.innerHTML='<div class="map-wrap">'+m+'</div>'+key;
+    }
+    function renderAltDays(){
+      var ol=document.getElementById("altDays"); if(!ol) return;
+      var ai=document.getElementById("arrival"), a=parseDate(ai&&ai.value)||parseDate(state.arrival)||new Date(2028,2,24);
+      ol.innerHTML=DAYS.map(function(d){
+        var d0=addDays(a,d[0]-1), d1=addDays(a,d[1]-1);
+        var when = d[0]===d[1] ? fmt(d0) : DOW[d0.getDay()]+" "+d0.getDate()+" – "+fmt(d1);
+        return '<li style="--cc:'+d[3]+'"><span class="ad"><b>'+(d[0]===d[1]?"Día "+d[0]:"Días "+d[0]+"–"+d[1])+'</b>'+when+'</span>'+
+          '<span class="ap2"><b>'+esc(d[2])+'</b><span>'+esc(d[4])+'</span>'+(d[5]?'<br><span><em class="opt">Opcional</em> '+esc(d[5])+'</span>':'')+'</span></li>';
+      }).join("");
+    }
+    renderAltMap(); renderAltDays();
+    document.getElementById("arrival").addEventListener("change",renderAltDays);
+  })();
 
   /* ---------- Logistics ---------- */
   function renderLegs(){
@@ -2003,6 +2509,11 @@ body.dragging{-webkit-user-select:none;user-select:none}
       db.doc("plan/layout").onSnapshot(function(s){
         var v=s.exists && s.data() && s.data().order;
         if(v && typeof v==="object"){ state.layout=v; ls("japon2028-layout",JSON.stringify(v)); softRender(); }
+      },function(){});
+      db.doc("settings/vuelo").onSnapshot(function(s){
+        var v=s.exists && s.data(); if(!v) return;
+        ["arr","dep","ap","ap2"].forEach(function(k){ if(v[k]) state.flight[k]=String(v[k]); });
+        ls("japon2028-flight",JSON.stringify(state.flight)); if(dview==="crono") renderCrono();
       },function(){});
       db.doc("settings/fechas").onSnapshot(function(s){
         var v=s.exists && s.data() && s.data().arrival;
