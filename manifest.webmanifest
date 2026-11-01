@@ -1,0 +1,15 @@
+{
+  "name": "Japón en primavera 2028",
+  "short_name": "Japón 2028",
+  "description": "Guía del viaje a Japón del 24 de marzo al 12 de abril de 2028.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f5f6",
+  "theme_color": "#c2456b",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

@@ -13,6 +13,14 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_PA">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#c2456b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Japón 2028">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -530,6 +538,13 @@ body.dragging{-webkit-user-select:none;user-select:none}
 .map-key .k.ex{border-top:1.6px dashed var(--muted)}
 .map-key .k.ret{border-top:2px dotted var(--accent)}
 .stops{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.net-opts{display:grid;gap:8px;margin-top:8px}
+.net-o{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.net-o p{margin:6px 0 0;font-size:14px}
+.net-o p.small{font-size:12.5px;color:var(--muted)}
+.net-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 10px}
+.net-h b{font-size:15px}
+.net-p{font-size:13px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
 .alt-days{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
 .alt-days li{display:grid;grid-template-columns:82px 1fr;gap:10px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--cc);border-radius:10px;padding:8px 10px}
 .alt-days .ad{font-size:12px;color:var(--muted);line-height:1.3}
@@ -691,8 +706,44 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
   <div class="seg" role="tablist" aria-label="Logística">
     <button role="tab" data-sub="vuelos" aria-selected="true">Vuelos</button>
     <button role="tab" data-sub="traslados" aria-selected="false">Traslados</button>
+    <button role="tab" data-sub="internet" aria-selected="false">Internet</button>
     <button role="tab" data-sub="milista" aria-selected="false">Mis alojamientos</button>
     <button role="tab" data-sub="hospedaje" aria-selected="false">Guía de hospedaje</button>
+  </div>
+
+  <div data-panel="internet" hidden>
+    <p class="lead">Datos en el celular para Google Maps, horarios de tren, traductor y WhatsApp. Para dos personas y 20 días.</p>
+    <div class="callout ok"><strong>Recomendación:</strong> una eSIM de datos para cada uno, de 20 GB por 30 días (~US$25 cada una). Alcanza para mapas, WhatsApp y fotos: se usa ~0.5–1 GB por día. Si suben muchos videos o hacen videollamadas largas, mejor una ilimitada (~US$65–74).</div>
+
+    <h2>Opciones y precios</h2>
+    <p class="small">Precio por persona, salvo el pocket Wi-Fi, que es un aparato para los dos.</p>
+    <div class="net-opts">
+      <div class="net-o"><div class="net-h"><b>eSIM de 20 GB</b><span class="net-p">~US$25 c/u · ~US$50 los dos</span></div>
+        <p>Airalo (20 GB, US$25), Saily (US$24.99), Orange Travel (€25.99). Ubigi tiene 10 GB por US$16.50.</p>
+        <p class="small">✓ Se instala en Panamá y se activa al aterrizar. ✓ Cada uno es independiente. ✗ Solo datos, sin número japonés.</p></div>
+      <div class="net-o"><div class="net-h"><b>eSIM ilimitada</b><span class="net-p">~US$65–74 c/u · ~US$130–150 los dos</span></div>
+        <p>Ubigi US$65 (velocidad completa hasta 60 GB), Jetpac US$65.99, Airalo US$69, Saily US$71.99, Holafly US$73.90.</p>
+        <p class="small">✗ Varias bajan a 1 Mbps después de 3–5 GB por día. ✗ Holafly limita compartir datos a 1 GB por día.</p></div>
+      <div class="net-o"><div class="net-h"><b>Pocket Wi-Fi</b><span class="net-p">~¥15,000–30,000 por 20 días · ~US$95–190 los dos</span></div>
+        <p>Global Advanced Communications, eConnect, Sakura Mobile, Japan Wireless, Ninja WiFi. Lo recoges en el aeropuerto o el hotel y lo devuelves en un buzón.</p>
+        <p class="small">✓ Sirve para cualquier celular, aunque no tenga eSIM. ✗ Tienen que andar juntos, cargarlo cada noche y no perderlo.</p></div>
+      <div class="net-o"><div class="net-h"><b>Roaming de tu operador de Panamá</b><span class="net-p">El más caro</span></div>
+        <p>Los paquetes de roaming internacional suelen costar varias veces más que una eSIM. Consulta el precio con tu operador antes de decidir.</p>
+        <p class="small">Úsalo solo si no quieres instalar nada, y con un paquete contratado, nunca por consumo.</p></div>
+      <div class="net-o"><div class="net-h"><b>Solo Wi-Fi gratis</b><span class="net-p">US$0</span></div>
+        <p>Hay Wi-Fi en hoteles, estaciones grandes, el Shinkansen, tiendas de conveniencia y cafés. La app «Japan Wi-Fi auto-connect» se conecta sola a muchas redes.</p>
+        <p class="small">✗ No sirve para guiarse con Google Maps en la calle. Útil solo como respaldo.</p></div>
+    </div>
+
+    <h2>Antes de viajar</h2>
+    <ul class="bullets">
+      <li>Confirma que los dos celulares estén <b>liberados</b> y acepten eSIM (iPhone XS o más nuevo, y la mayoría de Android recientes).</li>
+      <li>Compra e instala la eSIM en Panamá, con Wi-Fi, unos días antes. Déjala apagada y actívala al aterrizar en Narita.</li>
+      <li>Deja tu línea de Panamá encendida con <b>datos en roaming apagados</b>: así sigues recibiendo los SMS del banco y los códigos de verificación sin pagar datos.</li>
+      <li>Descarga Google Maps sin conexión de Tokio, Kioto y Osaka, y el traductor de Google con japonés offline, como respaldo.</li>
+      <li>Lleva un cargador portátil: con mapas todo el día, la batería no alcanza.</li>
+    </ul>
+    <p class="small">Precios consultados en octubre de 2026; pueden cambiar para 2028. Fuentes: <a href="https://freakingnomads.com/best-esims-for-japan/" target="_blank" rel="noopener">Freaking Nomads (eSIM)</a>, <a href="https://jw-webmagazine.com/tips/pocket-wifi-in-japan/" target="_blank" rel="noopener">JW Web Magazine (pocket Wi-Fi)</a>, <a href="https://www.japan-wireless.com/esim/compare/japan-esim-comparison" target="_blank" rel="noopener">Japan Wireless</a>.</p>
   </div>
 
   <div data-panel="milista" hidden>
@@ -3126,5 +3177,6 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
 })();
 </script>
 
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
 </body>
 </html>
