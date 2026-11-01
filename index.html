@@ -237,7 +237,7 @@ nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-4p
 .petal-toggle[aria-pressed="false"]{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
 .petal-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .hbtns{display:flex;gap:6px;flex:none}
-@media (max-width:380px){.petal-toggle em{display:none}.petal-toggle{padding:6px 10px}}
+@media (max-width:440px){.petal-toggle em{display:none}.petal-toggle{padding:6px 10px}}
 
 /* Editable lodging list */
 .lodge-sum{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
@@ -298,6 +298,16 @@ nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-4p
 .act-time b{font-weight:700}
 .act-time span{color:var(--muted)}
 .act-open{margin:2px 0 0 42px;font-size:12.5px;color:var(--muted)}
+.act-price{display:flex;flex-wrap:wrap;align-items:center;gap:0 4px;margin:3px 0 0 42px;font-size:13px;font-variant-numeric:tabular-nums}
+.act-price svg{width:14px;height:14px;fill:none;stroke:var(--ok);stroke-width:2;stroke-linecap:round;margin-right:2px}
+.act-price b{color:var(--ok)}
+.act-price span{color:var(--muted)}
+.act.dropped .act-price{display:none}
+.alt-price{display:block;font-size:12px;color:var(--ok);font-weight:500;margin-top:1px}
+.acts-sum{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:12px;padding:10px 12px;margin:10px 0 4px;display:grid;gap:4px}
+.acts-sum b{display:block;font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums}
+.acts-sum .small{display:block}
+tr.live td.num{color:var(--ok)}
 .leg{list-style:none;display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--muted);padding:2px 0 2px 12px;margin:-2px 0}
 .leg .leg-i{flex:none;width:18px;text-align:center;color:var(--cc);font-weight:700}
 .leg .leg-i svg{width:16px;height:16px;fill:none;stroke:var(--cc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
@@ -401,6 +411,66 @@ body.dragging{-webkit-user-select:none;user-select:none}
 .flt-n{width:24px;height:24px;border-radius:50%;background:var(--cc);color:var(--surface);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:none}
 .flt .kt{margin-left:auto}
 
+.conv{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px;display:grid;gap:8px}
+.conv-f{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:12px;align-items:center;background:var(--bg);border-radius:10px;padding:10px 12px;cursor:text}
+.conv-f .cur{grid-row:1/3;width:40px;height:40px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:20px}
+.conv-f .cn{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.conv-f input{border:0;background:transparent;font:700 28px var(--body);color:var(--ink);width:100%;min-width:0;padding:0;font-variant-numeric:tabular-nums;outline:none}
+.conv-f:focus-within{box-shadow:inset 0 0 0 2px var(--accent)}
+.conv-mid{display:flex;align-items:center;gap:10px;justify-content:center;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.conv-mid .sw{color:var(--accent);font-size:16px}
+.cv-quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cv-fee{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:12px}
+.cv-fee p{flex-basis:100%;margin:0;color:var(--ink)}
+.cv-rate{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px}
+.cv-rate input{width:96px;font:500 15px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;text-align:right}
+
+.viewsw{margin:10px 0 12px}
+.cr-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.cr-strip::-webkit-scrollbar{display:none}
+.cr-chip{flex:none;width:46px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 0 5px;display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;color:var(--ink);font:inherit}
+.cr-chip .w{font-size:10px;text-transform:uppercase;color:var(--muted);font-weight:700;letter-spacing:.04em}
+.cr-chip b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.cr-chip .k{font-family:var(--display);font-size:11px;color:var(--cc)}
+.cr-chip[aria-selected="true"]{background:color-mix(in srgb,var(--cc) 20%,var(--surface));border-color:var(--cc);box-shadow:inset 0 0 0 1px var(--cc)}
+.cr-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cr-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.cr-head{display:flex;align-items:center;gap:8px;padding:10px 8px;border-bottom:1px solid var(--line)}
+.cr-nav{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:22px;line-height:1;cursor:pointer;color:var(--ink)}
+.cr-nav:disabled{opacity:.3;cursor:default}
+.cr-nav:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cr-title{flex:1;min-width:0;text-align:center}
+.cr-title b{display:block;font-size:15px;overflow-wrap:anywhere}
+.cr-title span{font-size:12.5px;color:var(--muted)}
+.cr-all{display:grid;grid-template-columns:52px 1fr;border-bottom:1px solid var(--line);box-shadow:0 3px 6px -4px rgba(0,0,0,.25)}
+.cr-allh{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.cr-allh b{font-size:22px;color:var(--ink);font-weight:500;letter-spacing:0}
+.cr-allb{padding:8px 10px 8px 6px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-width:0;border-left:1px solid var(--line)}
+.cr-empty{color:var(--muted);font-weight:500;font-size:15px}
+.cr-from{font-size:12px;color:var(--muted);line-height:1.4}
+.cr-from b{color:var(--ink)}
+.ev-chip{border:0;background:color-mix(in srgb,var(--cc) 18%,var(--surface));color:var(--ink);border-radius:6px;padding:4px 8px;font:500 13px var(--body);cursor:pointer;text-align:left}
+.ev-chip small{color:var(--muted);font-size:11px}
+.cr-scroll{height:min(62vh,600px);overflow-y:auto;position:relative;overscroll-behavior:contain}
+.cr-grid{position:relative;margin:10px 0 14px 52px;border-left:1px solid var(--line)}
+.cr-line{position:absolute;left:0;right:0;border-top:1px solid var(--line)}
+.cr-line span{position:absolute;left:-50px;width:42px;text-align:right;top:-8px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cr-evs{position:absolute;inset:0 4px 0 3px}
+.ev{position:absolute;border:0;border-left:3px solid var(--cc);background:color-mix(in srgb,var(--cc) 17%,var(--surface));border-radius:6px;padding:4px 7px;text-align:left;overflow:hidden;cursor:pointer;color:var(--ink);font:inherit;display:flex;flex-direction:column;gap:1px;min-width:0}
+.ev b{font-size:13px;font-weight:700;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ev span{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ev .evh{font-style:normal;color:var(--accent);margin-right:3px}
+.ev.short{flex-direction:row;align-items:center;gap:6px;padding:2px 7px}
+.ev.short b{-webkit-line-clamp:1;display:block;white-space:nowrap;text-overflow:ellipsis;min-width:0}
+.ev.done{opacity:.55}
+.ev.done b{text-decoration:line-through}
+.ev.mine{border-left-style:dashed}
+.ev:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cr-now{position:absolute;left:-5px;right:0;height:2px;background:var(--accent);z-index:1}
+.cr-now::before{content:"";position:absolute;left:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.cr-fab{position:absolute;right:14px;bottom:14px;width:54px;height:54px;border-radius:16px;border:0;background:var(--accent-soft);color:var(--accent);font-size:32px;line-height:1;box-shadow:0 6px 16px rgba(0,0,0,.18);cursor:pointer;z-index:2}
+.cr-fab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
 @media (prefers-reduced-motion:reduce){.note.flash,.day.flash,.act.flash,.fav.pop svg{animation:none}}
 </style>
 
@@ -408,6 +478,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
   <div class="wrap">
     <div class="brand">Japón en primavera<small>Marzo–abril 2028 · borrador</small></div>
     <div class="hbtns">
+      <button class="petal-toggle" id="convBtn" type="button" aria-label="Conversor de yenes y dólares"><span aria-hidden="true">¥</span><em style="font-style:normal">Cambio</em></button>
       <button class="petal-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Música de fondo"><span aria-hidden="true">♪</span><em id="musicLabel" style="font-style:normal">Música</em></button>
       <button class="petal-toggle" id="petalToggle" type="button" aria-pressed="true" aria-label="Pétalos de sakura"><span aria-hidden="true">桜</span><em id="petalLabel" style="font-style:normal">Pétalos</em></button>
     </div>
@@ -453,8 +524,14 @@ body.dragging{-webkit-user-select:none;user-select:none}
     <span><b>♥</b> Marca tus favoritas y agrega actividades propias en cada día</span>
     <span><b>◷</b> Horas y duración sugeridas, con el traslado entre una y otra. Los horarios de apertura son aproximados: confírmalos antes de ir</span>
   </div>
+  <div class="acts-sum" id="actsSum"></div>
   <div class="favbar"><button type="button" class="chip" id="favOnly" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>Solo favoritas <span id="favCount"></span></button></div>
   <input type="file" id="photoInput" accept="image/*" multiple hidden>
+  <div class="seg viewsw" role="tablist" aria-label="Vista del itinerario">
+    <button role="tab" type="button" data-dview="lista" aria-selected="true">Lista</button>
+    <button role="tab" type="button" data-dview="crono" aria-selected="false">Cronograma</button>
+  </div>
+  <div id="cronoView" hidden></div>
   <div id="dayList"></div>
 </section>
 
@@ -612,10 +689,11 @@ body.dragging{-webkit-user-select:none;user-select:none}
     <button role="tab" data-sub="presupuesto" aria-selected="true">Presupuesto</button>
     <button role="tab" data-sub="seguros" aria-selected="false">Seguros</button>
     <button role="tab" data-sub="gastos" aria-selected="false">Gastos</button>
+    <button role="tab" data-sub="conversor" aria-selected="false">Cambio</button>
   </div>
 
   <div data-panel="presupuesto">
-    <p class="lead">Estimación de $3,800–6,375+ por persona con vuelo incluido, ya con seguros, extras y un fondo de imprevistos. Cambia según el vuelo, el tipo de habitación y cuántos tours privados se contraten.</p>
+    <p class="lead" id="bud-lead">Estimación de $3,800–6,375+ por persona con vuelo incluido, ya con seguros, extras y un fondo de imprevistos. Cambia según el vuelo, el tipo de habitación y cuántos tours privados se contraten.</p>
     <div class="tbl" style="margin-top:14px">
       <table>
         <thead><tr><th>Rubro (por persona)</th><th style="text-align:right">USD</th></tr></thead>
@@ -624,11 +702,10 @@ body.dragging{-webkit-user-select:none;user-select:none}
           <tr><td>Hotel<small>~20 noches; habitación compartida abarata por persona.<button class="fn" data-note="6" aria-label="Ver nota 6">6</button></small></td><td class="num">900–1,400</td></tr>
           <tr><td>Comidas<small>Con desayunos incluidos y comidas casuales.</small></td><td class="num">400–700</td></tr>
           <tr><td>Trenes y transporte local<small>Los trayectos de la pestaña Logística suman unos $510 por persona.</small></td><td class="num">300–500</td></tr>
-          <tr><td>Entradas y excursiones<small>Sin guía privado todos los días.</small></td><td class="num">200–450</td></tr>
-          <tr><td>Kart urbano<small>Estimación; verificar requisitos de licencia.</small></td><td class="num">70–120</td></tr>
+          <tr class="live"><td>Entradas y actividades <span class="kt k-rec">Según tu itinerario</span><small id="bud-acts-n">Suma de las actividades elegidas en Días, sin las descartadas. Se actualiza sola.</small></td><td class="num" id="bud-acts">200–450</td></tr>
           <tr><td>Seguros, impuestos y extras<small>Seguro de viaje, datos, comisiones, envío de maletas y más. <button class="linkbtn" type="button" data-gosub="seguros">Ver detalle</button></small></td><td class="num">285–625</td></tr>
-          <tr><td>Fondo de imprevistos<small>10% de la suma anterior, para gastos no previstos.</small></td><td class="num">350–580</td></tr>
-          <tr class="total"><td>Total estimado<small>Suma de los rubros anteriores.<button class="fn" data-note="7" aria-label="Ver nota 7">7</button></small></td><td class="num">3,800–6,375+</td></tr>
+          <tr><td>Fondo de imprevistos<small>10% de la suma anterior, para gastos no previstos.</small></td><td class="num" id="bud-imp">350–580</td></tr>
+          <tr class="total"><td>Total estimado<small>Suma de los rubros anteriores.<button class="fn" data-note="7" aria-label="Ver nota 7">7</button></small></td><td class="num" id="bud-total">3,800–6,375+</td></tr>
         </tbody>
       </table>
     </div>
@@ -673,6 +750,29 @@ body.dragging{-webkit-user-select:none;user-select:none}
       <li><label><input type="checkbox" id="s4"><span>Guardar el número de asistencia 24 horas y la póliza en el celular y en papel.</span></label></li>
       <li><label><input type="checkbox" id="s5"><span>Revisar el tope por artículo del equipaje y el de equipos electrónicos.</span></label></li>
     </ul>
+  </div>
+
+  <div data-panel="conversor" hidden>
+    <p class="lead">Escribe en cualquiera de los dos campos y el otro se calcula solo.</p>
+    <div class="conv">
+      <label class="conv-f" for="cv-jpy"><span class="cur" aria-hidden="true">¥</span><span class="cn">Yenes</span><input id="cv-jpy" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+      <div class="conv-mid"><span class="sw" aria-hidden="true">⇅</span><span id="cv-rate-l"></span><button type="button" class="chip" id="cv-clear">Borrar</button></div>
+      <label class="conv-f" for="cv-usd"><span class="cur" aria-hidden="true">$</span><span class="cn">Dólares</span><input id="cv-usd" inputmode="decimal" autocomplete="off" placeholder="0.00"></label>
+    </div>
+    <div class="cv-quick" id="cv-quick" role="group" aria-label="Montos rápidos en yenes"></div>
+    <div class="cv-fee">
+      <span class="small">Comisión de la tarjeta</span>
+      <div class="dispsw" role="group" aria-label="Comisión de la tarjeta" id="cv-fee"></div>
+      <p class="small" id="cv-fee-r"></p>
+    </div>
+    <div class="cv-rate">
+      <label for="cv-rate"><b>Tipo de cambio</b><span class="small" style="display:block">Yenes por 1 dólar. Usa el que te dé tu banco o casa de cambio.</span></label>
+      <input id="cv-rate" inputmode="decimal" autocomplete="off">
+    </div>
+    <p class="small" id="cv-rate-note"></p>
+    <h2>Precios de referencia</h2>
+    <p class="small">Precios aproximados en Japón, convertidos con el tipo de cambio de arriba.</p>
+    <div class="tbl" style="margin-top:8px"><table><thead><tr><th>Qué</th><th style="text-align:right">Yenes</th><th style="text-align:right">USD</th></tr></thead><tbody id="cv-ref"></tbody></table></div>
   </div>
 
   <div data-panel="gastos" hidden>
@@ -1128,6 +1228,34 @@ body.dragging{-webkit-user-select:none;user-select:none}
     d18a:{h:"19:00",d:"1.5 h"},
     d19a:{h:"9:00",d:"2.5 h",o:"9:00–17:30; en temporada de cerezos puede pedir reserva"}
   };
+
+  /* Approximate entry prices per person in yen: [low, high]. 0 = free. Food and shopping are budgeted apart. */
+  var PRICE = {
+    d1a:[0,0], d2a:[0,0], d2b:[0,0], d3c:[0,0], d3b:[0,0], d3a:[0,0], d3d:[0,0], d4a:[0,0], d4b:[2100,3500], d5a:[10000,20000],
+    d6a:[300,300], d6b:[400,400], d6c:[0,0], d7b:[1000,1100], d7a:[0,0], d8b:[0,500], d8a:[0,0], d8c:[0,0], d9a:[0,0],
+    d10a:[500,500], d10b:[0,0], d10c:[0,0], d11a:[0,0], d11b:[0,0], d12a:[0,0], d12b:[0,0], d12c:[500,500],
+    d13a:[0,200], d13b:[800,800], d13c:[0,700], d14a:[600,1200], d14b:[0,1200], d14c:[0,0], d15a:[0,0], d15b:[8600,10900],
+    d16a:[0,0], d16b:[200,200], d17a:[300,300], d17b:[2000,2000], d18a:[0,0], d19a:[500,500]
+  };
+  var PNOTE = {
+    d4b:"Más barato reservando en línea", d5a:"Según duración del recorrido", d8b:"Teleférico incluido en el Freepass; huevos negros aparte",
+    d8a:"Incluido en el Freepass", d13a:"Galletas para los ciervos", d13c:"Jardín interior opcional", d14a:"Torre del castillo; el parque es gratis",
+    d14b:"Torre Tsutenkaku opcional", d15b:"Precio dinámico según la fecha", d17a:"Más ¥100 de impuesto de visitante a Miyajima", d17b:"Teleférico ida y vuelta",
+    d19a:"Entrada al jardín"
+  };
+  var ALTP = {
+    d1a:[[0,0]], d2a:[[0,0]], d2b:[[1000,1000]], d3b:[[0,0]], d3a:[[2500,3400]], d3d:[[0,0]], d4a:[[0,0],[0,0]], d4b:[[1200,3000]],
+    d5a:[[3600,4800],[2500,3400]], d6b:[[0,1500]], d7a:[[0,0]], d8b:[[2000,2000]], d9a:[[0,0]], d10c:[[0,0]], d11b:[[0,0]],
+    d12c:[[500,500],[600,600]], d13c:[[1200,1500]], d14a:[[200,300]], d15b:[[1500,2000],[0,0]], d16b:[[300,300],[400,400]],
+    d17b:[[0,0]], d18a:[[0,800]], d19a:[[0,0],[0,0]]
+  };
+  var onActs=null;
+  function yenR(pr){ if(!pr) return "Precio por definir"; if(!pr[1]) return "Gratis"; return pr[0]===pr[1] ? "¥"+pr[0].toLocaleString("en-US") : "¥"+pr[0].toLocaleString("en-US")+"–"+pr[1].toLocaleString("en-US"); }
+  function usdR(pr){ var r=(typeof moneyRate!=="undefined"&&moneyRate)||YEN; if(!pr||!pr[1]) return ""; var a=Math.round(pr[0]/r), b=Math.round(pr[1]/r); return a===b ? "$"+a : "$"+a+"–"+b; }
+  function parsePrice(v){
+    var m=String(v||"").replace(/[¥,\s]/g,"").match(/^(\d+)(?:[-–](\d+))?$/); if(!m) return null;
+    var lo=+m[1], hi=m[2]!==undefined?+m[2]:lo; if(hi<lo){ var t=lo; lo=hi; hi=t; } return [Math.min(lo,1e6),Math.min(hi,1e6)];
+  }
   /* ---------- Days ---------- */
   // Index of activities and their original day
   var ACTS={}, ORIG={};
@@ -1147,7 +1275,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     Object.keys(map).forEach(function(id){
       var v=map[id]; if(!v || !v.t) return;
       var day=Math.min(20,Math.max(1,parseInt(v.day,10)||1));
-      CUSTOM[id]={day:day,t:String(v.t).slice(0,100),note:String(v.note||"").slice(0,300),h:/^\d{1,2}:\d{2}$/.test(v.h||"")?v.h:"",d:String(v.d||"").slice(0,20),created:+v.created||0};
+      CUSTOM[id]={day:day,t:String(v.t).slice(0,100),note:String(v.note||"").slice(0,300),h:/^\d{1,2}:\d{2}$/.test(v.h||"")?v.h:"",d:String(v.d||"").slice(0,20),p:(Array.isArray(v.p)&&v.p.length===2&&isFinite(v.p[0])&&isFinite(v.p[1]))?[+v.p[0],+v.p[1]]:null,created:+v.created||0};
       ACTS[id]={id:id,t:CUSTOM[id].t,q:CUSTOM[id].t+" "+cityOfDay(day),alts:[],custom:true,note:CUSTOM[id].note};
       ORIG[id]=day;
     });
@@ -1223,6 +1351,8 @@ body.dragging{-webkit-user-select:none;user-select:none}
     if(favOnly && !favTotal) out='<div class="empty" style="margin-top:14px">Aún no tienes favoritas. Toca el corazón de cualquier actividad para guardarla aquí.</div>';
     document.getElementById("dayList").innerHTML = out;
     var f=document.querySelector("#dayList .cform input[name=t]"); if(f && !f.value) f.focus({preventScroll:false});
+    if(dview==="crono") renderCrono();
+    refreshActsBudget();
   }
   var ICON_GO='<svg viewBox="0 0 24 24"><rect x="6" y="3.5" width="12" height="14" rx="4"/><path d="M6 11h12M9 21l1.5-3.5M15 21l-1.5-3.5"/></svg>';
   // Suggested order: the day's planned activities in planned order, then anything else, keeping its relative order
@@ -1240,12 +1370,46 @@ body.dragging{-webkit-user-select:none;user-select:none}
     return all;
   }
   function toMin(h){ var m=/^(\d{1,2}):(\d{2})$/.exec(h||""); return m? (+m[1])*60+(+m[2]) : 9999; }
+  function actPrice(id){
+    var a=ACTS[id]; if(!a) return null; var st=actState(id);
+    if(st && st.dropped) return [0,0];
+    if(a.custom) return CUSTOM[id] && CUSTOM[id].p ? CUSTOM[id].p : null;
+    if(st && typeof st.alt==="number"){ var al=ALTP[id]; return al && al[st.alt] ? al[st.alt] : null; }
+    return PRICE[id] || null;
+  }
+  function actsTotal(){
+    var L=layoutNow(), lo=0, hi=0, n=0, paid=0, unknown=0;
+    Object.keys(L).forEach(function(k){ L[k].forEach(function(id){
+      var st=actState(id); if(st && st.dropped) return;
+      n++; var pr=actPrice(id);
+      if(!pr){ unknown++; return; }
+      lo+=pr[0]; hi+=pr[1]; if(pr[1]>0) paid++;
+    }); });
+    return {lo:lo,hi:hi,n:n,paid:paid,unknown:unknown};
+  }
+  function refreshActsBudget(){
+    var t=actsTotal(), r=(typeof moneyRate!=="undefined"&&moneyRate)||YEN, ulo=Math.round(t.lo/r), uhi=Math.round(t.hi/r);
+    var box=document.getElementById("actsSum");
+    if(box) box.innerHTML='<div><span class="eyebrow">Entradas de lo elegido</span><b>'+yenR([t.lo,t.hi])+'</b><span class="small">por persona · ~$'+ulo+'–'+uhi+' · los dos ~$'+(ulo*2)+'–'+(uhi*2)+'</span></div>'+
+      '<div class="small">'+t.n+' actividades, '+t.paid+' con costo'+(t.unknown?' · '+t.unknown+' sin precio':'')+'. Comidas y compras aparte. <button type="button" class="linkbtn" id="toBudget">Ver presupuesto</button></div>';
+    var c=document.getElementById("bud-acts"); if(!c) return;
+    c.textContent=ulo.toLocaleString("en-US")+"–"+uhi.toLocaleString("en-US");
+    document.getElementById("bud-acts-n").textContent=t.n+" actividades elegidas en Días ("+yenR([t.lo,t.hi])+" por persona), sin las descartadas. Se actualiza sola."+(t.unknown?" "+t.unknown+" sin precio no se suman.":"");
+    // Fixed rows per person (USD): flight, hotel, food, transport, insurance & extras
+    var base=[1300+900+400+300+285, 2000+1400+700+500+625];
+    var sub=[base[0]+ulo, base[1]+uhi], imp=[Math.round(sub[0]*0.1), Math.round(sub[1]*0.1)], tot=[sub[0]+imp[0], sub[1]+imp[1]];
+    document.getElementById("bud-imp").textContent=imp[0].toLocaleString("en-US")+"–"+imp[1].toLocaleString("en-US");
+    document.getElementById("bud-total").textContent=tot[0].toLocaleString("en-US")+"–"+tot[1].toLocaleString("en-US")+"+";
+    document.getElementById("bud-lead").textContent="Estimación de $"+tot[0].toLocaleString("en-US")+"–"+tot[1].toLocaleString("en-US")+"+ por persona con vuelo incluido, ya con seguros, extras, las entradas de las actividades que elegiste y un fondo de imprevistos. Los dos: ~$"+(tot[0]*2).toLocaleString("en-US")+"–"+(tot[1]*2).toLocaleString("en-US")+"+.";
+    if(onActs) onActs();
+  }
   function customForm(id,day){
-    var c=id?CUSTOM[id]:{t:"",note:"",h:"",d:"",day:day};
+    var c=id?CUSTOM[id]:{t:"",note:"",h:"",d:"",p:null,day:day};
     var h='<form class="lform cform" data-cform="'+(id||"new")+'" data-day="'+(id?c.day:day)+'" novalidate style="--cc:var(--accent)">';
     h+='<h3 class="form-h">'+(id?'Editar actividad':'Nueva actividad · Día '+day)+'</h3>';
     h+='<label for="cf-t-'+(id||day)+'">Nombre<input id="cf-t-'+(id||day)+'" name="t" maxlength="100" value="'+esc(c.t)+'" placeholder="Ej. Museo Ghibli"></label>';
     h+='<div class="row2"><label for="cf-h-'+(id||day)+'">Hora (opcional)<input id="cf-h-'+(id||day)+'" name="h" type="time" value="'+esc(c.h||"")+'"></label><label for="cf-d-'+(id||day)+'">Duración (opcional)<input id="cf-d-'+(id||day)+'" name="d" maxlength="20" value="'+esc(c.d||"")+'" placeholder="2 h"></label></div>';
+    h+='<label for="cf-p-'+(id||day)+'">Precio por persona en yenes (opcional)<input id="cf-p-'+(id||day)+'" name="p" inputmode="numeric" maxlength="20" value="'+(c.p?(c.p[0]===c.p[1]?c.p[0]:c.p[0]+"-"+c.p[1]):"")+'" placeholder="1500 o 1000-2000. 0 si es gratis"></label>';
     h+='<label for="cf-n-'+(id||day)+'">Nota (opcional)<textarea id="cf-n-'+(id||day)+'" name="note" maxlength="300" placeholder="Horario, reserva, precio…">'+esc(c.note)+'</textarea></label>';
     if(customErr) h+='<p class="err">'+esc(customErr)+'</p>';
     h+='<div class="actions"><button class="btn small" type="submit">'+(id?'Guardar':'Agregar')+'</button><button class="btn small ghost" type="button" data-ccancel="1">Cancelar</button></div></form>';
@@ -1286,6 +1450,10 @@ body.dragging{-webkit-user-select:none;user-select:none}
     var inf = a.custom ? (CUSTOM[a.id]||{}) : (INFO[a.id]||{}), swapped = st && typeof st.alt==="number";
     if(inf.h || inf.d) h+='<div class="act-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>'+(inf.h?'<b>'+esc(inf.h)+'</b>':'')+(inf.h&&inf.d?'<span>·</span>':'')+(inf.d?'<span>'+esc(inf.d)+'</span>':'')+'</div>';
     if(inf.o && !swapped && !a.custom) h+='<p class="act-open">'+esc(inf.o)+'</p>';
+    if(!(st && st.dropped)){
+      var pr=actPrice(a.id), pn=(!swapped && !a.custom && PNOTE[a.id]) ? PNOTE[a.id] : "";
+      if(pr || a.custom) h+='<p class="act-price"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l5 7 5-7M12 11v9M8 13h8M8 16.5h8"/></svg><b>'+yenR(pr)+'</b>'+(pr&&pr[1]?'<span> por persona · ~'+usdR(pr)+'</span>':'')+(pn?'<span> · '+esc(pn)+'</span>':'')+'</p>';
+    }
     if(a.custom && a.note) h+='<p class="act-note">'+esc(a.note)+'</p>';
     if(photos.length) h+=renderCarousel(a.id, photos);
     if(uploading[a.id]) h+='<p class="small up">Subiendo '+uploading[a.id]+' foto'+(uploading[a.id]>1?'s':'')+'…</p>';
@@ -1314,7 +1482,8 @@ body.dragging{-webkit-user-select:none;user-select:none}
       if(a.alts.length){
         h+='<p>Elige otra opción</p>';
         a.alts.forEach(function(o,i){
-          h+='<div class="alt-row"><b>'+esc(o.t)+'</b><div class="act-tools">'+lookChips(o.q)+'<button class="chip pick" type="button" data-pick="'+a.id+'" data-i="'+i+'">Elegir</button></div></div>';
+          var ap=ALTP[a.id] && ALTP[a.id][i];
+          h+='<div class="alt-row"><b>'+esc(o.t)+'<small class="alt-price">'+yenR(ap)+(ap&&ap[1]?' · ~'+usdR(ap):'')+'</small></b><div class="act-tools">'+lookChips(o.q)+'<button class="chip pick" type="button" data-pick="'+a.id+'" data-i="'+i+'">Elegir</button></div></div>';
         });
       } else {
         h+='<p>No hay alternativa sugerida para esta actividad.</p>';
@@ -1335,7 +1504,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
   }
   function setChoice(id,val){
     if(val) state.choices[id]=val; else delete state.choices[id];
-    rerenderAct(id);
+    rerenderAct(id); refreshActsBudget();
     var persist = val ? {alt:val.alt, dropped:val.dropped} : null;
     if(persist && persist.alt===undefined) delete persist.alt;
     if(persist && !persist.dropped) delete persist.dropped;
@@ -1498,11 +1667,13 @@ body.dragging{-webkit-user-select:none;user-select:none}
   dayList.addEventListener("submit",function(e){
     var f=e.target.closest("form.cform"); if(!f) return;
     e.preventDefault();
-    var t=String(f.elements.t.value||"").trim(), note=String(f.elements.note.value||"").trim(), hh=String(f.elements.h.value||"").trim(), dd=String(f.elements.d.value||"").trim();
+    var t=String(f.elements.t.value||"").trim(), note=String(f.elements.note.value||"").trim(), hh=String(f.elements.h.value||"").trim(), dd=String(f.elements.d.value||"").trim(), pp=String(f.elements.p.value||"").trim();
+    var pv=pp?parsePrice(pp):null;
+    if(pp && !pv){ var er=f.querySelector(".err"); if(!er){ er=document.createElement("p"); er.className="err"; f.querySelector(".actions").before(er); } er.textContent="Escribe el precio como 1500 o como un rango 1000-2000."; f.elements.p.focus(); return; }
     if(!t){ customErr="Escribe el nombre de la actividad."; renderDays(); return; }
     var isNew=f.dataset.cform==="new", id=isNew ? "c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5) : f.dataset.cform;
     var prev=CUSTOM[id];
-    var data={day:prev?prev.day:+f.dataset.day, t:t.slice(0,100), note:note.slice(0,300), h:hh.replace(/^0(\d):/,"$1:"), d:dd.slice(0,20), created:prev?prev.created:Date.now()};
+    var data={day:prev?prev.day:+f.dataset.day, t:t.slice(0,100), note:note.slice(0,300), h:hh.replace(/^0(\d):/,"$1:"), d:dd.slice(0,20), p:pv, created:prev?prev.created:Date.now()};
     addingDay=null; editingCustom=null; customErr="";
     var m=customStore(); m[id]=data; registerCustom(m);
     ls("japon2028-custom",JSON.stringify(customStore()));
@@ -1510,6 +1681,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     var el=document.querySelector('[data-act="'+id+'"]'); if(el){ el.scrollIntoView({block:"nearest"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); }
     if(dbRef) dbRef.collection("custom").doc(id).set(data).catch(function(){});
   });
+  document.getElementById("actsSum").addEventListener("click",function(e){ if(e.target.id==="toBudget"){ go("dinero"); setSub(document.getElementById("v-dinero"),"presupuesto"); } });
   document.getElementById("favOnly").addEventListener("click",function(){ favOnly=!favOnly; moving=null; addingDay=null; editingCustom=null; renderDays(); });
   dayList.addEventListener("change",function(e){
     var cb=e.target.closest("input[data-done]"); if(cb) setDone(cb.dataset.done, cb.checked);
@@ -1576,6 +1748,109 @@ body.dragging{-webkit-user-select:none;user-select:none}
   document.addEventListener("pointerup",onEnd);
   document.addEventListener("pointercancel",onEnd);
 
+
+  /* ---------- Day timeline (Cronograma) ---------- */
+  var dview = ls("japon2028-dview")==="crono" ? "crono" : "lista";
+  var cronoDay = parseInt(ls("japon2028-cday"),10) || 0;
+  var HOURPX=56, H0=6;
+  function durMin(d){
+    if(!d) return 60;
+    if(/todo el d/i.test(d)) return 570;
+    var m=String(d).replace(/,/g,".").match(/(\d+(?:\.\d+)?)\s*(?:[–-]\s*(\d+(?:\.\d+)?))?\s*(h|min)/i);
+    if(!m) return 60;
+    var v=m[2] ? (parseFloat(m[1])+parseFloat(m[2]))/2 : parseFloat(m[1]);
+    return Math.max(15, Math.round(m[3].toLowerCase()==="h" ? v*60 : v));
+  }
+  function hhmm(m){ var h=Math.floor(m/60)%24, mm=m%60; return h+":"+(mm<10?"0":"")+mm; }
+  function defaultCronoDay(){ var r=arrivalDate(), n=new Date(); var d=Math.floor((new Date(n.getFullYear(),n.getMonth(),n.getDate())-r)/86400000)+1; return (d>=1&&d<=20)?d:1; }
+  function renderCrono(){
+    var box=document.getElementById("cronoView"); if(!box) return;
+    if(!cronoDay || cronoDay<1 || cronoDay>20) cronoDay=defaultCronoDay();
+    var start=arrivalDate(), L=layoutNow(), day=DAYS[cronoDay-1], b=BASES[day.base], date=addDays(start,cronoDay-1);
+    var ids=(favOnly ? L[cronoDay].filter(isFav) : L[cronoDay]).filter(function(id){ var st=actState(id); return ACTS[id] && !(st&&st.dropped); });
+    var timed=[], untimed=[];
+    ids.forEach(function(id){
+      var a=ACTS[id], inf=a.custom?(CUSTOM[id]||{}):(INFO[id]||{}), st=actState(id), ad=actData(id);
+      var title=a.t; if(st && typeof st.alt==="number" && a.alts[st.alt]) title=a.alts[st.alt].t;
+      var ev={id:id,title:title,s:toMin(inf.h),dur:durMin(inf.d),done:!!ad.done,fav:!!ad.fav,custom:!!a.custom};
+      if(ev.s>=9999) untimed.push(ev); else { ev.e=Math.min(24*60, ev.s+ev.dur); timed.push(ev); }
+    });
+    // Side-by-side lanes for overlapping activities
+    timed.sort(function(x,y){ return x.s-y.s || y.dur-x.dur; });
+    var clusters=[], cur=null, endMax=-1;
+    timed.forEach(function(ev){ if(!cur || ev.s>=endMax){ cur=[]; clusters.push(cur); endMax=-1; } cur.push(ev); endMax=Math.max(endMax,ev.e); });
+    clusters.forEach(function(cl){ var lanes=[]; cl.forEach(function(ev){ var i=0; while(lanes[i]!==undefined && lanes[i]>ev.s) i++; lanes[i]=ev.e; ev.lane=i; }); cl.forEach(function(ev){ ev.lanes=lanes.length; }); });
+    var h0=H0, h1=22;
+    timed.forEach(function(ev){ h0=Math.min(h0,Math.floor(ev.s/60)); h1=Math.max(h1,Math.ceil(ev.e/60)); });
+    h1=Math.min(24,h1);
+
+    var strip='<div class="cr-strip" role="tablist" aria-label="Días del viaje">';
+    DAYS.forEach(function(d){ var dd=addDays(start,d.n-1), bb=BASES[d.base];
+      strip+='<button type="button" role="tab" class="cr-chip" data-cday="'+d.n+'" aria-selected="'+(d.n===cronoDay)+'" aria-label="Día '+d.n+', '+fmt(dd)+'" style="--cc:'+bb.color+'"><span class="w">'+DOW[dd.getDay()]+'</span><b>'+dd.getDate()+'</b><span class="k">'+bb.kanji+'</span></button>'; });
+    strip+='</div>';
+
+    var h='<div class="cr-head" style="--cc:'+b.color+'"><button type="button" class="cr-nav" data-cnav="-1" aria-label="Día anterior"'+(cronoDay<=1?' disabled':'')+'>‹</button>'+
+      '<div class="cr-title"><b>Día '+cronoDay+' · '+esc(day.t)+'</b><span>'+fmt(date)+' · '+esc(b.name)+'</span></div>'+
+      '<button type="button" class="cr-nav" data-cnav="1" aria-label="Día siguiente"'+(cronoDay>=20?' disabled':'')+'>›</button></div>';
+    h+='<div class="cr-all" style="--cc:'+b.color+'"><span class="cr-allh">'+DOW[date.getDay()].toUpperCase()+'<b>'+date.getDate()+'</b></span><div class="cr-allb">';
+    if(!timed.length && !untimed.length) h+='<span class="cr-empty">Nada planeado</span>';
+    untimed.forEach(function(ev){ h+='<button type="button" class="ev-chip" data-evgo="'+ev.id+'">'+(ev.fav?'♥ ':'')+esc(ev.title)+' <small>sin hora</small></button>'; });
+    if(FROM[cronoDay] && (timed.length||untimed.length) && !favOnly) h+='<span class="cr-from"><b>Cómo llegar:</b> '+esc(FROM[cronoDay])+'</span>';
+    h+='</div></div>';
+
+    h+='<div class="cr-scroll" id="crScroll"><div class="cr-grid" style="height:'+((h1-h0)*HOURPX)+'px;--cc:'+b.color+'">';
+    for(var k=h0;k<=h1;k++) h+='<div class="cr-line" style="top:'+((k-h0)*HOURPX)+'px"><span>'+(k===24?'0':k)+':00</span></div>';
+    h+='<div class="cr-evs">';
+    timed.forEach(function(ev){
+      var top=(ev.s-h0*60)/60*HOURPX, hh=Math.max(26,(ev.e-ev.s)/60*HOURPX-2), w=100/ev.lanes;
+      h+='<button type="button" class="ev'+(ev.done?' done':'')+(ev.custom?' mine':'')+(hh<46?' short':'')+'" data-evgo="'+ev.id+'" style="top:'+top.toFixed(1)+'px;height:'+hh.toFixed(1)+'px;left:calc('+(ev.lane*w)+'% + 2px);width:calc('+w+'% - 4px)" aria-label="'+esc(ev.title)+', '+hhmm(ev.s)+' a '+hhmm(ev.e)+(ev.done?', hecha':'')+'">'+
+        '<b>'+(ev.fav?'<i class="evh">♥</i>':'')+(ev.done?'✓ ':'')+esc(ev.title)+'</b><span>'+hhmm(ev.s)+' – '+hhmm(ev.e)+'</span></button>';
+    });
+    var now=new Date();
+    if(sameDay(now,date)){ var nm=now.getHours()*60+now.getMinutes(); if(nm>=h0*60 && nm<=h1*60) h+='<div class="cr-now" style="top:'+((nm-h0*60)/60*HOURPX).toFixed(1)+'px" aria-hidden="true"></div>'; }
+    h+='</div></div></div>';
+    h+='<button type="button" class="cr-fab" data-cadd="'+cronoDay+'" aria-label="Agregar actividad al día '+cronoDay+'">+</button>';
+    box.innerHTML=strip+'<div class="cr-card">'+h+'</div><p class="small" style="margin-top:8px">Toca una actividad para ver detalles, fotos y precio. Desliza el cronograma a los lados para cambiar de día.</p>';
+
+    var strp=box.querySelector(".cr-strip"), chip=box.querySelector('.cr-chip[aria-selected="true"]');
+    if(strp && chip) strp.scrollLeft=chip.offsetLeft-strp.clientWidth/2+chip.offsetWidth/2;
+    var sc=document.getElementById("crScroll");
+    if(sc){ var first=timed.length?timed[0].s:8*60; sc.scrollTop=Math.max(0,(first-h0*60-30)/60*HOURPX); }
+  }
+  function setCronoDay(n){ cronoDay=Math.min(20,Math.max(1,n)); ls("japon2028-cday",String(cronoDay)); renderCrono(); }
+  function setDView(v){
+    dview=v; ls("japon2028-dview",v);
+    document.getElementById("dayList").hidden = v==="crono";
+    document.getElementById("cronoView").hidden = v!=="crono";
+    var ht=document.querySelector("#v-dias .howto"); if(ht) ht.hidden = v==="crono";
+    document.querySelectorAll("[data-dview]").forEach(function(b){ b.setAttribute("aria-selected", b.dataset.dview===v?"true":"false"); });
+    if(v==="crono") renderCrono();
+  }
+  document.querySelectorAll("[data-dview]").forEach(function(b){ b.addEventListener("click",function(){ setDView(b.dataset.dview); }); });
+  var cronoBox=document.getElementById("cronoView");
+  cronoBox.addEventListener("click",function(e){
+    var t=e.target.closest("button"); if(!t) return;
+    if(t.dataset.cday){ setCronoDay(+t.dataset.cday); }
+    else if(t.dataset.cnav){ setCronoDay(cronoDay+(+t.dataset.cnav)); }
+    else if(t.dataset.evgo){
+      var id=t.dataset.evgo; setDView("lista");
+      setTimeout(function(){ var li=document.querySelector('#dayList [data-act="'+id+'"]'); if(li){ li.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); li.classList.remove("flash"); void li.offsetWidth; li.classList.add("flash"); } },40);
+    }
+    else if(t.dataset.cadd){
+      var n=+t.dataset.cadd; if(favOnly) favOnly=false;
+      setDView("lista"); addingDay=n; editingCustom=null; customErr=""; renderDays();
+      setTimeout(function(){ var f=document.querySelector("#dayList .cform"); if(f) f.scrollIntoView({block:"center"}); },40);
+    }
+  });
+  // Swipe sideways on the hour grid to change day
+  (function(){
+    var sx=0, sy=0, on=false;
+    cronoBox.addEventListener("touchstart",function(e){ if(!e.target.closest(".cr-scroll")) return; on=true; sx=e.touches[0].clientX; sy=e.touches[0].clientY; },{passive:true});
+    cronoBox.addEventListener("touchend",function(e){ if(!on) return; on=false; var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy; if(Math.abs(dx)>70 && Math.abs(dy)<45) setCronoDay(cronoDay+(dx<0?1:-1)); },{passive:true});
+  })();
+  // Keep the "now" line moving while the timeline is open
+  setInterval(function(){ if(dview==="crono" && !document.hidden && current==="dias"){ var sc=document.getElementById("crScroll"), keep=sc?sc.scrollTop:0; renderCrono(); var sc2=document.getElementById("crScroll"); if(sc2) sc2.scrollTop=keep; } },60000);
+
   /* ---------- Logistics ---------- */
   function renderLegs(){
     var lo=0,hi=0,html="";
@@ -1640,6 +1915,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
   function setSub(section,sub){
     section.querySelectorAll(".seg button").forEach(function(b){ b.setAttribute("aria-selected", b.dataset.sub===sub?"true":"false"); });
     section.querySelectorAll("[data-panel]").forEach(function(p){ p.hidden = p.dataset.panel!==sub; });
+    var on=section.querySelector('.seg button[data-sub="'+sub+'"]'); if(on && on.scrollIntoView) on.scrollIntoView({block:"nearest",inline:"nearest"});
   }
   document.querySelectorAll("section.view").forEach(function(sec){
     sec.querySelectorAll(".seg button").forEach(function(b){ b.addEventListener("click",function(){ setSub(sec,b.dataset.sub); }); });
@@ -1691,6 +1967,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
   /* ---------- Initial render ---------- */
   renderCalendar(); renderDays(); renderLegs(); renderStays(); renderFoodFilter(); renderFood();
   show(location.hash.slice(1),false);
+  setDView(dview);
 
   /* ---------- Shared choices (db) ---------- */
   var syncNote=document.getElementById("syncNote");
@@ -1711,7 +1988,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
       },function(){ syncNote.textContent="Tus cambios se guardan en este dispositivo."; dbRef=null; });
       db.collection("custom").onSnapshot(function(snap){
         var m={};
-        snap.docs.forEach(function(d){ var v=d.data()||{}; if(v.t) m[d.id]={day:v.day,t:v.t,note:v.note||"",h:v.h||"",d:v.d||"",created:v.created||0}; });
+        snap.docs.forEach(function(d){ var v=d.data()||{}; if(v.t) m[d.id]={day:v.day,t:v.t,note:v.note||"",h:v.h||"",d:v.d||"",p:v.p||null,created:v.created||0}; });
         registerCustom(m); ls("japon2028-custom",JSON.stringify(customStore()));
         if(editingCustom && !CUSTOM[editingCustom]) editingCustom=null;
         softRender();
@@ -1874,6 +2151,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     }).catch(function(){ startLocal("Sin conexión a la lista compartida: tus cambios se guardan solo en este dispositivo."); });
   })();
 
+  var moneyRate=YEN, onRate=null;
   /* ---------- Money: expense tracker ---------- */
   (function(){
     var CATS=[
@@ -1929,6 +2207,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     function dayNum(iso){ var r=tripRange(), d=parseDate(iso); if(!d) return 0; var n=Math.round((d-r.start)/86400000)+1; return (n>=1&&n<=20)?n:0; }
 
     function renderSum(){
+      if(moneyRate!==plan.rate){ moneyRate=plan.rate; if(onRate) onRate(); refreshActsBudget(); }
       var total=0; CATS.forEach(function(c){ total+=plan.cats[c.k]; });
       var spent=0, tdy=0, t=today(), trip=0;
       var r=tripRange(), tripDaysSet={};
@@ -1952,6 +2231,10 @@ body.dragging{-webkit-user-select:none;user-select:none}
         else h+='<span>'+money(sp)+' / '+money(pl)+'</span>';
         h+='</div>';
         if(!editPlan) h+='<div class="mbar thin'+(over?' over':'')+'"><i style="width:'+pct.toFixed(1)+'%"></i></div><span class="small'+(over?' neg':'')+'">'+(over?'Excedido por '+money(sp-pl):'Quedan '+money(pl-sp))+'</span>';
+        if(!editPlan && c.k==="entradas"){
+          var at=actsTotal(), sugU=Math.round((at.lo+at.hi)/2/plan.rate*2);
+          if(Math.abs(sugU-pl)>=10) h+='<span class="small">Según tu itinerario, los dos: ~'+money(sugU)+'. '+(canWrite?'<button type="button" class="linkbtn" data-useacts="'+sugU+'">Usar este monto</button>':'')+'</span>';
+        }
         h+='</div>';
       });
       if(editPlan){
@@ -2043,6 +2326,11 @@ body.dragging{-webkit-user-select:none;user-select:none}
     el.cats.addEventListener("click",function(ev){
       var t=ev.target.closest("button"); if(!t) return;
       if(t.id==="planCancel"){ editPlan=false; renderCats(); }
+      else if(t.dataset.useacts){
+        var np2={rate:plan.rate,cats:{}}; CATS.forEach(function(c){ np2.cats[c.k]=plan.cats[c.k]; }); np2.cats.entradas=+t.dataset.useacts;
+        var fin=function(){ plan=normPlan(np2); renderAll(); renderCats(); };
+        if(planRef) planRef.set(np2).then(fin).catch(fail); else { ls(PLKEY,JSON.stringify(np2)); fin(); }
+      }
       else if(t.id==="planReset"){ var d=defPlan(); CATS.forEach(function(c){ var i=document.getElementById("pl-"+c.k); if(i) i.value=d.cats[c.k]; }); }
       else if(t.id==="planSave"){
         var np={rate:plan.rate,cats:{}}, bad=null;
@@ -2072,6 +2360,7 @@ body.dragging{-webkit-user-select:none;user-select:none}
     sec.addEventListener("click",function(ev){ var b=ev.target.closest("[data-gosub]"); if(b) setSub(sec,b.dataset.gosub); });
 
     resetForm();
+    onActs=function(){ if(!editPlan) renderCats(); };
     function startLocal(msg){
       col=null; planRef=null;
       try{ var a=JSON.parse(ls(EKEY)||"[]"); items=(Array.isArray(a)?a:[]).map(function(v){ return normItem(v&&v.id,v); }).filter(function(x){ return x&&x.id; }); }catch(e){ items=[]; }
@@ -2096,6 +2385,69 @@ body.dragging{-webkit-user-select:none;user-select:none}
         },function(){ startLocal("No se pudieron cargar los gastos compartidos: se guardan solo en este dispositivo."); });
       });
     }).catch(function(){ startLocal(LOCALMSG); });
+  })();
+
+  /* ---------- Yen ⇄ dollar converter ---------- */
+  (function(){
+    var sec=document.getElementById("v-dinero");
+    var jpy=document.getElementById("cv-jpy"), usd=document.getElementById("cv-usd"), rateIn=document.getElementById("cv-rate");
+    var rateL=document.getElementById("cv-rate-l"), note=document.getElementById("cv-rate-note"), feeBox=document.getElementById("cv-fee"), feeR=document.getElementById("cv-fee-r");
+    var RKEY="japon2028-convrate", FKEY="japon2028-convfee";
+    var own=parseFloat(ls(RKEY)||""); if(!(own>50&&own<500)) own=null;
+    var fee=parseFloat(ls(FKEY)||"0"); if([0,1.5,3].indexOf(fee)<0) fee=0;
+    var last="jpy";
+    var REF=[
+      ["Pasaje de metro o tren urbano",180,260],["Onigiri en tienda de conveniencia",150,250],["Botella de agua en máquina",120,160],
+      ["Café",400,600],["Bento o almuerzo económico",600,1000],["Ramen",1000,1500],["Galletas para los ciervos de Nara",200,200],
+      ["Entrada a templo o santuario",300,600],["Bus Shinjuku–Kawaguchiko",1800,2000],["Hakone Freepass de 2 días",6100,6100],["Shinkansen Tokio–Kioto",14200,14500]
+    ];
+    function rate(){ return own || moneyRate || YEN; }
+    function num(v){ var x=parseFloat(String(v||"").replace(/[,\s¥$]/g,"")); return isFinite(x)&&x>=0 ? x : null; }
+    function fy(n){ return Math.round(n).toLocaleString("en-US"); }
+    function fu(n){ return n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    function calc(from){
+      var r=rate();
+      if(from==="jpy"){ var y=num(jpy.value); usd.value = y===null ? "" : fu(y/r); }
+      else { var u=num(usd.value); jpy.value = u===null ? "" : fy(u*r); }
+      var yy=num(jpy.value);
+      feeR.textContent = (fee>0 && yy) ? "Con "+fee+"% de comisión, la tarjeta cobraría unos US$"+fu(yy/r*(1+fee/100))+"." : "";
+    }
+    function paint(){
+      var r=rate();
+      rateL.textContent="1 US$ = ¥"+(Math.round(r*100)/100).toLocaleString("en-US");
+      if(document.activeElement!==rateIn) rateIn.value=r;
+      note.innerHTML = own ? 'Usando tu tipo de cambio. <button type="button" class="linkbtn" id="cv-reset">Usar el del presupuesto (¥'+(Math.round(moneyRate*100)/100)+')</button>'
+                           : 'Usa el tipo de cambio del presupuesto, que puedes cambiar en Gastos → Editar presupuesto. Referencia: US$1 = ¥157.56 el 27 de octubre de 2026 (<a href="https://poundsterlinglive.com/data/currencies/usd-pairs/USDJPY-exchange-rate" target="_blank" rel="noopener">fuente</a>).';
+      feeBox.innerHTML=[0,1.5,3].map(function(f){ return '<button type="button" data-fee="'+f+'" aria-pressed="'+(f===fee)+'">'+(f?f+"%":"Sin")+'</button>'; }).join("");
+      document.getElementById("cv-quick").innerHTML=[100,500,1000,3000,5000,10000].map(function(v){ return '<button type="button" class="chip" data-q="'+v+'">¥'+fy(v)+'</button>'; }).join("");
+      document.getElementById("cv-ref").innerHTML=REF.map(function(x){
+        var y = x[1]===x[2] ? "¥"+fy(x[1]) : "¥"+fy(x[1])+"–"+fy(x[2]);
+        var u = x[1]===x[2] ? "$"+fu(x[1]/r) : "$"+fu(x[1]/r)+"–"+fu(x[2]/r);
+        return '<tr><td>'+esc(x[0])+'</td><td class="num">'+y+'</td><td class="num">'+u+'</td></tr>';
+      }).join("");
+      calc(last);
+    }
+    jpy.addEventListener("input",function(){ last="jpy"; calc("jpy"); });
+    usd.addEventListener("input",function(){ last="usd"; calc("usd"); });
+    jpy.addEventListener("blur",function(){ var y=num(jpy.value); if(y!==null) jpy.value=fy(y); });
+    rateIn.addEventListener("change",function(){
+      var r=num(rateIn.value);
+      if(r && r>50 && r<500){ own=r; ls(RKEY,String(r)); } else { rateIn.value=rate(); }
+      paint();
+    });
+    sec.addEventListener("click",function(e){
+      var b=e.target.closest("button"); if(!b || !sec.querySelector('[data-panel="conversor"]').contains(b)) return;
+      if(b.id==="cv-clear"){ jpy.value=""; usd.value=""; feeR.textContent=""; jpy.focus(); }
+      else if(b.id==="cv-reset"){ own=null; try{ localStorage.removeItem(RKEY); }catch(err){} paint(); }
+      else if(b.dataset.q){ jpy.value=fy(+b.dataset.q); last="jpy"; calc("jpy"); }
+      else if(b.dataset.fee!==undefined){ fee=+b.dataset.fee; ls(FKEY,String(fee)); paint(); }
+    });
+    document.getElementById("convBtn").addEventListener("click",function(){
+      go("dinero"); setSub(sec,"conversor");
+      setTimeout(function(){ jpy.focus({preventScroll:true}); window.scrollTo(0,0); },60);
+    });
+    onRate=paint;
+    paint();
   })();
 
   /* ---------- Background music: "Sakura Sakura" (traditional, public domain) on a koto-like synth ---------- */
