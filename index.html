@@ -625,7 +625,7 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
     <h2>Día a día</h2>
     <p class="small">Fechas según la llegada que elegiste en «Plan actual».</p>
     <ol class="alt-days" id="altDays"></ol>
-    <div class="callout"><strong>¿Por qué Tokio al inicio y no al final?</strong> Los cerezos de Tokio suelen estar en plena flor entre el 25 de marzo y el 2 de abril; del 8 al 12 de abril ya se están cayendo. Además, el norte (Nagano, Kanazawa) florece más tarde, así que llegar allí a fines de marzo y principios de abril coincide mejor. Tokio también es la ciudad más fácil para los primeros días con jet lag. Lo que sí conviene dejar para el final son las compras grandes (Akihabara, recuerdos), para no cargarlas por todo el recorrido: la noche del día 19 y la mañana del 20 en Tokio sirven para eso.</div>
+    <div class="callout"><strong>¿Por qué Tokio al inicio y no al final?</strong> Los cerezos de Tokio suelen abrir hacia el 24 de marzo y estar en plena flor hasta inicios de abril; del 8 al 12 de abril ya se están cayendo. El norte (Nagano, Kanazawa) florece más tarde, así que llegar allí a fines de marzo coincide mejor, y el Fuji florece de último. Tokio también es la ciudad más fácil para los primeros días con jet lag. Las compras grandes (Akihabara, recuerdos) conviene dejarlas para la noche del día 19 y la mañana del 20, para no cargarlas por todo el recorrido.</div>
     <h2>Comparación</h2>
     <div class="tbl" style="margin-top:8px"><table class="cmp">
       <thead><tr><th></th><th>Plan actual</th><th>Ruta circular</th></tr></thead>
@@ -636,7 +636,7 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
         <tr><th>Transporte entre ciudades</th><td data-l="Plan actual">~¥59,000–61,000 por persona</td><td data-l="Ruta circular">~¥62,000–68,000 por persona (estimado)</td></tr>
         <tr><th>Hiroshima y Miyajima</th><td data-l="Plan actual">2 noches</td><td data-l="Ruta circular">No se incluyen: quedan muy lejos de la ruta</td></tr>
         <tr><th>Lugares que suma</th><td data-l="Plan actual">—</td><td data-l="Ruta circular">Nikko, monos de nieve, Kanazawa, Shirakawa-go</td></tr>
-        <tr><th>Cerezos</th><td data-l="Plan actual">Tokio y Kioto en buena fecha; Hiroshima ya pasada a mediados de abril</td><td data-l="Ruta circular">Sigue la floración: Tokio fin de marzo, Kanazawa ~1 abr, Kioto 3–5 abr, Fuji ~10 abr</td></tr>
+        <tr><th>Cerezos</th><td data-l="Plan actual">Tokio y Kioto en buena fecha; Hiroshima ya pasada a mediados de abril</td><td data-l="Ruta circular">Sigue la floración: Tokio al inicio de la flor, Kanazawa ~1 abr, Kioto 31 mar–3 abr, Fuji 7–10 abr (puede estar empezando)</td></tr>
         <tr><th>Clima</th><td data-l="Plan actual">Templado (8–18 °C)</td><td data-l="Ruta circular">Más frío 4 días en el norte (3–12 °C, posible nieve en Jigokudani)</td></tr>
       </tbody>
     </table></div>
@@ -645,10 +645,11 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
         <li>Sin el viaje hasta Hiroshima ni el regreso de 4 horas a Tokio.</li>
         <li>Cada parada cae cerca de su mejor fecha de cerezos.</li>
         <li>Kanazawa y Shirakawa-go son de los lugares más bonitos de Japón y menos llenos que Kioto.</li>
-        <li>Kawaguchiko y Hakone pasan de excursiones de ida y vuelta a noches allí, con más tiempo frente al Fuji.</li>
+        <li>4 noches alrededor del Fuji (3 en Kawaguchiko y 1 en Hakone) en lugar de excursiones de ida y vuelta: más oportunidades de verlo despejado.</li>
       </ul></div>
       <div class="card"><h3>En contra</h3><ul>
         <li>Sin Hiroshima ni Miyajima.</li>
+        <li>Tokio queda en 2 días y medio al inicio, más una noche al final: solo lo esencial.</li>
         <li>Más cambios de hotel: conviene enviar las maletas grandes de Tokio a Kioto (servicio takkyubin, ~¥2,500 por maleta) y llevar mochila 4 días.</li>
         <li>Nagano y Kanazawa son más fríos: ropa de abrigo y calzado para nieve en Jigokudani.</li>
         <li>El bus a Shirakawa-go necesita reserva y se llena en primavera.</li>
@@ -2289,20 +2290,22 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
     var N="var(--c-norte)", T="var(--c-tokio)", K="var(--c-kyoto)", O="var(--c-osaka)", F="var(--c-fuji)", H="var(--c-hiro)";
     var DAYS=[
       [1,1,"Tokio",T,"Llegada; Ueno y Asakusa"],
-      [2,4,"Tokio",T,"Meiji, Harajuku, Shibuya y Shinjuku; Akihabara y Skytree. Cerezos de Tokio en plena flor"],
-      [5,5,"Nikko",N,"Excursión al norte: santuario Tōshō-gū y cascadas. Tren Tobu, ~2 h por trayecto"],
-      [6,6,"Nagano",N,"Shinkansen Hokuriku, ~1 h 20. Templo Zenkō-ji"],
-      [7,7,"Jigokudani → Kanazawa",N,"Monos de nieve en la mañana; Shinkansen ~1 h a Kanazawa"],
-      [8,8,"Kanazawa",N,"Jardín Kenroku-en, castillo, Higashi Chaya y mercado Ōmichō"],
-      [9,9,"Shirakawa-go",N,"Aldea de casas de techo de paja. Bus ~1 h 15, con reserva"],
-      [10,10,"Kanazawa → Kioto",K,"Shinkansen a Tsuruga y tren Thunderbird, ~2 h. Gion al atardecer"],
-      [11,13,"Kioto",K,"Kiyomizu; Fushimi Inari y Nishiki; Arashiyama y Kinkaku-ji"],
-      [14,14,"Nara → Osaka",O,"Ciervos, Tōdai-ji y Kasuga; dormir en Osaka"],
-      [15,16,"Osaka",O,"Castillo, Shinsekai y Dōtonbori",
-        "Día 16: castillo de Himeji (~1 h en tren), Kobe o Universal Studios"],
-      [17,17,"Osaka → Kawaguchiko",F,"Shinkansen a Mishima y bus, ~4 h. Noche frente al Fuji"],
-      [18,18,"Kawaguchiko → Hakone",F,"Pagoda Chureito en la mañana; bus a Hakone; noche en ryokan"],
-      [19,19,"Hakone → Kamakura → Tokio",T,"Owakudani y lago Ashi; Gran Buda en la tarde; dormir en Tokio"],
+      [2,2,"Tokio",T,"Lo esencial: Meiji, Harajuku, Shibuya y Shinjuku. Los cerezos de Tokio empiezan a abrir"],
+      [3,3,"Nikko",N,"Excursión al norte: santuario Tōshō-gū y cascadas. Tren Tobu, ~2 h por trayecto"],
+      [4,4,"Nagano",N,"Shinkansen Hokuriku, ~1 h 20. Templo Zenkō-ji"],
+      [5,5,"Jigokudani → Kanazawa",N,"Monos de nieve en la mañana; Shinkansen ~1 h a Kanazawa"],
+      [6,6,"Kanazawa",N,"Jardín Kenroku-en, castillo, Higashi Chaya y mercado Ōmichō"],
+      [7,7,"Shirakawa-go",N,"Aldea de casas de techo de paja. Bus ~1 h 15, con reserva"],
+      [8,8,"Kanazawa → Kioto",K,"Shinkansen a Tsuruga y tren Thunderbird, ~2 h. Gion al atardecer"],
+      [9,11,"Kioto",K,"Kiyomizu; Fushimi Inari y Nishiki; Arashiyama y Kinkaku-ji"],
+      [12,12,"Nara → Osaka",O,"Ciervos, Tōdai-ji y Kasuga; dormir en Osaka"],
+      [13,14,"Osaka",O,"Castillo, Shinsekai y Dōtonbori",
+        "Día 14: castillo de Himeji (~1 h en tren), Kobe o Universal Studios"],
+      [15,15,"Osaka → Kawaguchiko",F,"Shinkansen a Mishima y bus, ~4 h. Atardecer en el lago Kawaguchi"],
+      [16,16,"Kawaguchiko",F,"Pagoda Chureito al amanecer, teleférico Kachi Kachi y parque Oishi, con el Fuji de frente"],
+      [17,17,"Cinco Lagos del Fuji",F,"Aldea Oshino Hakkai, Saiko Iyashi no Sato y lago Motosu (la vista del billete de ¥1,000). Bus turístico de los lagos"],
+      [18,18,"Kawaguchiko → Hakone",F,"Bus a Hakone (~2 h); onsen y noche en ryokan"],
+      [19,19,"Hakone → Kamakura → Tokio",T,"Owakudani y lago Ashi; Gran Buda en la tarde; noche en Tokio para compras de último momento"],
       [20,20,"Regreso",T,"Tokio → aeropuerto"]
     ];
     var STOPS2=[
