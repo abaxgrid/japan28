@@ -543,6 +543,15 @@ body.dragging{-webkit-user-select:none;user-select:none}
 .tminus .tm-t{font-size:14px;line-height:1.35}
 .tminus .tm-t b{display:block;font-size:15px}
 .tminus .tm-t span{color:var(--muted);font-size:13px}
+.buy{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.buy li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--cc,var(--line));border-radius:10px;padding:8px 12px}
+.buy li b{font-size:14px;grid-row:1/span 2;align-self:start}
+.buy li .bw{grid-column:2;grid-row:1;font-size:13px;font-weight:700;color:var(--ink);text-align:right;white-space:nowrap}
+.buy li .bt{grid-column:2;grid-row:2;font-size:12px;color:var(--muted);text-align:right;white-space:nowrap}
+.buy li p{grid-column:1/-1;grid-row:3;margin:2px 0 0;font-size:13px;color:var(--muted)}
+.buy li.past{opacity:.55}
+.buy li.next{--cc:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.tminus .tm-next{display:block;margin-top:4px;font-size:12.5px;color:var(--ink);background:none;border:0;padding:0;font-family:inherit;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .net-opts{display:grid;gap:8px;margin-top:8px}
 .net-o{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .net-o p{margin:6px 0 0;font-size:14px}
@@ -763,6 +772,11 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
   <div data-panel="vuelos">
     <p class="lead">Rutas de Panamá a Japón sin pasar por Estados Unidos, porque uno de los viajeros no tiene visa estadounidense. Ambos viajan con pasaporte panameño.</p>
     <div class="callout"><strong>Descartadas:</strong> cualquier escala en EE. UU., aunque sea solo para cambiar de avión. Canadá también: sin visa de EE. UU., los panameños necesitan visa canadiense incluso para conectar (<a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/eligibility/eta-x.html" target="_blank" rel="noopener">Gobierno de Canadá</a>).</div>
+
+    <h2>¿Cuándo comprar?</h2>
+    <p class="small">Fechas calculadas desde la salida de Panamá. El contador indica cuántos días faltan para cada una.</p>
+    <ol class="buy" id="buyList"></ol>
+    <p class="small" style="margin-top:8px">Para cerezos se recomienda comprar 5 a 6 meses antes; después, las tarifas baratas suelen agotarse y no vuelven (<a href="https://discover.shopback.com/travel/when-to-book/flights-to-japan" target="_blank" rel="noopener">ShopBack</a>). ANA abre sus asientos con millas unos 355 días antes del vuelo (<a href="https://awardtravelfinder.com/when-does-ana-release-award-seats" target="_blank" rel="noopener">Award Travel Finder</a>). Los asientos del Shinkansen salen a la venta un mes antes.</p>
 
     <h2>Opciones, en orden de recomendación</h2>
     <div class="cards">
@@ -2337,6 +2351,33 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
   rmap.addEventListener("keydown",function(e){ if((e.key==="Enter"||e.key===" ") && e.target.matches("[data-mapday]")){ e.preventDefault(); openMapDay(+e.target.getAttribute("data-mapday")); } });
   renderMap();
 
+  /* ---------- When to buy ---------- */
+  function buyPlan(arr){
+    var dep=addDays(arr,-1), ret=addDays(arr,19);
+    return [
+      {t:"Activar alertas de precio",d:addDays(dep,-365),p:"En Google Flights, Panamá → Tokio por Ciudad de México, para ver cómo se mueven las tarifas."},
+      {t:"Abren los asientos con millas (ida)",d:addDays(dep,-355),p:"LifeMiles y ANA: reserva el mismo día que aparezcan; en temporada de cerezos se agotan rápido."},
+      {t:"Abren los asientos con millas (regreso)",d:addDays(ret,-355),p:"Mismo criterio para el vuelo de vuelta."},
+      {t:"Reservar hoteles con cancelación gratis",d:addDays(dep,-300),e:addDays(dep,-240),p:"Kioto y la zona del Fuji se llenan primero en primavera. Elige tarifas reembolsables."},
+      {t:"Comprar los vuelos con dinero",d:addDays(dep,-183),e:addDays(dep,-150),buy:1,p:"Ventana ideal: 5 a 6 meses antes. Compra el seguro de viaje el mismo día."},
+      {t:"Fecha límite recomendada para los vuelos",d:addDays(dep,-120),p:"Después de esta fecha los precios suelen subir rápido."},
+      {t:"Reservar asientos del Shinkansen",d:addDays(dep,-30),p:"Salen a la venta un mes antes de cada trayecto; en temporada de cerezos conviene reservar el primer día."}
+    ].sort(function(a,b){ return a.d-b.d; });
+  }
+  function todayD(){ var n=new Date(); return new Date(n.getFullYear(),n.getMonth(),n.getDate()); }
+  function renderBuy(){
+    var ol=document.getElementById("buyList"); if(!ol) return;
+    var arr=parseDate(document.getElementById("arrival").value)||new Date(2028,2,24), td=todayD(), nextDone=false;
+    ol.innerHTML=buyPlan(arr).map(function(m){
+      var end=m.e||m.d, past=end<td, isNext=!past&&!nextDone; if(isNext) nextDone=true;
+      var dd=Math.round((m.d-td)/864e5);
+      var when=m.e ? m.d.getDate()+" "+MON[m.d.getMonth()]+(m.d.getFullYear()!==m.e.getFullYear()?" "+m.d.getFullYear():"")+" – "+m.e.getDate()+" "+MON[m.e.getMonth()]+" "+m.e.getFullYear() : fmt(m.d)+" "+m.d.getFullYear();
+      var tl = past ? "Pasó" : dd>0 ? "T-"+dd.toLocaleString("es-PA") : "Ahora";
+      return '<li class="'+(past?"past":"")+(isNext?" next":"")+'"'+(m.buy?' style="--cc:var(--ok)"':'')+'><b>'+esc(m.t)+'</b><span class="bw">'+esc(when)+'</span><p>'+esc(m.p)+'</p><span class="bt">'+tl+'</span></li>';
+    }).join("");
+  }
+  renderBuy(); document.getElementById("arrival").addEventListener("change",renderBuy);
+
   /* ---------- T-minus countdown ---------- */
   (function(){
     var box=document.getElementById("tminus"), inp=document.getElementById("arrival");
@@ -2352,8 +2393,11 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
       else if(today<arr){ n="✈"; t="En camino a Japón"; sub="Llegada a Tokio el "+fmt(arr); }
       else if(today<=end){ var k=Math.round((today-arr)/864e5)+1; n="Día "+k; t="de 20 en Japón"; sub=(20-k)===0?"Último día: regreso a casa":"Quedan "+(20-k)+(20-k===1?" día":" días"); }
       else { n="✓"; t="Viaje completado"; sub="Regreso el "+fmt(end)+" "+end.getFullYear(); }
-      box.innerHTML='<span class="tm-n">'+esc(n)+'</span><span class="tm-t"><b>'+esc(t)+'</b><span>'+esc(sub)+'</span></span>';
+      var nx=null; if(d>0) buyPlan(arr).some(function(m){ if((m.e||m.d)>=today){ nx=m; return true; } });
+      var nxl = nx ? '<button type="button" class="tm-next" id="tmNext">🎟 Próximo: '+esc(nx.t.charAt(0).toLowerCase()+nx.t.slice(1))+' · '+(Math.round((nx.d-today)/864e5)>0 ? "T-"+Math.round((nx.d-today)/864e5).toLocaleString("es-PA") : "ahora")+'</button>' : '';
+      box.innerHTML='<span class="tm-n">'+esc(n)+'</span><span class="tm-t"><b>'+esc(t)+'</b><span>'+esc(sub)+'</span>'+nxl+'</span>';
     }
+    box.addEventListener("click",function(e){ if(e.target.closest("#tmNext")){ go("logistica"); setSub(document.getElementById("v-logistica"),"vuelos"); setTimeout(function(){ var el=document.getElementById("buyList"); if(el){ scrollToEl(el); } },80); } });
     paint(); inp.addEventListener("change",paint); setInterval(paint,3600000);
     document.addEventListener("visibilitychange",function(){ if(!document.hidden) paint(); });
   })();
