@@ -1,5 +1,5 @@
 /* Offline support: the guide works without internet after the first visit. */
-var CACHE = "japon2028-v1";
+var CACHE = "japon2028-v2";
 var CORE = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", function (e) {

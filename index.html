@@ -538,6 +538,11 @@ body.dragging{-webkit-user-select:none;user-select:none}
 .map-key .k.ex{border-top:1.6px dashed var(--muted)}
 .map-key .k.ret{border-top:2px dotted var(--accent)}
 .stops{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tminus{display:flex;align-items:center;gap:14px;margin-top:12px;background:linear-gradient(135deg,var(--accent-soft),var(--surface));border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.tminus .tm-n{font:700 34px/1 var(--display);color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tminus .tm-t{font-size:14px;line-height:1.35}
+.tminus .tm-t b{display:block;font-size:15px}
+.tminus .tm-t span{color:var(--muted);font-size:13px}
 .net-opts{display:grid;gap:8px;margin-top:8px}
 .net-o{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .net-o p{margin:6px 0 0;font-size:14px}
@@ -605,6 +610,7 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
 <section class="view" id="v-calendario" role="tabpanel" aria-labelledby="t-calendario">
   <p class="eyebrow">20 días · 5 bases</p>
   <h1>Calendario del viaje</h1>
+  <div class="tminus" id="tminus" aria-live="polite"></div>
   <div class="seg" role="tablist" aria-label="Ruta">
     <button role="tab" data-sub="actual" aria-selected="true">Plan actual</button>
     <button role="tab" data-sub="circular" aria-selected="false">Ruta circular (comparar)</button>
@@ -2330,6 +2336,27 @@ table.cmp td::before{content:attr(data-l);display:block;font-size:10.5px;font-we
   rmap.addEventListener("click",function(e){ var g=e.target.closest("[data-mapday]"); if(g) openMapDay(+g.getAttribute("data-mapday")); });
   rmap.addEventListener("keydown",function(e){ if((e.key==="Enter"||e.key===" ") && e.target.matches("[data-mapday]")){ e.preventDefault(); openMapDay(+e.target.getAttribute("data-mapday")); } });
   renderMap();
+
+  /* ---------- T-minus countdown ---------- */
+  (function(){
+    var box=document.getElementById("tminus"), inp=document.getElementById("arrival");
+    function paint(){
+      var arr=parseDate(inp.value)||new Date(2028,2,24), dep=addDays(arr,-1), end=addDays(arr,19);
+      var now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+      var d=Math.round((dep-today)/864e5), n, t, sub;
+      if(d>0){
+        n="T-"+d.toLocaleString("es-PA"); t=d===1?"día para salir de Panamá":"días para salir de Panamá";
+        var w=Math.floor(d/7), m=Math.floor(d/30.44);
+        sub="Salida el "+fmt(dep)+" "+dep.getFullYear()+(d>=60?" · unos "+m+" meses":d>=14?" · "+w+" semanas":"");
+      } else if(d===0){ n="T-0"; t="¡Hoy salen hacia Japón!"; sub="Buen viaje"; }
+      else if(today<arr){ n="✈"; t="En camino a Japón"; sub="Llegada a Tokio el "+fmt(arr); }
+      else if(today<=end){ var k=Math.round((today-arr)/864e5)+1; n="Día "+k; t="de 20 en Japón"; sub=(20-k)===0?"Último día: regreso a casa":"Quedan "+(20-k)+(20-k===1?" día":" días"); }
+      else { n="✓"; t="Viaje completado"; sub="Regreso el "+fmt(end)+" "+end.getFullYear(); }
+      box.innerHTML='<span class="tm-n">'+esc(n)+'</span><span class="tm-t"><b>'+esc(t)+'</b><span>'+esc(sub)+'</span></span>';
+    }
+    paint(); inp.addEventListener("change",paint); setInterval(paint,3600000);
+    document.addEventListener("visibilitychange",function(){ if(!document.hidden) paint(); });
+  })();
 
   /* ---------- Alternative: circular route (comparison only) ---------- */
   (function(){
